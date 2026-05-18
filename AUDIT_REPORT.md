@@ -1,5 +1,77 @@
-# Audit Report — grecolatinovivo-site
-*Senior Compliance Auditor — 17 maggio 2026*
+# AUDIT_REPORT — GrecoLatinoVivo Site
+*Prodotto da: Auditor (GDPR / WCAG 2.1 / Sicurezza) — pipeline agent-orchestra — 18 maggio 2026*
+
+---
+
+## GDPR
+
+### Risolto in questa pipeline
+
+| Issue | Stato precedente | Stato attuale |
+|---|---|---|
+| Google Fonts CDN | `@import url('https://fonts.googleapis.com/...')` — trasferimento IP a Google senza consenso (violazione Art. 5/6 GDPR, LG München 3 O 17493/20) | **RISOLTO** — `next/font/google` in `layout.tsx`: i font sono scaricati a build time e serviti localmente. Zero chiamate Google a runtime. |
+
+### Aperti (da completare prima del go-live)
+
+| # | Issue | Normativa | Priorità |
+|---|---|---|---|
+| 1 | Cookie banner / Consent Manager non implementato | GDPR Art. 6; ePrivacy Directive | CRITICA |
+| 2 | Privacy Policy: pagina `/marketing/privacy` vuota | GDPR Art. 13 | CRITICA |
+| 3 | Termini di servizio: pagina `/marketing/termini-condizioni` vuota | Codice del Consumo Art. 49 | Alta |
+| 4 | Stripe: data processing agreement (DPA) richiesta | GDPR Art. 28 | Alta |
+| 5 | Resend (email transazionali): DPA richiesta | GDPR Art. 28 | Media |
+
+---
+
+## Accessibilità WCAG 2.1 AA
+
+### Conforme
+
+| Requisito | Verifica |
+|---|---|
+| Skip link "Salta al contenuto principale" | Presente in `layout.tsx`, punta a `#main-content` |
+| `<main id="main-content">` | Presente |
+| `aria-label` su nav | `role="navigation" aria-label="Navigazione principale"` |
+| `aria-expanded` sull'hamburger | Implementato correttamente |
+| `prefers-reduced-motion` | Gestito in `globals.css` |
+| Elementi decorativi con `aria-hidden` | Applicato a decorazioni grafiche e avatar |
+| Oro `#C9A84C` MAI come testo su sfondo chiaro | Regola rispettata in tutti i file |
+
+---
+
+## Sicurezza
+
+| Requisito | Verifica |
+|---|---|
+| Cookie auth `httpOnly: true` | Verificato in `lib/auth.ts` |
+| Cookie `secure: true` in produzione | Condizionale su `NODE_ENV` |
+| JWT da variabile d'ambiente | Non hardcoded — legge `JWT_SECRET` |
+| Header sicurezza HTTP | X-Frame-Options, HSTS, Referrer-Policy, Permissions-Policy in `next.config.js` |
+| CORS limitato | `/api/*` limitato a `grecolatinovivo.it` via `vercel.json` |
+
+### Issues aperti
+
+| # | Issue | Priorità |
+|---|---|---|
+| 1 | Content Security Policy (CSP) non configurata | Media |
+| 2 | Rate limiting su `/api/auth/register` e `/api/auth/login` non implementato | Alta |
+
+---
+
+## Licenze software
+
+Tutti i pacchetti (Next.js, React, Prisma, Stripe, bcryptjs, jsonwebtoken, Resend, pdfkit, qrcode): **MIT** o **Apache 2.0** — nessun conflitto.
+
+---
+
+## Sintesi
+
+**RISOLTO:** violazione GDPR Google Fonts.
+**CRITICO pre-go-live:** Cookie banner, Privacy Policy, Termini di servizio.
+
+---
+
+## Report precedente (17 maggio 2026)
 
 ---
 

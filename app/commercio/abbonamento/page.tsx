@@ -63,7 +63,7 @@ export default function AbbonamentoPage() {
                   </div>
                 )}
 
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#8B1A1A', marginBottom: '6px' }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#1B3A6B', marginBottom: '6px' }}>
                   PIANO
                 </p>
                 <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.6rem', fontWeight: 700, color: '#1A1A1A', marginBottom: '4px' }}>
@@ -142,7 +142,7 @@ export default function AbbonamentoPage() {
                 <tr style={{ borderBottom: '2px solid #E8E0D0' }}>
                   <th style={{ textAlign: 'left', padding: '12px', color: '#6B6B6B', fontWeight: 600 }}>Funzionalità</th>
                   {PLANS.map((p) => (
-                    <th key={p.id} style={{ padding: '12px', color: p.isFeatured ? '#8B1A1A' : '#3A3A3A', fontWeight: 700, textAlign: 'center' }}>
+                    <th key={p.id} style={{ padding: '12px', color: p.isFeatured ? '#1B3A6B' : '#3A3A3A', fontWeight: 700, textAlign: 'center' }}>
                       {p.name}
                     </th>
                   ))}
@@ -200,11 +200,11 @@ export default function AbbonamentoPage() {
 
       <style>{`
         .pricing-card { transition: transform 0.2s, box-shadow 0.2s; }
-        .pricing-card--featured { border: 2px solid #8B1A1A; box-shadow: 0 8px 32px rgba(139,26,26,0.12); }
+        .pricing-card--featured { border: 2px solid #1B3A6B; box-shadow: 0 8px 32px rgba(27,58,107,0.12); }
         .pricing-card--featured:hover { transform: translateY(-6px); }
         .pricing-badge {
           position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-          background: #8B1A1A; color: #fff;
+          background: #1B3A6B; color: #fff;
           font-family: Inter, sans-serif; font-size: 0.72rem; font-weight: 700;
           padding: 4px 14px; border-radius: 20px; white-space: nowrap;
         }

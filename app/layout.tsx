@@ -1,10 +1,29 @@
 // Layout radice — avvolge tutte le pagine
-// Topbar + Navbar + Footer sempre presenti
+// Font serviti via next/font/google (self-hosted a build time — GDPR compliant)
+// COUNCIL.md decisione 2: zero CDN Google a runtime.
 import type { Metadata } from 'next'
+import { Playfair_Display, Inter } from 'next/font/google'
 import Topbar from '@/components/layout/Topbar'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import '@/styles/globals.css'
+
+// Playfair Display — serif istituzionale per titoli
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '900'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-playfair',
+})
+
+// Inter — sans-serif per corpo testo, UI, label
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://grecolatinovivo.it'),
@@ -30,7 +49,7 @@ export const metadata: Metadata = {
     description: 'Studia le lingue dell\'antichità con i migliori docenti italiani. Dal 2015, accreditato MIM.',
     images: [
       {
-        url: '/fb.jpg', // OG image da QA_REPORT.md
+        url: '/fb.jpg',
         width: 1200,
         height: 630,
         alt: 'Centro Nazionale di Studi Classici GrecoLatinoVivo',
@@ -55,7 +74,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="it">
+    <html lang="it" className={`${playfair.variable} ${inter.variable}`}>
       <body>
         <a href="#main-content" className="visually-hidden" style={{ position: 'absolute' }}>
           Salta al contenuto principale
@@ -67,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
 
-        {/* Script scroll-reveal (NEURO_SPEC §8.2) */}
+        {/* Script scroll-reveal — IntersectionObserver, zero dipendenze */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

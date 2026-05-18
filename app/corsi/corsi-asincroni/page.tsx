@@ -60,7 +60,7 @@ export default function CorsiAsincroniPage() {
             {/* SIDEBAR FILTRI */}
             <aside>
               <div style={{ background: '#fff', border: '1px solid #E8E0D0', borderRadius: '12px', padding: '24px', position: 'sticky', top: '90px' }}>
-                <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#8B1A1A', marginBottom: '16px' }}>
+                <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#1B3A6B', marginBottom: '16px' }}>
                   Filtra
                 </h2>
 
@@ -81,14 +81,14 @@ export default function CorsiAsincroniPage() {
                 <div style={{ marginBottom: '20px' }}>
                   <p className="label">Lingua</p>
                   {LANGS.map((l) => (
-                    <label key={l} style={{ display: 'flex', gap: '8px', alignItems: 'center', cursor: 'pointer', padding: '4px 0', fontSize: '0.9rem', color: lang === l ? '#8B1A1A' : '#3A3A3A' }}>
+                    <label key={l} style={{ display: 'flex', gap: '8px', alignItems: 'center', cursor: 'pointer', padding: '4px 0', fontSize: '0.9rem', color: lang === l ? '#1B3A6B' : '#3A3A3A' }}>
                       <input
                         type="radio"
                         name="lang"
                         value={l}
                         checked={lang === l}
                         onChange={() => setLang(lang === l ? '' : l)}
-                        style={{ accentColor: '#8B1A1A' }}
+                        style={{ accentColor: '#1B3A6B' }}
                       />
                       {l}
                     </label>
@@ -99,14 +99,14 @@ export default function CorsiAsincroniPage() {
                 <div>
                   <p className="label">Livello QCER</p>
                   {LEVELS.map((lv) => (
-                    <label key={lv} style={{ display: 'flex', gap: '8px', alignItems: 'center', cursor: 'pointer', padding: '4px 0', fontSize: '0.9rem', color: level === lv ? '#8B1A1A' : '#3A3A3A' }}>
+                    <label key={lv} style={{ display: 'flex', gap: '8px', alignItems: 'center', cursor: 'pointer', padding: '4px 0', fontSize: '0.9rem', color: level === lv ? '#1B3A6B' : '#3A3A3A' }}>
                       <input
                         type="radio"
                         name="level"
                         value={lv}
                         checked={level === lv}
                         onChange={() => setLevel(level === lv ? '' : lv)}
-                        style={{ accentColor: '#8B1A1A' }}
+                        style={{ accentColor: '#1B3A6B' }}
                       />
                       {lv}
                     </label>
@@ -116,7 +116,7 @@ export default function CorsiAsincroniPage() {
                 {(lang || level || search) && (
                   <button
                     onClick={() => { setLang(''); setLevel(''); setSearch('') }}
-                    style={{ marginTop: '16px', color: '#8B1A1A', background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600, padding: 0 }}
+                    style={{ marginTop: '16px', color: '#1B3A6B', background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600, padding: 0 }}
                   >
                     × Azzera filtri
                   </button>
@@ -201,7 +201,7 @@ function CourseCard({ course }: { course: AsyncCourse }) {
 
         {/* Prezzo + durata */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E8E0D0', paddingTop: '12px' }}>
-          <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.2rem', fontWeight: 700, color: '#8B1A1A' }}>
+          <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.2rem', fontWeight: 700, color: '#1B3A6B' }}>
             {priceStr}
           </span>
           {course.durationMin > 0 && (

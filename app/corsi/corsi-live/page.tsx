@@ -37,7 +37,7 @@ export default function CorsiLivePage() {
       </section>
 
       {/* Caratteristiche chiave */}
-      <section style={{ background: '#8B1A1A', padding: '20px 24px' }}>
+      <section style={{ background: '#1B3A6B', padding: '20px 24px' }}>
         <div className="container" style={{ display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap' }}>
           {[
             '✓ Massimo 15 studenti per classe',
@@ -110,7 +110,7 @@ function LiveCourseCard({ course }: { course: LiveCourse }) {
         {course.title}
       </h2>
 
-      <p style={{ fontSize: '0.85rem', color: '#8B1A1A', fontWeight: 600, marginBottom: '4px' }}>
+      <p style={{ fontSize: '0.85rem', color: '#1B3A6B', fontWeight: 600, marginBottom: '4px' }}>
         {course.teacher.name}
       </p>
 
@@ -125,11 +125,11 @@ function LiveCourseCard({ course }: { course: LiveCourse }) {
       )}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E8E0D0', paddingTop: '12px', marginBottom: '12px' }}>
-        <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', fontWeight: 700, color: '#8B1A1A' }}>
+        <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', fontWeight: 700, color: '#1B3A6B' }}>
           {formatEur(course.priceEur)}
         </span>
         {!isFull && spotsLeft <= 5 && (
-          <span style={{ fontSize: '0.75rem', color: '#8B1A1A', fontWeight: 600 }}>
+          <span style={{ fontSize: '0.75rem', color: '#1B3A6B', fontWeight: 600 }}>
             Solo {spotsLeft} posti
           </span>
         )}

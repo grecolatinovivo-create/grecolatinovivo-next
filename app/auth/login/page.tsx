@@ -67,7 +67,7 @@ function LoginForm() {
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <Link href="/" aria-label="Home">
-            <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 900, color: '#8B1A1A' }}>ΓΛ</span>
+            <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 900, color: '#1B3A6B' }}>ΓΛ</span>
           </Link>
           <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A', marginTop: '8px' }}>
             {mode === 'login' ? 'Accedi al tuo account' : 'Crea il tuo account'}
@@ -139,7 +139,7 @@ function LoginForm() {
 
         {mode === 'login' && (
           <p style={{ textAlign: 'center', marginTop: '16px', fontSize: '0.85rem', color: '#6B6B6B' }}>
-            <Link href="/auth/recupero-password" style={{ color: '#8B1A1A' }}>
+            <Link href="/auth/recupero-password" style={{ color: '#1B3A6B' }}>
               Hai dimenticato la password?
             </Link>
           </p>
@@ -149,11 +149,11 @@ function LoginForm() {
         {mode === 'register' && (
           <p style={{ textAlign: 'center', marginTop: '12px', fontSize: '0.78rem', color: '#aaa', lineHeight: 1.5 }}>
             Registrandoti accetti la nostra{' '}
-            <Link href="/privacy" style={{ color: '#8B1A1A' }}>
+            <Link href="/privacy" style={{ color: '#1B3A6B' }}>
               Informativa Privacy
             </Link>
             {' '}e i{' '}
-            <Link href="/termini-condizioni" style={{ color: '#8B1A1A' }}>
+            <Link href="/termini-condizioni" style={{ color: '#1B3A6B' }}>
               Termini e Condizioni
             </Link>
             . I tuoi dati sono trattati per gestire il tuo account.
@@ -162,7 +162,7 @@ function LoginForm() {
 
         <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '0.8rem', color: '#aaa' }}>
           Hai già un account sul portale?{' '}
-          <a href={`${process.env.NEXT_PUBLIC_PORTALE_URL ?? 'https://portale.grecolatinovivo.it'}/login`} style={{ color: '#8B1A1A' }}>
+          <a href={`${process.env.NEXT_PUBLIC_PORTALE_URL ?? 'https://portale.grecolatinovivo.it'}/login`} style={{ color: '#1B3A6B' }}>
             Accedi direttamente al portale →
           </a>
         </p>

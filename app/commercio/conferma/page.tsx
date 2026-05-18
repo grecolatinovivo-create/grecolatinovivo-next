@@ -76,7 +76,7 @@ function ConfermaContent() {
         </div>
 
         <p style={{ fontSize: '0.825rem', color: '#aaa', marginTop: '32px' }}>
-          Per qualsiasi necessità: <a href="mailto:info@grecolatinovivo.it" style={{ color: '#8B1A1A' }}>info@grecolatinovivo.it</a>
+          Per qualsiasi necessità: <a href="mailto:info@grecolatinovivo.it" style={{ color: '#1B3A6B' }}>info@grecolatinovivo.it</a>
         </p>
       </div>
     </section>

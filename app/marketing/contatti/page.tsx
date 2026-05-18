@@ -65,7 +65,7 @@ export default function ContattiPage() {
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#8B1A1A', marginBottom: '4px' }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#1B3A6B', marginBottom: '4px' }}>
                   Telefono
                 </p>
                 <a href="tel:+393452456696" style={{ fontSize: '1.1rem', fontWeight: 600, color: '#1A1A1A', textDecoration: 'none' }}>
@@ -73,7 +73,7 @@ export default function ContattiPage() {
                 </a>
               </div>
               <div>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#8B1A1A', marginBottom: '4px' }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#1B3A6B', marginBottom: '4px' }}>
                   Email
                 </p>
                 <a href="mailto:info@grecolatinovivo.it" style={{ fontSize: '1rem', color: '#1A1A1A', textDecoration: 'none' }}>
@@ -81,7 +81,7 @@ export default function ContattiPage() {
                 </a>
               </div>
               <div>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#8B1A1A', marginBottom: '4px' }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#1B3A6B', marginBottom: '4px' }}>
                   Sedi
                 </p>
                 <p style={{ fontSize: '0.9rem', color: '#6B6B6B', lineHeight: 1.7 }}>
@@ -166,7 +166,7 @@ export default function ContattiPage() {
                   * Campi obbligatori. Risponderemo entro 24 ore.
                   I dati inviati sono trattati esclusivamente per rispondere alla tua richiesta,
                   nel rispetto della nostra{' '}
-                  <a href="/privacy" style={{ color: '#8B1A1A' }}>Informativa Privacy</a>.
+                  <a href="/privacy" style={{ color: '#1B3A6B' }}>Informativa Privacy</a>.
                 </p>
               </form>
             )}

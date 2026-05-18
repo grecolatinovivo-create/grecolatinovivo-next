@@ -56,7 +56,7 @@ export default function EventiPage() {
               </p>
               <p style={{ color: '#6B6B6B' }}>
                 Torna a trovarci presto o{' '}
-                <a href="mailto:info@grecolatinovivo.it" style={{ color: '#8B1A1A' }}>
+                <a href="mailto:info@grecolatinovivo.it" style={{ color: '#1B3A6B' }}>
                   iscriviti alla newsletter
                 </a>{' '}
                 per restare aggiornato.
@@ -74,7 +74,7 @@ export default function EventiPage() {
                 return (
                   <div key={event.id} className="card reveal" style={{ display: 'grid', gridTemplateColumns: '80px 1fr auto', gap: '24px', alignItems: 'start' }}>
                     {/* Data — box */}
-                    <div style={{ background: '#8B1A1A', borderRadius: '8px', padding: '12px 8px', textAlign: 'center', flexShrink: 0 }}>
+                    <div style={{ background: '#1B3A6B', borderRadius: '8px', padding: '12px 8px', textAlign: 'center', flexShrink: 0 }}>
                       <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 900, color: '#fff', lineHeight: 1 }}>
                         {start.getDate()}
                       </div>
@@ -99,7 +99,7 @@ export default function EventiPage() {
                         {start.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })}
                       </p>
                       {!isSoldOut && available <= 10 && (
-                        <p style={{ fontSize: '0.8rem', color: '#8B1A1A', fontWeight: 600 }}>
+                        <p style={{ fontSize: '0.8rem', color: '#1B3A6B', fontWeight: 600 }}>
                           Solo {available} posti disponibili
                         </p>
                       )}
@@ -134,7 +134,7 @@ export default function EventiPage() {
           </h2>
           <p style={{ color: '#6B6B6B', marginBottom: '24px' }}>
             Scrivici a{' '}
-            <a href="mailto:info@grecolatinovivo.it" style={{ color: '#8B1A1A' }}>
+            <a href="mailto:info@grecolatinovivo.it" style={{ color: '#1B3A6B' }}>
               info@grecolatinovivo.it
             </a>{' '}
             per essere informato sui prossimi eventi e convegni.
