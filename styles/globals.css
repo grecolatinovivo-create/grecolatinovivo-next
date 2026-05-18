@@ -275,6 +275,14 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 .card:hover {
   border-top-color: var(--gold);
 }
+.card-clickable {
+  cursor: pointer;
+  color: inherit;
+}
+.card-clickable:hover {
+  border-top-color: var(--gold);
+  text-decoration: none;
+}
 
 /* ============================
    7. BADGE / TAG

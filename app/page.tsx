@@ -56,38 +56,38 @@ export default function HomePage() {
           </p>
         </div>
         <div className="hp-percorsi-grid">
-          <article className="card">
+          <Link href="/corsi/corsi-live" className="card card-clickable" style={{ display: 'block', textDecoration: 'none' }}>
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Corsi in Diretta</h3>
             <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1.25rem', lineHeight: 1.7 }}>
               Classi live con insegnanti specializzati, massimo 15 studenti per gruppo.
               Livelli A1&ndash;C2. 72 ore equivalenti al biennio liceale.
             </p>
-            <Link href="/corsi/corsi-live" className="card-link">Scopri i corsi in diretta &rarr;</Link>
-          </article>
-          <article className="card">
+            <span className="card-link">Scopri i corsi in diretta &rarr;</span>
+          </Link>
+          <Link href="/corsi/corsi-asincroni" className="card card-clickable" style={{ display: 'block', textDecoration: 'none' }}>
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Corsi Asincroni</h3>
             <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1.25rem', lineHeight: 1.7 }}>
               Percorsi registrati con materiali didattici esclusivi, fruibili in autonomia
               e a qualsiasi ora. Ideali per ritmi personalizzati.
             </p>
-            <Link href="/corsi/corsi-asincroni" className="card-link">Scopri i corsi asincroni &rarr;</Link>
-          </article>
-          <article className="card">
+            <span className="card-link">Scopri i corsi asincroni &rarr;</span>
+          </Link>
+          <a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" className="card card-clickable" style={{ display: 'block', textDecoration: 'none' }}>
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Portale in Abbonamento</h3>
             <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1.25rem', lineHeight: 1.7 }}>
               Accesso a risorse, testi commentati, esercizi e archivi didattici.
               Cultura &euro;5,90/mese &middot; Linguae &euro;12,90/mese &middot; Accademia &euro;19,90/mese.
             </p>
-            <a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" className="card-link">Scopri i piani &rarr;</a>
-          </article>
-          <article className="card">
+            <span className="card-link">Scopri il portale &rarr;</span>
+          </a>
+          <Link href="/eventi" className="card card-clickable" style={{ display: 'block', textDecoration: 'none' }}>
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Eventi e Convegni</h3>
             <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1.25rem', lineHeight: 1.7 }}>
               Conferenze, seminari e convegni dedicati alle lingue e alle culture del mondo
               antico. Aperti a studenti, docenti e pubblico.
             </p>
-            <Link href="/eventi" className="card-link">Scopri gli eventi &rarr;</Link>
-          </article>
+            <span className="card-link">Scopri gli eventi &rarr;</span>
+          </Link>
         </div>
       </section>
 
