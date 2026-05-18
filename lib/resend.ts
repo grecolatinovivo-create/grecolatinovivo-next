@@ -1,7 +1,14 @@
 // Email transazionali via Resend
+// Inizializzazione lazy: non crasha al build se RESEND_API_KEY non è configurata
 import { Resend } from 'resend'
 
-export const resend = new Resend(process.env.RESEND_API_KEY!)
+function getResend() {
+  if (!process.env.RESEND_API_KEY) {
+    console.warn('[resend] RESEND_API_KEY non configurata — email non inviata.')
+    return null
+  }
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 const FROM = process.env.RESEND_FROM_EMAIL ?? 'noreply@grecolatinovivo.it'
 const REPLY_TO = process.env.RESEND_REPLY_TO ?? 'info@grecolatinovivo.it'
@@ -22,6 +29,7 @@ export async function sendLiveBookingConfirmation({
   sessionDate: string
   zoomUrl?: string
 }) {
+  const resend = getResend(); if (!resend) return null
   return resend.emails.send({
     from: FROM,
     reply_to: REPLY_TO,
@@ -50,6 +58,7 @@ export async function sendCourseAccessEmail({
   courseTitle: string
   portalUrl: string
 }) {
+  const resend = getResend(); if (!resend) return null
   return resend.emails.send({
     from: FROM,
     reply_to: REPLY_TO,
@@ -82,6 +91,7 @@ export async function sendEventTicketEmail({
   ticketCode: string
   pdfBuffer: Buffer
 }) {
+  const resend = getResend(); if (!resend) return null
   return resend.emails.send({
     from: FROM,
     reply_to: REPLY_TO,
@@ -119,6 +129,7 @@ export async function sendTutoringConfirmation({
   slotDate: string
   durationMin: number
 }) {
+  const resend = getResend(); if (!resend) return null
   return resend.emails.send({
     from: FROM,
     reply_to: REPLY_TO,
@@ -149,6 +160,7 @@ export async function sendContactFormEmail({
   subject: string
   message: string
 }) {
+  const resend = getResend(); if (!resend) return null
   return resend.emails.send({
     from: FROM,
     reply_to: senderEmail,
