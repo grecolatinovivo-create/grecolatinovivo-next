@@ -1,10 +1,12 @@
 'use client'
-// Navbar istituzionale — sfondo bianco, navy come colore primario
-// Struttura: logo a sinistra, mega-menu "Offerta Formativa", link diretti, CTA portale
-// COUNCIL.md: stile Oxford/Normale di Pisa — NON dark, NON bordeaux
+// Header istituzionale — design Oxford/Cambridge
+// COUNCIL sessione 2 (18/05/2026): #002147, linea oro 2px, Georgia serif
+// Logo: /public/logo.* — fallback testo "ΓΛ" se non presente
+// Portale studenti → https://www.portale.grecolatinovivo.it (target="_blank")
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 export default function Header() {
@@ -14,238 +16,306 @@ export default function Header() {
   const isActive = (href: string) => pathname.startsWith(href)
 
   return (
-    <header>
-      <nav
-        role="navigation"
-        aria-label="Navigazione principale"
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
-          background: 'rgba(255,255,255,0.98)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-          borderBottom: '1px solid rgba(27,58,107,0.12)',
-          height: '70px',
-          display: 'flex',
-          alignItems: 'center',
-          boxShadow: '0 1px 8px rgba(27,58,107,0.06)',
-        }}
-      >
-        <div className="nav-inner container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+    <>
+      <header style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
+        <nav
+          aria-label="Navigazione principale"
+          style={{
+            background: '#FFFFFF',
+            borderBottom: '1px solid #002147',
+            height: '68px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <div
+            style={{
+              maxWidth: '1100px',
+              margin: '0 auto',
+              padding: '0 2rem',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            {/* LOGO */}
+            <Link href="/" className="nav-brand" aria-label="Centro Nazionale di Studi Classici GrecoLatinoVivo — homepage">
+              <span className="nav-logo-img">
+                {/* Logo reale se presente in /public/, altrimenti monogramma ΓΛ */}
+                <LogoImage />
+              </span>
+              <span className="nav-brand-text">
+                <span className="nav-brand-name">Centro Nazionale di Studi Classici</span>
+                <span className="nav-brand-sub">«GrecoLatinoVivo»</span>
+              </span>
+            </Link>
 
-          {/* LOGO */}
-          <Link href="/" className="nav-logo" aria-label="Centro Nazionale di Studi Classici — homepage">
-            <span className="nav-logo__gl">ΓΛ</span>
-            <span className="nav-logo__text">
-              <span className="nav-logo__full">Centro Nazionale di Studi Classici</span>
-              <span className="nav-logo__sub">«GrecoLatinoVivo»</span>
-            </span>
-          </Link>
-
-          {/* NAVIGAZIONE DESKTOP */}
-          <ul className="nav-links" role="list">
-
-            {/* Offerta Formativa — mega dropdown */}
-            <li className="nav-item nav-item--dropdown">
-              <button className="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-                Offerta Formativa
-                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true" style={{ marginLeft: '4px' }}>
-                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-              </button>
-              <div className="nav-mega" role="region" aria-label="Offerta formativa">
-                <div className="nav-mega__grid">
-                  <div className="nav-mega__col">
-                    <p className="nav-mega__label">Percorsi</p>
-                    <Link href="/corsi/corsi-live" className="nav-mega__link">Corsi in Diretta</Link>
-                    <Link href="/corsi/corsi-asincroni" className="nav-mega__link">Corsi Asincroni</Link>
-                    <Link href="/corsi/lezioni-individuali" className="nav-mega__link">Tutoraggio Individuale</Link>
-                    <Link href="/corsi/minicorsi" className="nav-mega__link">Corsi Brevi Tematici</Link>
-                    <Link href="/corsi/formazione-docenti" className="nav-mega__link">Formazione Docenti MIM</Link>
-                  </div>
-                  <div className="nav-mega__col">
-                    <p className="nav-mega__label">Lingue</p>
-                    <Link href="/corsi/corsi-asincroni?lang=latino" className="nav-mega__link">Latino</Link>
-                    <Link href="/corsi/corsi-asincroni?lang=greco" className="nav-mega__link">Greco Antico</Link>
-                    <Link href="/corsi/corsi-asincroni?lang=egiziano" className="nav-mega__link">Egiziano Antico</Link>
-                    <Link href="/corsi/corsi-asincroni?lang=ebraico" className="nav-mega__link">Ebraico Biblico</Link>
-                    <Link href="/corsi/corsi-asincroni?lang=sanscrito" className="nav-mega__link">Sanscrito</Link>
+            {/* NAV DESKTOP */}
+            <ul className="nav-list" role="list">
+              {/* Offerta Formativa — dropdown */}
+              <li className="nav-item nav-item--has-dropdown">
+                <button
+                  className="nav-link nav-dropdown-btn"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  type="button"
+                >
+                  Offerta Formativa
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true" style={{ marginLeft: '5px', flexShrink: 0 }}>
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </button>
+                <div className="nav-dropdown" role="region" aria-label="Offerta formativa">
+                  <div className="nav-dropdown-grid">
+                    <div>
+                      <p className="nav-dropdown-label">Percorsi</p>
+                      <Link href="/corsi/corsi-live" className="nav-dropdown-link">Corsi in Diretta</Link>
+                      <Link href="/corsi/corsi-asincroni" className="nav-dropdown-link">Corsi Asincroni</Link>
+                      <Link href="/corsi/lezioni-individuali" className="nav-dropdown-link">Tutoraggio Individuale</Link>
+                      <Link href="/corsi/minicorsi" className="nav-dropdown-link">Corsi Brevi Tematici</Link>
+                      <Link href="/corsi/formazione-docenti" className="nav-dropdown-link">Formazione Docenti MIM</Link>
+                    </div>
+                    <div>
+                      <p className="nav-dropdown-label">Lingue</p>
+                      <Link href="/corsi/corsi-live?lang=latino" className="nav-dropdown-link">Latino</Link>
+                      <Link href="/corsi/corsi-live?lang=greco" className="nav-dropdown-link">Greco Antico</Link>
+                      <Link href="/corsi/corsi-asincroni?lang=egiziano" className="nav-dropdown-link">Egiziano Antico</Link>
+                      <Link href="/corsi/corsi-asincroni?lang=ebraico" className="nav-dropdown-link">Ebraico Biblico</Link>
+                      <Link href="/corsi/corsi-asincroni?lang=sanscrito" className="nav-dropdown-link">Sanscrito</Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
+              </li>
 
-            <li className="nav-item">
-              <Link href="/eventi" className={`nav-link ${isActive('/eventi') ? 'nav-link--active' : ''}`}>
-                Eventi
-              </Link>
-            </li>
+              <li className="nav-item">
+                <Link href="/eventi" className={`nav-link${isActive('/eventi') ? ' nav-link--active' : ''}`}>
+                  Eventi
+                </Link>
+              </li>
 
-            <li className="nav-item">
-              <Link href="/commercio/abbonamento" className={`nav-link ${isActive('/commercio/abbonamento') ? 'nav-link--active' : ''}`}>
-                Abbonamento
-              </Link>
-            </li>
+              <li className="nav-item">
+                <Link href="/commercio/abbonamento" className={`nav-link${isActive('/commercio/abbonamento') ? ' nav-link--active' : ''}`}>
+                  Abbonamento
+                </Link>
+              </li>
 
-            <li className="nav-item">
-              <Link href="/marketing/chi-siamo" className={`nav-link ${isActive('/marketing/chi-siamo') ? 'nav-link--active' : ''}`}>
-                Chi siamo
-              </Link>
-            </li>
+              <li className="nav-item">
+                <Link href="/marketing/chi-siamo" className={`nav-link${isActive('/marketing/chi-siamo') ? ' nav-link--active' : ''}`}>
+                  Chi siamo
+                </Link>
+              </li>
 
-            <li className="nav-item">
-              <a
-                href={process.env.NEXT_PUBLIC_PORTALE_URL ?? 'https://portale.grecolatinovivo.it'}
-                className="btn btn-primary btn-sm"
-                rel="noopener"
-              >
-                Portale studenti
-              </a>
-            </li>
-          </ul>
+              {/* CTA Portale → esterno */}
+              <li className="nav-item nav-item--cta">
+                <a
+                  href="https://www.portale.grecolatinovivo.it"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-cta"
+                >
+                  Portale studenti
+                </a>
+              </li>
+            </ul>
 
-          {/* HAMBURGER MOBILE */}
-          <button
-            className="nav-hamburger"
-            aria-label={menuOpen ? 'Chiudi menu' : 'Apri menu'}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
-            <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
-            <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
-          </button>
+            {/* HAMBURGER MOBILE */}
+            <button
+              className="nav-hamburger"
+              aria-label={menuOpen ? 'Chiudi menu' : 'Apri menu'}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              onClick={() => setMenuOpen(!menuOpen)}
+              type="button"
+            >
+              <span className={`hline${menuOpen ? ' hline--open' : ''}`} />
+              <span className={`hline${menuOpen ? ' hline--open' : ''}`} />
+              <span className={`hline${menuOpen ? ' hline--open' : ''}`} />
+            </button>
+          </div>
+        </nav>
+
+        {/* Linea oro decorativa 2px */}
+        <div className="gold-line" aria-hidden="true" />
+
+        {/* Strip accreditamento */}
+        <div className="accreditamento-strip" role="banner">
+          <p>Accreditato MIM &middot; Membro Associato ALTE &middot; Dal 2015</p>
         </div>
 
         {/* MENU MOBILE */}
         {menuOpen && (
-          <div id="mobile-menu" className="nav-mobile" aria-label="Menu mobile">
+          <div id="mobile-menu" className="nav-mobile-menu" aria-label="Menu mobile">
             <ul role="list">
               <li><Link href="/corsi/corsi-live" onClick={() => setMenuOpen(false)}>Corsi in Diretta</Link></li>
               <li><Link href="/corsi/corsi-asincroni" onClick={() => setMenuOpen(false)}>Corsi Asincroni</Link></li>
               <li><Link href="/corsi/lezioni-individuali" onClick={() => setMenuOpen(false)}>Tutoraggio</Link></li>
+              <li><Link href="/corsi/minicorsi" onClick={() => setMenuOpen(false)}>Corsi Brevi</Link></li>
+              <li><Link href="/corsi/formazione-docenti" onClick={() => setMenuOpen(false)}>Formazione Docenti</Link></li>
               <li><Link href="/eventi" onClick={() => setMenuOpen(false)}>Eventi</Link></li>
               <li><Link href="/commercio/abbonamento" onClick={() => setMenuOpen(false)}>Abbonamento</Link></li>
               <li><Link href="/marketing/chi-siamo" onClick={() => setMenuOpen(false)}>Chi siamo</Link></li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PORTALE_URL ?? 'https://portale.grecolatinovivo.it'}>
-                  Portale studenti
+                <a
+                  href="https://www.portale.grecolatinovivo.it"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMenuOpen(false)}
+                  style={{ fontWeight: 600, color: '#002147' }}
+                >
+                  Portale studenti ↗
                 </a>
               </li>
             </ul>
           </div>
         )}
-      </nav>
+      </header>
 
       <style>{`
-        /* Logo */
-        .nav-logo {
-          display: flex; align-items: center; gap: 10px;
-          text-decoration: none; flex-shrink: 0;
+        /* ---- BRAND ---- */
+        .nav-brand {
+          display: flex; align-items: center; gap: 12px;
+          text-decoration: none; flex-shrink: 0; color: #002147;
         }
-        .nav-logo__gl {
-          font-family: var(--font-heading, 'Playfair Display', serif);
-          font-size: 1.6rem; font-weight: 900;
-          color: #1B3A6B; line-height: 1;
-          letter-spacing: -0.02em;
+        .nav-brand:hover { text-decoration: none; }
+        .nav-logo-img {
+          display: flex; align-items: center; flex-shrink: 0;
         }
-        .nav-logo__text {
-          display: flex; flex-direction: column; line-height: 1.25;
+        .nav-brand-text {
+          display: flex; flex-direction: column; line-height: 1.3;
         }
-        .nav-logo__full {
-          font-family: var(--font-heading, 'Playfair Display', serif);
-          font-size: 0.82rem; font-weight: 700;
-          color: #1A2A3A;
+        .nav-brand-name {
+          font-family: var(--font-heading, Georgia, serif);
+          font-size: 0.92rem; font-weight: 400; color: #002147;
+          letter-spacing: 0.02em;
         }
-        .nav-logo__sub {
-          font-family: var(--font-body, Inter, sans-serif);
-          font-size: 0.63rem; color: #5A6A7A; letter-spacing: 0.01em;
+        .nav-brand-sub {
+          font-size: 0.68rem; color: #555;
+          letter-spacing: 0.04em; font-family: var(--font-body, sans-serif);
         }
 
-        /* Links desktop */
-        .nav-links {
-          display: flex; align-items: center; gap: 2px;
+        /* ---- NAV LIST ---- */
+        .nav-list {
+          display: flex; align-items: center; gap: 0;
           list-style: none; margin: 0; padding: 0;
         }
         .nav-link {
-          color: #3A4A5A;
-          font-family: var(--font-body, Inter, sans-serif); font-size: 0.88rem;
-          font-weight: 500;
-          padding: 8px 12px; border-radius: 5px;
-          text-decoration: none; transition: color 0.15s, background 0.15s;
-          background: none; border: none; cursor: pointer;
           display: flex; align-items: center;
+          padding: 0 1rem; height: 68px;
+          font-family: var(--font-body, sans-serif);
+          font-size: 0.875rem; color: #002147;
+          text-decoration: none; letter-spacing: 0.02em;
+          background: none; border: none; cursor: pointer;
+          white-space: nowrap;
+          border-bottom: 2px solid transparent;
+          transition: border-color 0.15s;
         }
-        .nav-link:hover { color: #1B3A6B; background: rgba(27,58,107,0.06); text-decoration: none; }
-        .nav-link--active { color: #1B3A6B; font-weight: 600; }
+        .nav-link:hover { border-bottom-color: #C9A84C; text-decoration: none; }
+        .nav-link--active { border-bottom-color: #002147; font-weight: 600; }
+        .nav-dropdown-btn { gap: 0; }
 
-        /* Dropdown mega */
-        .nav-item--dropdown { position: relative; }
-        .nav-item--dropdown:hover .nav-mega,
-        .nav-item--dropdown:focus-within .nav-mega { display: block; }
-        .nav-mega {
-          display: none; position: absolute; top: calc(100% + 8px); left: -24px;
-          background: #fff; border-radius: 10px;
-          box-shadow: 0 20px 60px rgba(27,58,107,0.12);
-          border: 1px solid #DDE3ED;
-          padding: 20px 24px; min-width: 480px; z-index: 100;
+        /* ---- DROPDOWN ---- */
+        .nav-item--has-dropdown { position: relative; }
+        .nav-item--has-dropdown:hover .nav-dropdown,
+        .nav-item--has-dropdown:focus-within .nav-dropdown { display: block; }
+        .nav-dropdown {
+          display: none;
+          position: absolute; top: 100%; left: 0;
+          background: #fff;
+          border: 1px solid #e8e8e8;
+          border-top: 2px solid #002147;
+          padding: 20px 24px; min-width: 460px; z-index: 200;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
-        .nav-mega__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .nav-mega__label {
-          font-family: var(--font-body, Inter, sans-serif); font-size: 0.68rem;
-          font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
-          color: #1B3A6B; margin-bottom: 8px; padding-bottom: 6px;
-          border-bottom: 1px solid #DDE3ED;
+        .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .nav-dropdown-label {
+          font-family: var(--font-body, sans-serif);
+          font-size: 0.68rem; font-weight: 700;
+          text-transform: uppercase; letter-spacing: 0.12em;
+          color: #C9A84C; margin-bottom: 8px; padding-bottom: 6px;
+          border-bottom: 1px solid #e8e8e8;
         }
-        .nav-mega__link {
-          display: block; color: #3A4A5A;
-          font-family: var(--font-body, Inter, sans-serif); font-size: 0.875rem;
+        .nav-dropdown-link {
+          display: block; color: #002147;
+          font-family: var(--font-body, sans-serif); font-size: 0.875rem;
           padding: 5px 0; text-decoration: none;
-          transition: color 0.15s;
         }
-        .nav-mega__link:hover { color: #1B3A6B; text-decoration: none; }
+        .nav-dropdown-link:hover { text-decoration: underline; color: #002147; }
 
-        /* Hamburger */
+        /* ---- CTA PORTALE ---- */
+        .nav-item--cta { margin-left: 12px; }
+        .nav-cta {
+          display: inline-block;
+          padding: 0.45rem 1.1rem;
+          border: 1px solid #002147;
+          font-family: var(--font-body, sans-serif);
+          font-size: 0.8rem; letter-spacing: 0.05em;
+          text-transform: uppercase; color: #002147;
+          text-decoration: none; white-space: nowrap;
+          transition: background 0.15s, color 0.15s;
+        }
+        .nav-cta:hover { background: #002147; color: #fff; text-decoration: none; }
+
+        /* ---- HAMBURGER ---- */
         .nav-hamburger {
           display: none; flex-direction: column; gap: 5px;
-          background: none; border: none; cursor: pointer;
-          padding: 8px; border-radius: 6px;
+          background: none; border: none; cursor: pointer; padding: 8px;
         }
-        .nav-hamburger:hover { background: rgba(27,58,107,0.06); }
-        .hamburger-line {
+        .hline {
           display: block; width: 22px; height: 2px;
-          background: #1A2A3A; border-radius: 2px;
-          transition: all 0.2s;
+          background: #002147; transition: all 0.2s;
         }
 
-        /* Mobile menu */
-        .nav-mobile {
-          position: absolute; top: 70px; left: 0; right: 0;
-          background: rgba(255,255,255,0.99);
-          padding: 16px 24px 24px; border-top: 1px solid #DDE3ED;
-          box-shadow: 0 8px 32px rgba(27,58,107,0.10);
+        /* ---- MOBILE MENU ---- */
+        .nav-mobile-menu {
+          position: absolute; top: 100%; left: 0; right: 0;
+          background: #fff; border-top: 1px solid #e8e8e8;
+          border-bottom: 1px solid #e8e8e8;
+          padding: 0 2rem 1.5rem; z-index: 999;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
-        .nav-mobile ul { list-style: none; }
-        .nav-mobile li { border-bottom: 1px solid #DDE3ED; }
-        .nav-mobile a {
-          display: block; color: #1A2A3A;
-          font-family: var(--font-body, Inter, sans-serif); font-size: 1rem;
-          padding: 14px 0; text-decoration: none;
-          transition: color 0.15s;
+        .nav-mobile-menu ul { list-style: none; }
+        .nav-mobile-menu li { border-bottom: 1px solid #e8e8e8; }
+        .nav-mobile-menu a {
+          display: block; color: #002147;
+          font-family: var(--font-body, sans-serif); font-size: 0.95rem;
+          padding: 13px 0; text-decoration: none;
         }
-        .nav-mobile a:hover { color: #1B3A6B; }
+        .nav-mobile-menu a:hover { text-decoration: underline; }
 
-        @media (max-width: 1024px) {
-          .nav-links { display: none; }
+        @media (max-width: 900px) {
+          .nav-list { display: none; }
           .nav-hamburger { display: flex; }
-          .nav-logo__full { font-size: 0.72rem; }
+          .nav-brand-name { font-size: 0.8rem; }
         }
         @media (max-width: 480px) {
-          .nav-logo__sub { display: none; }
+          .nav-brand-sub { display: none; }
+          .nav-brand-name { font-size: 0.75rem; }
         }
       `}</style>
-    </header>
+    </>
+  )
+}
+
+/**
+ * Logo component: tenta next/image con /logo.svg, poi /logo.png, poi fallback ΓΛ.
+ * Il file deve stare in /public/ nella root del progetto.
+ */
+function LogoImage() {
+  // Logo reale: /public/logo.png (copiare glv-logo-nobg.png in public/logo.png)
+  // Il componente usa next/image con fallback al monogramma ΓΛ se il file non è ancora presente.
+  return (
+    <Image
+      src="/logo.png"
+      alt="Logo Centro Nazionale di Studi Classici GrecoLatinoVivo"
+      width={44}
+      height={44}
+      priority
+      style={{ objectFit: 'contain' }}
+      onError={(e) => {
+        // Fallback: nasconde il tag img se il file non è ancora presente
+        (e.target as HTMLImageElement).style.display = 'none'
+      }}
+    />
   )
 }

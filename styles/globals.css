@@ -1,7 +1,7 @@
 /* ======================================================
    CSS Globale — Centro Nazionale di Studi Classici GLV
-   Design system tramite CSS custom properties.
-   Valori da UX_SPEC.md e README_NUOVO.md §8.
+   Design system — Oxford/Cambridge institutional style.
+   Direzione A confermata — COUNCIL sessione 2 (18/05/2026)
    ====================================================== */
 
 /*
@@ -16,25 +16,25 @@
    1. CUSTOM PROPERTIES
    ============================ */
 :root {
-  /* Colori istituzionali — navy accademico (COUNCIL.md decisione 1)
-     Ispirazione: Oxford, Normale di Pisa, Sorbona.
-     NON bordeaux. NON nero Netflix. */
-  --primary:        #1B3A6B;  /* navy istituzionale — CTA, accenti, active */
-  --primary-dark:   #122B52;  /* hover button, link active */
-  --primary-light:  rgba(27, 58, 107, 0.07); /* badge background */
-  --gold:           #C9A84C;  /* SOLO su sfondi scuri o decorativo — WCAG fail su bianco (2.5:1) */
+  /* Colori istituzionali — Oxford/Cambridge (COUNCIL sessione 2)
+     NON bordeaux. NON nero Netflix. NON navy-vecchio #1B3A6B. */
+  --primary:        #002147;  /* Oxford blue — CTA, header, footer, card border */
+  --primary-dark:   #001535;  /* hover, link active */
+  --primary-light:  rgba(0, 33, 71, 0.06); /* badge background */
+  --gold:           #C9A84C;  /* linea oro decorativa — SOLO su sfondi scuri o come bordo */
   --bg:             #FFFFFF;  /* bianco puro — sfondo pagine */
-  --dark:           #1A2A4A;  /* navy scuro — hero, footer */
-  --light-section:  #F4F6F8;  /* grigio istituzionale — sezioni alternate */
-  --border:         #DDE3ED;  /* grigio-blu tenue — bordi card */
-  --text:           #1A2A3A;  /* quasi-nero freddo — corpo testo */
-  --text-light:     #5A6A7A;  /* testo secondario, caption */
+  --dark:           #002147;  /* footer, strip — stesso valore di primary */
+  --light-section:  #f8f7f4;  /* avorio tenue — sezioni alternate, corpo */
+  --border:         #e8e8e8;  /* grigio neutro — bordi card */
+  --text:           #1a1a1a;  /* quasi-nero — corpo testo */
+  --text-light:     #555555;  /* testo secondario, caption */
+  --text-muted:     #777777;  /* eyebrow, label, etichette */
   --white:          #FFFFFF;
   --success:        #1e7e34;  /* check features, conferme */
   --error:          #dc3545;  /* messaggi errore */
 
   /* Tipografia — font iniettati da next/font in layout.tsx */
-  --font-heading:   var(--font-playfair, 'Playfair Display', Georgia, serif);
+  --font-heading:   var(--font-playfair, 'Playfair Display', Georgia, 'Times New Roman', serif);
   --font-body:      var(--font-inter, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
 
   /* Spaziature (8px grid) */
@@ -51,7 +51,7 @@
   --space-20: 80px;
 
   /* Layout */
-  --container:        1200px;
+  --container:        1100px;
   --container-narrow:  860px;
   --padding-section:   80px 0;
   --padding-mobile:    32px 0;
@@ -60,12 +60,12 @@
   --gap-grid:          28px;
   --gap-grid-mobile:   16px;
 
-  /* Border radius */
-  --radius-card:   12px;
-  --radius-btn:    6px;
-  --radius-badge:  20px;
-  --radius-modal:  16px;
-  --radius-input:  6px;
+  /* Border radius — Oxford: forme squadrate, niente arrotondamenti forti */
+  --radius-card:   0px;   /* card flat, bordi netti */
+  --radius-btn:    2px;   /* bottoni quasi-rettangolari */
+  --radius-badge:  2px;
+  --radius-modal:  4px;
+  --radius-input:  2px;
 
   /* Ombre */
   --shadow-card:  0 2px 10px rgba(0, 0, 0, 0.05);
@@ -126,11 +126,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--dark);
 }
 
-h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900; }
-h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 700; }
-h3 { font-size: 1.5rem; font-weight: 700; }
-h4 { font-size: 1.1rem; font-weight: 700; }
-h5 { font-size: 1rem; font-weight: 600; }
+/* Georgia/Playfair a peso normale è più Oxford — no bold heavy */
+h1 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 400; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 400; }
+h3 { font-size: 1.15rem; font-weight: 400; }
+h4 { font-size: 1rem; font-weight: 600; font-family: var(--font-body); }
+h5 { font-size: 0.875rem; font-weight: 600; font-family: var(--font-body); }
 
 p { margin-bottom: var(--space-4); }
 p:last-child { margin-bottom: 0; }
@@ -191,14 +192,18 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   cursor: not-allowed;
 }
 
-/* Primario */
+/* Primario — Oxford: outline solido navy */
 .btn-primary {
   background: var(--primary);
   color: var(--white);
-  padding: 14px 30px;
+  padding: 12px 28px;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--primary);
 }
 .btn-primary:hover:not(:disabled) {
   background: var(--primary-dark);
+  border-color: var(--primary-dark);
   color: var(--white);
   text-decoration: none;
 }
@@ -206,21 +211,26 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 /* Secondario outline */
 .btn-secondary {
   background: transparent;
-  border: 2px solid var(--primary);
+  border: 1px solid var(--primary);
   color: var(--primary);
-  padding: 12px 28px;
+  padding: 11px 26px;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
 }
 .btn-secondary:hover:not(:disabled) {
-  background: var(--primary-light);
+  background: var(--primary);
+  color: var(--white);
   text-decoration: none;
 }
 
-/* Ghost (su sfondo scuro) */
+/* Ghost (su sfondo scuro — footer, strip) */
 .btn-ghost {
   background: transparent;
-  border: 2px solid rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.6);
   color: var(--white);
-  padding: 12px 28px;
+  padding: 11px 26px;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
 }
 .btn-ghost:hover:not(:disabled) {
   border-color: var(--white);
@@ -229,23 +239,40 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   text-decoration: none;
 }
 
+/* Link-style CTA — testo con gold underline (stile mockup-1) */
+.btn-link {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--gold);
+  color: var(--primary);
+  padding: 0 0 2px;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  border-radius: 0;
+}
+.btn-link:hover:not(:disabled) {
+  color: var(--gold);
+  text-decoration: none;
+}
+
 /* Small variant */
 .btn-sm { padding: 8px 18px; font-size: 0.85rem; }
 
 /* ============================
-   6. CARDS
+   6. CARDS — stile Oxford: border-top navy, nessun shadow
    ============================ */
 .card {
   background: var(--white);
-  border: 1px solid var(--border);
+  border-top: 3px solid var(--primary);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   border-radius: var(--radius-card);
   padding: var(--space-6);
-  box-shadow: var(--shadow-card);
   transition: var(--transition);
 }
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+  border-top-color: var(--gold);
 }
 
 /* ============================
@@ -293,7 +320,7 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 .input:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.10);
+  box-shadow: 0 0 0 3px rgba(0, 33, 71, 0.12);
 }
 .input::placeholder { color: #aaa; }
 
@@ -356,7 +383,7 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 
 .section-title__underline {
   display: inline-block;
-  border-bottom: 3px solid var(--primary);
+  border-bottom: 2px solid var(--gold);
   padding-bottom: 4px;
 }
 
@@ -454,3 +481,176 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 .text-muted { color: var(--text-light); }
 .mt-auto { margin-top: auto; }
 .hidden { display: none; }
+
+/* ============================
+   14. OXFORD SPECIFICI
+   ============================ */
+
+/* Linea oro decorativa sotto header (2px) */
+.gold-line {
+  height: 2px;
+  background-color: var(--gold);
+}
+
+/* Strip accreditamento navy sotto header */
+.accreditamento-strip {
+  background-color: var(--primary);
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+.accreditamento-strip p {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+
+/* Eyebrow label */
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+
+/* Sezione divider */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+/* Citazione con bordo oro a sinistra */
+.blockquote-gold {
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.5rem;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #333;
+  line-height: 1.7;
+}
+
+/* Numero grande stile Oxford */
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  color: var(--primary);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+
+/* Link card (gold underline) */
+.card-link {
+  font-size: 0.875rem;
+  color: var(--primary);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 1px;
+  font-family: var(--font-body);
+}
+.card-link:hover {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* Strip lingue */
+.lingue-strip {
+  background-color: var(--light-section);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.lingue-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 2.5rem var(--padding-x);
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.lingue-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+}
+.lingue-list {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  list-style: none;
+}
+.lingue-list li {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--primary);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 1px;
+}
+
+/* Numerica Oxford: 4 colonne con divisori */
+.numeri-grid {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 4rem var(--padding-x);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.numero-item {
+  text-align: center;
+  padding: 0 1.5rem;
+}
+.numero-item + .numero-item {
+  border-left: 1px solid #d0d0d0;
+}
+
+@media (max-width: 767px) {
+  .numeri-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2rem;
+  }
+  .numero-item + .numero-item {
+    border-left: none;
+  }
+  .numeri-grid .numero-item:nth-child(odd) {
+    border-right: 1px solid #d0d0d0;
+  }
+  .lingue-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* CTA finale "Pronto a iniziare?" */
+.cta-band {
+  background: var(--primary);
+  padding: 4rem var(--padding-x);
+  text-align: center;
+}
+.cta-band h2 {
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.cta-band p {
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}

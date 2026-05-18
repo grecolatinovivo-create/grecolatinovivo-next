@@ -1,43 +1,47 @@
 'use client'
 // Pagina conferma post-pagamento — /commercio/conferma
-// Peak-end rule NEURO_SPEC §8.5: questa pagina è il "last impression"
-// Gestisce tutti i tipi: corso_live, corso_asincrono, biglietto_evento, tutoraggio, abbonamento
+// Gestisce il caso abbonamento come primario; altri tipi come fallback
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { Suspense } from 'react'
+import { Suspense as ReactSuspense } from 'react'
 
-const PORTALE_URL = process.env.NEXT_PUBLIC_PORTALE_URL ?? 'https://portale.grecolatinovivo.it'
+const PORTALE_URL = 'https://www.portale.grecolatinovivo.it'
 
-const MESSAGES: Record<string, { title: string; body: string; cta: string; ctaHref: string }> = {
+const MESSAGES: Record<string, { title: string; body: string; cta: string; ctaHref: string; ctaExternal: boolean }> = {
+  abbonamento: {
+    title: 'Abbonamento attivato con successo',
+    body: 'Il tuo abbonamento è ora attivo. Puoi accedere al tuo Portale studenti e iniziare il percorso con le lingue classiche.',
+    cta: 'Accedi al Portale studenti',
+    ctaHref: `${PORTALE_URL}/dashboard`,
+    ctaExternal: true,
+  },
   corso_live: {
-    title: 'Iscrizione confermata!',
+    title: 'Iscrizione confermata',
     body: 'Sei iscritto al corso. Trovi i dettagli e il link Zoom nella tua email (controlla anche lo spam).',
     cta: 'Vai alla dashboard',
     ctaHref: `${PORTALE_URL}/dashboard`,
+    ctaExternal: true,
   },
   corso_asincrono: {
-    title: 'Accesso al corso attivato!',
+    title: 'Accesso al corso attivato',
     body: 'Il corso è ora accessibile nella tua dashboard. Puoi iniziare subito.',
     cta: 'Inizia il corso',
     ctaHref: `${PORTALE_URL}/dashboard`,
+    ctaExternal: true,
   },
   biglietto_evento: {
-    title: 'Biglietto confermato!',
+    title: 'Biglietto confermato',
     body: 'Il tuo biglietto PDF è stato inviato via email (controlla anche lo spam). Mostralo all\'ingresso dell\'evento.',
     cta: 'Torna agli eventi',
     ctaHref: '/eventi',
+    ctaExternal: false,
   },
   tutoraggio: {
-    title: 'Appuntamento confermato!',
+    title: 'Appuntamento confermato',
     body: 'Il docente ti contatterà al tuo indirizzo email con il link per il collegamento.',
     cta: 'Torna alla home',
     ctaHref: '/',
-  },
-  abbonamento: {
-    title: 'Benvenuto nel portale!',
-    body: 'Il tuo abbonamento è attivo. Accedi al portale per iniziare il tuo percorso.',
-    cta: 'Accedi al portale',
-    ctaHref: `${PORTALE_URL}/dashboard`,
+    ctaExternal: false,
   },
 }
 
@@ -45,38 +49,209 @@ function ConfermaContent() {
   const params = useSearchParams()
   const type = params.get('type') ?? 'abbonamento'
   const msg = MESSAGES[type] ?? MESSAGES.abbonamento
+  const isAbbonamento = type === 'abbonamento' || !(type in MESSAGES)
 
   return (
-    <section style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '60px 24px' }}>
-      <div style={{ textAlign: 'center', maxWidth: '520px' }}>
-        {/* Check mark */}
-        <div style={{
-          width: '72px', height: '72px', borderRadius: '50%',
-          background: 'rgba(30,126,52,0.1)', border: '2px solid #1e7e34',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          margin: '0 auto 24px', fontSize: '2rem'
-        }} aria-hidden="true">
-          ✓
+    <section
+      style={{
+        minHeight: '70vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '80px 24px',
+        background: '#fff',
+      }}
+    >
+      <div
+        style={{
+          textAlign: 'center',
+          maxWidth: '560px',
+          width: '100%',
+        }}
+      >
+        {/* Segno di spunta Oxford */}
+        <div
+          style={{
+            width: '72px',
+            height: '72px',
+            borderRadius: '50%',
+            background: '#F5F0E8',
+            border: '2px solid #C9A84C',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 28px',
+            fontSize: '1.8rem',
+            color: '#002147',
+            fontWeight: 700,
+            fontFamily: 'Georgia, serif',
+          }}
+          aria-hidden="true"
+        >
+          &#10003;
         </div>
 
-        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#1A1A1A', marginBottom: '16px' }}>
+        {/* Eyebrow */}
+        <p
+          style={{
+            fontFamily: 'Georgia, serif',
+            fontSize: '0.78rem',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.14em',
+            color: '#C9A84C',
+            marginBottom: '12px',
+          }}
+        >
+          {isAbbonamento ? 'Abbonamento attivato' : 'Pagamento confermato'}
+        </p>
+
+        <h1
+          style={{
+            fontFamily: 'Georgia, serif',
+            fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+            fontWeight: 700,
+            color: '#002147',
+            marginBottom: '20px',
+            lineHeight: 1.2,
+          }}
+        >
           {msg.title}
         </h1>
-        <p style={{ color: '#6B6B6B', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '36px' }}>
+
+        <p
+          style={{
+            fontFamily: 'Georgia, serif',
+            fontSize: '1rem',
+            color: '#555',
+            lineHeight: 1.75,
+            marginBottom: '16px',
+          }}
+        >
           {msg.body}
         </p>
 
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href={msg.ctaHref} className="btn btn-primary">
-            {msg.cta}
-          </a>
-          <Link href="/" className="btn btn-secondary">
+        {isAbbonamento && (
+          <p
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: '0.95rem',
+              color: '#002147',
+              fontWeight: 600,
+              marginBottom: '36px',
+            }}
+          >
+            Puoi ora accedere al tuo Portale studenti.
+          </p>
+        )}
+
+        {/* Pulsanti */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '14px',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            marginBottom: '36px',
+          }}
+        >
+          {msg.ctaExternal ? (
+            <a
+              href={msg.ctaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                background: '#002147',
+                color: '#fff',
+                fontFamily: 'Georgia, serif',
+                fontSize: '0.95rem',
+                fontWeight: 700,
+                padding: '13px 28px',
+                borderRadius: '3px',
+                textDecoration: 'none',
+              }}
+            >
+              {msg.cta}
+            </a>
+          ) : (
+            <Link
+              href={msg.ctaHref}
+              style={{
+                display: 'inline-block',
+                background: '#002147',
+                color: '#fff',
+                fontFamily: 'Georgia, serif',
+                fontSize: '0.95rem',
+                fontWeight: 700,
+                padding: '13px 28px',
+                borderRadius: '3px',
+                textDecoration: 'none',
+              }}
+            >
+              {msg.cta}
+            </Link>
+          )}
+
+          <Link
+            href="/"
+            style={{
+              display: 'inline-block',
+              border: '2px solid #002147',
+              color: '#002147',
+              fontFamily: 'Georgia, serif',
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              padding: '11px 24px',
+              borderRadius: '3px',
+              textDecoration: 'none',
+            }}
+          >
             Torna alla home
           </Link>
         </div>
 
-        <p style={{ fontSize: '0.825rem', color: '#aaa', marginTop: '32px' }}>
-          Per qualsiasi necessità: <a href="mailto:info@grecolatinovivo.it" style={{ color: '#1B3A6B' }}>info@grecolatinovivo.it</a>
+        {/* Link portale secondario per abbonamento */}
+        {isAbbonamento && (
+          <p
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: '0.875rem',
+              color: '#777',
+              marginBottom: '12px',
+            }}
+          >
+            Portale:{' '}
+            <a
+              href={PORTALE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: '#002147',
+                fontWeight: 600,
+                textDecoration: 'underline',
+                textUnderlineOffset: '3px',
+              }}
+            >
+              portale.grecolatinovivo.it
+            </a>
+          </p>
+        )}
+
+        <p
+          style={{
+            fontFamily: 'Georgia, serif',
+            fontSize: '0.82rem',
+            color: '#aaa',
+          }}
+        >
+          Per assistenza:{' '}
+          <a
+            href="mailto:info@grecolatinovivo.it"
+            style={{ color: '#002147', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+          >
+            info@grecolatinovivo.it
+          </a>
         </p>
       </div>
     </section>
@@ -85,8 +260,8 @@ function ConfermaContent() {
 
 export default function ConfermaPage() {
   return (
-    <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
+    <ReactSuspense fallback={<div style={{ minHeight: '70vh' }} />}>
       <ConfermaContent />
-    </Suspense>
+    </ReactSuspense>
   )
 }

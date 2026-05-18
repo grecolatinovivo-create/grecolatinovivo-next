@@ -31,7 +31,7 @@ export default function PricingToggle() {
               fontFamily: 'var(--font-body, Inter, sans-serif)',
               fontSize: '0.875rem',
               fontWeight: period === 'monthly' ? 600 : 500,
-              color: period === 'monthly' ? '#1A2A3A' : '#5A6A7A',
+              color: period === 'monthly' ? '#1a1a1a' : '#555555',
               padding: '8px 20px',
               borderRadius: '4px',
               transition: 'all 0.15s',
@@ -50,7 +50,7 @@ export default function PricingToggle() {
               fontFamily: 'var(--font-body, Inter, sans-serif)',
               fontSize: '0.875rem',
               fontWeight: period === 'annual' ? 600 : 500,
-              color: period === 'annual' ? '#1A2A3A' : '#5A6A7A',
+              color: period === 'annual' ? '#1a1a1a' : '#555555',
               padding: '8px 20px',
               borderRadius: '4px',
               transition: 'all 0.15s',
@@ -75,15 +75,15 @@ export default function PricingToggle() {
               display: 'flex',
               flexDirection: 'column',
               position: 'relative',
-              border: plan.isFeatured ? '2px solid #1B3A6B' : '1px solid #DDE3ED',
-              boxShadow: plan.isFeatured ? '0 8px 32px rgba(27,58,107,0.12)' : undefined,
+              border: plan.isFeatured ? '2px solid #002147' : '1px solid #DDE3ED',
+              boxShadow: plan.isFeatured ? '0 8px 32px rgba(0,33,71,0.12)' : undefined,
             }}
           >
             {/* Badge piano in evidenza */}
             {plan.badge && (
               <div style={{
                 position: 'absolute', top: '-13px', left: '50%', transform: 'translateX(-50%)',
-                background: '#1B3A6B', color: '#fff',
+                background: '#002147', color: '#fff',
                 fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.7rem', fontWeight: 700,
                 padding: '4px 16px', borderRadius: '3px', whiteSpace: 'nowrap',
               }}>
@@ -94,19 +94,19 @@ export default function PricingToggle() {
             <p style={{
               fontFamily: 'var(--font-body, Inter, sans-serif)',
               fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '0.12em', color: '#1B3A6B', marginBottom: '4px',
+              letterSpacing: '0.12em', color: '#002147', marginBottom: '4px',
             }}>
               Piano
             </p>
 
             <h3 style={{
               fontFamily: 'var(--font-heading, Playfair Display, serif)',
-              fontSize: '1.5rem', fontWeight: 700, color: '#1A2A3A', marginBottom: '4px',
+              fontSize: '1.5rem', fontWeight: 700, color: '#1a1a1a', marginBottom: '4px',
             }}>
               {plan.name}
             </h3>
 
-            <p style={{ color: '#5A6A7A', fontSize: '0.875rem', marginBottom: '20px' }}>
+            <p style={{ color: '#555555', fontSize: '0.875rem', marginBottom: '20px' }}>
               {plan.subtitle}
             </p>
 
@@ -114,13 +114,13 @@ export default function PricingToggle() {
             <div style={{ marginBottom: '24px' }}>
               <span style={{
                 fontFamily: 'var(--font-heading, Playfair Display, serif)',
-                fontSize: '2.4rem', fontWeight: 700, color: '#1A2A3A',
+                fontSize: '2.4rem', fontWeight: 700, color: '#1a1a1a',
               }}>
                 &euro;{period === 'monthly'
                   ? plan.priceMonthly.toFixed(2).replace('.', ',')
                   : plan.priceAnnual}
               </span>
-              <span style={{ color: '#5A6A7A', fontSize: '0.875rem' }}>
+              <span style={{ color: '#555555', fontSize: '0.875rem' }}>
                 {period === 'monthly' ? '/mese' : '/anno'}
               </span>
               {period === 'annual' && (
@@ -150,7 +150,7 @@ export default function PricingToggle() {
               {plan.id === 'cultura' ? 'Scegli Cultura' : plan.id === 'linguae' ? 'Scegli Linguae' : 'Scegli Accademia'}
             </a>
 
-            <p style={{ fontSize: '0.73rem', color: '#5A6A7A', textAlign: 'center', marginTop: '10px', marginBottom: 0 }}>
+            <p style={{ fontSize: '0.73rem', color: '#555555', textAlign: 'center', marginTop: '10px', marginBottom: 0 }}>
               Disdici in qualsiasi momento.
             </p>
           </div>

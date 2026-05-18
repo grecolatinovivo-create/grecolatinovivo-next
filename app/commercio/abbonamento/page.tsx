@@ -1,128 +1,193 @@
-// Pagina abbonamento — /commercio/abbonamento
-// Presenta i 3 piani con toggle mensile/annuale
-// Integra il flusso Stripe (data-plan, data-open-register — pattern portale)
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { PLANS } from '@/types'
+import PricingToggle from '@/components/sections/PricingToggle'
 
 export const metadata: Metadata = {
   title: 'Piani abbonamento — GrecoLatinoVivo',
-  description: 'Abbonati al portale GLV: Cultura €5,90/mese, Linguae €12,90/mese, Accademia €19,90/mese. Accedi a tutti i corsi registrati di Latino, Greco, Egiziano e Ebraico.',
+  description:
+    'Abbonati al Portale Didattico GLV: Cultura €5,90/mese, Linguae €12,90/mese, Accademia €19,90/mese. Accedi a tutti i corsi di Latino, Greco, Egiziano, Ebraico e Sanscrito.',
   alternates: { canonical: 'https://grecolatinovivo.it/commercio/abbonamento' },
 }
+
+const portalUrl = 'https://www.portale.grecolatinovivo.it'
+
+const faq = [
+  {
+    domanda: 'Come funziona il pagamento?',
+    risposta:
+      'Il pagamento avviene in modo sicuro tramite Stripe. Puoi utilizzare carta di credito, debito o altri metodi supportati. Riceverai una ricevuta via email dopo ogni addebito.',
+  },
+  {
+    domanda: 'Posso disdire quando voglio?',
+    risposta:
+      'Sì. Non ci sono vincoli minimi. Puoi disdire l\'abbonamento in qualsiasi momento dalla tua area personale sul portale. La disdetta avrà effetto al termine del periodo già pagato.',
+  },
+  {
+    domanda: 'Qual è la differenza tra mensile e annuale?',
+    risposta:
+      'Il piano annuale ti permette di risparmiare rispetto a 12 mesi separati. Il costo viene addebitato in un\'unica soluzione all\'inizio dell\'anno. Puoi comunque disdire anticipatamente.',
+  },
+  {
+    domanda: 'Cosa succede se cambio piano?',
+    risposta:
+      'Puoi passare a un piano superiore o inferiore in qualsiasi momento. In caso di upgrade, la differenza viene calcolata in modo proporzionale. Il cambio è immediato e gestito direttamente dal portale.',
+  },
+]
 
 export default function AbbonamentoPage() {
   return (
     <>
       {/* HERO */}
-      <section style={{ background: '#1A1A1A', padding: '72px 24px 60px', textAlign: 'center' }}>
+      <section
+        style={{
+          background: '#002147',
+          padding: '80px 24px 64px',
+          textAlign: 'center',
+        }}
+      >
         <div className="container-narrow">
-          <p style={{ color: '#C9A84C', fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>
-            Il portale abbonamento
+          <p
+            style={{
+              color: '#C9A84C',
+              fontFamily: 'Georgia, serif',
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.14em',
+              marginBottom: '14px',
+            }}
+          >
+            Accesso al Portale Didattico
           </p>
-          <h1 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 2.8rem)', color: '#fff', marginBottom: '16px', lineHeight: 1.15 }}>
-            Accedi a tutti i corsi<br />con un unico abbonamento
+          <h1
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+              fontWeight: 700,
+              color: '#fff',
+              marginBottom: '18px',
+              lineHeight: 1.2,
+            }}
+          >
+            Scegli il tuo piano
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '520px', margin: '0 auto 0' }}>
+          <p
+            style={{
+              color: 'rgba(255,255,255,0.72)',
+              fontSize: '1.05rem',
+              maxWidth: '540px',
+              margin: '0 auto',
+              lineHeight: 1.7,
+              fontFamily: 'Georgia, serif',
+            }}
+          >
             Latino, Greco, Egiziano, Ebraico e Sanscrito. 56 corsi e contando.
             Disdici quando vuoi.
           </p>
         </div>
       </section>
 
-      {/* PRICING */}
-      <section className="section section--alt">
-        <div className="container" style={{ textAlign: 'center' }}>
+      {/* PRICING CON TOGGLE */}
+      <section
+        style={{
+          background: '#F5F0E8',
+          padding: '72px 24px',
+          textAlign: 'center',
+        }}
+      >
+        <div className="container">
+          <PricingToggle />
+        </div>
+      </section>
 
-          {/* Toggle mensile/annuale */}
-          <div style={{ marginBottom: '48px' }}>
-            <div style={{ display: 'inline-flex', background: '#E8E0D0', borderRadius: '8px', padding: '4px', gap: '4px' }}>
-              <button id="tog-monthly" className="tog-btn tog-btn--active" aria-pressed="true">
-                Mensile
-              </button>
-              <button id="tog-annual" className="tog-btn" aria-pressed="false">
-                Annuale &nbsp;<strong style={{ color: '#1e7e34' }}>Risparmia fino a 60€</strong>
-              </button>
-            </div>
-            <p style={{ fontSize: '0.8rem', color: '#aaa', marginTop: '8px' }}>
-              Con il piano annuale risparmi rispetto a 12 mesi separati.
-            </p>
-          </div>
-
-          {/* Cards — Cultura prima (ancoraggio NEURO_SPEC §2.5) */}
-          <div className="grid-3" style={{ maxWidth: '1020px', margin: '0 auto', alignItems: 'start' }}>
-            {PLANS.map((plan) => (
+      {/* COSA INCLUDE IL PORTALE */}
+      <section style={{ padding: '72px 24px' }}>
+        <div className="container-narrow">
+          <p
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.13em',
+              color: '#C9A84C',
+              marginBottom: '12px',
+              textAlign: 'center',
+            }}
+          >
+            Il portale in dettaglio
+          </p>
+          <h2
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: 'clamp(1.4rem, 2.5vw, 1.75rem)',
+              fontWeight: 700,
+              color: '#002147',
+              marginBottom: '40px',
+              textAlign: 'center',
+            }}
+          >
+            Cosa trovi nel Portale Didattico
+          </h2>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '28px',
+            }}
+          >
+            {[
+              {
+                titolo: 'Corsi registrati',
+                testo:
+                  'Accedi a lezioni preregistrate di Latino, Greco antico, Egiziano geroglifico, Ebraico biblico e Sanscrito. Studia ai tuoi ritmi, senza scadenze.',
+              },
+              {
+                titolo: 'Materiali didattici',
+                testo:
+                  'Grammatiche, dispense, vocabolari e mappe concettuali scaricabili. Disponibili dai piani Linguae e Accademia.',
+              },
+              {
+                titolo: 'Formazione docenti MIM',
+                testo:
+                  'Corsi accreditati per la formazione dei docenti, riconosciuti dal Ministero dell\'Istruzione. Esclusivi del piano Accademia.',
+              },
+              {
+                titolo: 'Comunità di studio',
+                testo:
+                  'Forum, gruppi di lettura e spazi di confronto tra studenti e docenti. Incluso in tutti i piani.',
+              },
+            ].map((item) => (
               <div
-                key={plan.id}
-                className={`card pricing-card ${plan.isFeatured ? 'pricing-card--featured' : ''}`}
-                style={{ display: 'flex', flexDirection: 'column', position: 'relative', paddingTop: plan.badge ? '32px' : '24px' }}
+                key={item.titolo}
+                style={{
+                  background: '#fff',
+                  border: '1px solid #DDE3ED',
+                  borderTop: '3px solid #C9A84C',
+                  borderRadius: '3px',
+                  padding: '24px',
+                }}
               >
-                {plan.badge && (
-                  <div className="pricing-badge" aria-label={`Piano consigliato: ${plan.badge}`}>
-                    {plan.badge}
-                  </div>
-                )}
-
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#1B3A6B', marginBottom: '6px' }}>
-                  PIANO
-                </p>
-                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.6rem', fontWeight: 700, color: '#1A1A1A', marginBottom: '4px' }}>
-                  {plan.name}
-                </h2>
-                <p style={{ color: '#6B6B6B', fontSize: '0.875rem', marginBottom: '20px' }}>
-                  {plan.subtitle}
-                </p>
-
-                {/* Prezzo */}
-                <div style={{ marginBottom: '8px' }}>
-                  <span
-                    className="price-monthly"
-                    style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.4rem', fontWeight: 700, color: '#1A1A1A' }}
-                  >
-                    €{plan.priceMonthly.toFixed(2).replace('.', ',')}
-                  </span>
-                  <span
-                    className="price-annual"
-                    style={{ display: 'none', fontFamily: 'Playfair Display, serif', fontSize: '2.4rem', fontWeight: 700, color: '#1A1A1A' }}
-                  >
-                    €{plan.priceAnnual}
-                  </span>
-                  <span style={{ color: '#6B6B6B', fontSize: '0.9rem' }}>
-                    &nbsp;<span className="price-period">/mese</span>
-                  </span>
-                </div>
-                <p className="price-annual" style={{ display: 'none', fontSize: '0.8rem', color: '#1e7e34', marginBottom: '16px' }}>
-                  Fatturato annualmente
-                </p>
-                <p className="price-monthly" style={{ fontSize: '0.8rem', color: '#aaa', marginBottom: '16px' }}>
-                  Fatturato mensilmente
-                </p>
-
-                {/* Features */}
-                <ul style={{ listStyle: 'none', textAlign: 'left', marginBottom: '24px', display: 'flex', flexDirection: 'column', gap: '10px', flex: 1 }}>
-                  {plan.features.map((f) => (
-                    <li key={f} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.875rem', color: '#3A3A3A' }}>
-                      <span style={{ color: '#1e7e34', fontWeight: 700, flexShrink: 0, fontSize: '1rem' }}>✓</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <Link
-                  href={`/auth/login?redirect=/commercio/abbonamento&piano=${plan.id}`}
-                  className={`btn ${plan.isFeatured ? 'btn-primary' : 'btn-secondary'}`}
-                  style={{ width: '100%', justifyContent: 'center' }}
-                  data-plan={plan.id}
+                <h3
+                  style={{
+                    fontFamily: 'Georgia, serif',
+                    fontSize: '1.05rem',
+                    fontWeight: 700,
+                    color: '#002147',
+                    marginBottom: '10px',
+                  }}
                 >
-                  {plan.id === 'cultura'
-                    ? 'Inizia con Cultura'
-                    : plan.id === 'linguae'
-                    ? 'Scegli Linguae'
-                    : "Accedi all'Accademia"}
-                </Link>
-                <p style={{ fontSize: '0.72rem', color: '#aaa', textAlign: 'center', marginTop: '8px' }}>
-                  Disdici quando vuoi. Nessun vincolo.
+                  {item.titolo}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: 'Georgia, serif',
+                    fontSize: '0.875rem',
+                    color: '#555',
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {item.testo}
                 </p>
               </div>
             ))}
@@ -130,92 +195,145 @@ export default function AbbonamentoPage() {
         </div>
       </section>
 
-      {/* COMPARAZIONE */}
-      <section className="section">
+      {/* FAQ */}
+      <section
+        style={{
+          background: '#F5F0E8',
+          padding: '72px 24px',
+        }}
+      >
         <div className="container-narrow">
-          <h2 className="section-title text-center reveal">
-            <span className="section-title__underline">A cosa hai accesso</span>
+          <h2
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: 'clamp(1.4rem, 2.5vw, 1.75rem)',
+              fontWeight: 700,
+              color: '#002147',
+              marginBottom: '40px',
+              textAlign: 'center',
+            }}
+          >
+            Domande frequenti
           </h2>
-          <div style={{ marginTop: '40px', overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid #E8E0D0' }}>
-                  <th style={{ textAlign: 'left', padding: '12px', color: '#6B6B6B', fontWeight: 600 }}>Funzionalità</th>
-                  {PLANS.map((p) => (
-                    <th key={p.id} style={{ padding: '12px', color: p.isFeatured ? '#1B3A6B' : '#3A3A3A', fontWeight: 700, textAlign: 'center' }}>
-                      {p.name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { label: 'Accesso portale studenti', v: ['✓', '✓', '✓'] },
-                  { label: 'Catalogo corsi registrati', v: ['Base', 'Completo', 'Completo'] },
-                  { label: 'Materiali scaricabili', v: ['—', '✓', '✓'] },
-                  { label: 'Attestati di completamento', v: ['—', '✓', '✓'] },
-                  { label: 'Corsi formazione docenti MIM', v: ['—', '—', '✓'] },
-                  { label: 'Percorsi personalizzati', v: ['—', '—', '✓'] },
-                  { label: 'Accesso anticipato nuovi corsi', v: ['—', '—', '✓'] },
-                ].map((row) => (
-                  <tr key={row.label} style={{ borderBottom: '1px solid #F5F0E8' }}>
-                    <td style={{ padding: '12px', color: '#3A3A3A' }}>{row.label}</td>
-                    {row.v.map((val, i) => (
-                      <td key={i} style={{ padding: '12px', textAlign: 'center', color: val === '✓' ? '#1e7e34' : val === '—' ? '#ccc' : '#3A3A3A', fontWeight: val === '✓' ? 700 : 400 }}>
-                        {val}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {faq.map((item) => (
+              <details
+                key={item.domanda}
+                style={{
+                  background: '#fff',
+                  border: '1px solid #DDE3ED',
+                  borderRadius: '3px',
+                  overflow: 'hidden',
+                }}
+              >
+                <summary
+                  style={{
+                    cursor: 'pointer',
+                    padding: '18px 24px',
+                    fontFamily: 'Georgia, serif',
+                    fontSize: '1rem',
+                    fontWeight: 700,
+                    color: '#002147',
+                    listStyle: 'none',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  {item.domanda}
+                  <span
+                    style={{
+                      color: '#C9A84C',
+                      fontSize: '1.2rem',
+                      fontWeight: 400,
+                      flexShrink: 0,
+                      marginLeft: '12px',
+                    }}
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p
+                  style={{
+                    padding: '0 24px 18px',
+                    fontFamily: 'Georgia, serif',
+                    fontSize: '0.9rem',
+                    color: '#555',
+                    lineHeight: 1.75,
+                    margin: 0,
+                  }}
+                >
+                  {item.risposta}
+                </p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Script toggle */}
-      <script dangerouslySetInnerHTML={{ __html: `
-        (function() {
-          var togM = document.getElementById('tog-monthly');
-          var togA = document.getElementById('tog-annual');
-          if (!togM || !togA) return;
-          function setMonthly() {
-            togM.classList.add('tog-btn--active'); togA.classList.remove('tog-btn--active');
-            togM.setAttribute('aria-pressed','true'); togA.setAttribute('aria-pressed','false');
-            document.querySelectorAll('.price-monthly').forEach(function(el){el.style.display='';});
-            document.querySelectorAll('.price-annual').forEach(function(el){el.style.display='none';});
-            document.querySelectorAll('.price-period').forEach(function(el){el.textContent='/mese';});
-          }
-          function setAnnual() {
-            togA.classList.add('tog-btn--active'); togM.classList.remove('tog-btn--active');
-            togA.setAttribute('aria-pressed','true'); togM.setAttribute('aria-pressed','false');
-            document.querySelectorAll('.price-monthly').forEach(function(el){el.style.display='none';});
-            document.querySelectorAll('.price-annual').forEach(function(el){el.style.display='';});
-            document.querySelectorAll('.price-period').forEach(function(el){el.textContent='/anno';});
-          }
-          togM.addEventListener('click', setMonthly);
-          togA.addEventListener('click', setAnnual);
-        })();
-      `}} />
-
-      <style>{`
-        .pricing-card { transition: transform 0.2s, box-shadow 0.2s; }
-        .pricing-card--featured { border: 2px solid #1B3A6B; box-shadow: 0 8px 32px rgba(27,58,107,0.12); }
-        .pricing-card--featured:hover { transform: translateY(-6px); }
-        .pricing-badge {
-          position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-          background: #1B3A6B; color: #fff;
-          font-family: Inter, sans-serif; font-size: 0.72rem; font-weight: 700;
-          padding: 4px 14px; border-radius: 20px; white-space: nowrap;
-        }
-        .tog-btn {
-          background: transparent; border: none; cursor: pointer;
-          font-family: Inter, sans-serif; font-size: 0.9rem; font-weight: 500;
-          color: #6B6B6B; padding: 10px 20px; border-radius: 6px; transition: all 0.15s;
-        }
-        .tog-btn--active { background: #fff; color: #1A1A1A; font-weight: 600; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-        .text-center { text-align: center; }
-      `}</style>
+      {/* CTA FINALE */}
+      <section
+        style={{
+          background: '#002147',
+          padding: '64px 24px',
+          textAlign: 'center',
+        }}
+      >
+        <div className="container-narrow">
+          <h2
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: 'clamp(1.4rem, 2.5vw, 1.75rem)',
+              fontWeight: 700,
+              color: '#fff',
+              marginBottom: '16px',
+            }}
+          >
+            Pronto a iniziare?
+          </h2>
+          <p
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: '0.95rem',
+              color: 'rgba(255,255,255,0.72)',
+              lineHeight: 1.7,
+              maxWidth: '440px',
+              margin: '0 auto 32px',
+            }}
+          >
+            Accedi al portale e inizia il tuo percorso con le lingue classiche oggi stesso.
+          </p>
+          <a
+            href={portalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              background: '#C9A84C',
+              color: '#002147',
+              fontFamily: 'Georgia, serif',
+              fontSize: '0.95rem',
+              fontWeight: 700,
+              padding: '14px 32px',
+              borderRadius: '3px',
+              textDecoration: 'none',
+            }}
+          >
+            Vai al Portale Didattico
+          </a>
+          <p
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: '0.78rem',
+              color: 'rgba(255,255,255,0.45)',
+              marginTop: '16px',
+            }}
+          >
+            Disdici in qualsiasi momento. Nessun vincolo.
+          </p>
+        </div>
+      </section>
     </>
   )
 }

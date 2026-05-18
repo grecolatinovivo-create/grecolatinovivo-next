@@ -1,634 +1,249 @@
-// Homepage — /
-// Design istituzionale navy/bianco/grigio — COUNCIL.md decisione 1, 3, 4
-// Dati reali: 5.000+ studenti, MIM, ALTE, dal 2015, 6 dipartimenti, 5 sedi, 56 corsi
-// ZERO emoji. ZERO dati inventati. ZERO bordeaux.
+// Homepage — Centro Nazionale di Studi Classici «GrecoLatinoVivo»
+// Design Oxford/Cambridge — COUNCIL sessione 2 (18/05/2026)
+// Struttura: hero centrato → percorsi 2x2 → numeri → metodologia → lingue → pricing → faq → cta
+// Dati reali verificati. Zero emoji. Zero dati inventati.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PricingToggle from '@/components/sections/PricingToggle'
 
 export const metadata: Metadata = {
-  title: 'Centro Nazionale di Studi Classici «GrecoLatinoVivo»',
-  description:
-    'Studia Latino, Greco Antico, Egiziano, Ebraico e Sanscrito con i migliori docenti italiani. Corsi live, asincroni e tutoraggio 1:1. Dal 2015, accreditato MIM.',
-  alternates: { canonical: 'https://grecolatinovivo.it' },
+  title: 'Centro Nazionale di Studi Classici «GrecoLatinoVivo» — Latino, Greco, Lingue Antiche',
+  description: 'Il primo centro nazionale dedicato allo studio attivo del Latino, Greco Antico, Egiziano, Ebraico e Sanscrito. Metodo contestuale-induttivo, accreditato MIM. 5.000+ studenti dal 2015.',
+  openGraph: {
+    title: 'Centro Nazionale di Studi Classici «GrecoLatinoVivo»',
+    description: 'Studio attivo del Latino, Greco Antico e lingue del mondo antico. Accreditato MIM. Dal 2015.',
+    url: 'https://grecolatinovivo.it',
+    siteName: 'GrecoLatinoVivo',
+    locale: 'it_IT',
+    type: 'website',
+  },
 }
 
 export default function HomePage() {
   return (
-    <>
-      {/* ================================================
-          HERO — sfondo navy istituzionale (#1A2A4A)
-          Gerarchia: badge accreditamento → headline → sottotitolo → CTA → trust bar
-          Ref: NEURO_SPEC §3 — 0–300ms: headline; 300ms–2s: trust bar + CTA
-          ================================================ */}
-      <section
-        style={{
-          background: 'linear-gradient(160deg, #1A2A4A 0%, #1B3A6B 60%, #1A2A4A 100%)',
-          padding: '96px 24px 80px',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Decorazione geometrica discreta */}
-        <div aria-hidden="true" style={{
-          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-          backgroundImage: 'radial-gradient(ellipse 50% 60% at 80% 40%, rgba(201,168,76,0.05) 0%, transparent 100%)',
-          pointerEvents: 'none',
-        }} />
-
-        <div className="container" style={{ position: 'relative', textAlign: 'center', maxWidth: '820px' }}>
-
-          {/* Badge accreditamento — legittimità istituzionale */}
-          <p style={{
-            display: 'inline-block',
-            background: 'rgba(201,168,76,0.12)',
-            border: '1px solid rgba(201,168,76,0.28)',
-            color: '#C9A84C',
-            fontFamily: 'var(--font-body, Inter, sans-serif)',
-            fontSize: '0.72rem',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.14em',
-            padding: '5px 16px',
-            borderRadius: '3px',
-            marginBottom: '28px',
-          }}>
-            Accreditato MIM &middot; Membro Associato ALTE &middot; Dal 2015
-          </p>
-
-          {/* Headline */}
-          <h1 style={{
-            fontFamily: 'var(--font-heading, Playfair Display, serif)',
-            fontWeight: 700,
-            fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
-            color: '#FFFFFF',
-            lineHeight: 1.2,
-            marginBottom: '22px',
-            letterSpacing: '-0.01em',
-          }}>
-            Studia le lingue dell&apos;antichità<br />
-            con i migliori docenti italiani
-          </h1>
-
-          {/* Sottotitolo */}
-          <p style={{
-            fontFamily: 'var(--font-body, Inter, sans-serif)',
-            fontSize: 'clamp(1rem, 1.8vw, 1.1rem)',
-            color: 'rgba(255,255,255,0.7)',
-            lineHeight: 1.75,
-            marginBottom: '36px',
-            maxWidth: '600px',
-            margin: '0 auto 36px',
-          }}>
-            Latino, Greco Antico, Egiziano Antico, Ebraico Biblico e Sanscrito.
-            Il Metodo Natura applicato alle lingue classiche, in corsi live e asincroni
-            con un massimo di 15 studenti per classe.
-          </p>
-
-          {/* CTA — sobri, istituzionali */}
-          <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/corsi/corsi-live" className="btn btn-primary" style={{ background: '#C9A84C', color: '#1A2A4A', borderColor: '#C9A84C', fontWeight: 700 }}>
-              Scopri i corsi
-            </Link>
-            <Link href="/marketing/chi-siamo" className="btn btn-ghost">
-              Il Centro
-            </Link>
-          </div>
-
-          {/* Trust bar — dati verificati */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '0',
-            marginTop: '60px',
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '8px',
-          }}>
-            {[
-              { value: '5.000+', label: 'studenti formati' },
-              { value: '2015', label: 'anno di fondazione' },
-              { value: '56', label: 'corsi disponibili' },
-              { value: '5', label: 'sedi in Italia' },
-            ].map((stat, i) => (
-              <div key={stat.value} style={{
-                textAlign: 'center',
-                padding: '20px 12px',
-                borderRight: i < 3 ? '1px solid rgba(255,255,255,0.08)' : 'none',
-              }}>
-                <div style={{
-                  fontFamily: 'var(--font-heading, Playfair Display, serif)',
-                  fontSize: '1.75rem',
-                  fontWeight: 700,
-                  color: '#C9A84C',
-                  lineHeight: 1,
-                  marginBottom: '5px',
-                }}>
-                  {stat.value}
-                </div>
-                <div style={{
-                  fontFamily: 'var(--font-body, Inter, sans-serif)',
-                  fontSize: '0.72rem',
-                  color: 'rgba(255,255,255,0.45)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                }}>
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
+    <main>
+      {/* HERO */}
+      <section aria-labelledby="hero-titolo" style={{ maxWidth: '860px', margin: '0 auto', padding: '7rem 2rem 6rem', textAlign: 'center' }}>
+        <p className="eyebrow" style={{ marginBottom: '1.5rem' }}>
+          Firenze &middot; Milano &middot; Torino &middot; Parma &middot; Pordenone
+        </p>
+        <h1 id="hero-titolo" style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 400, color: '#002147', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+          Le lingue classiche<br />nella loro <em style={{ fontStyle: 'normal', color: '#C9A84C' }}>forma viva</em>
+        </h1>
+        <p style={{ fontSize: '1.1rem', color: '#444', maxWidth: '620px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
+          Il primo centro nazionale dedicato allo studio attivo del Latino, del Greco Antico
+          e delle lingue del mondo antico, con metodo contestuale-induttivo.
+        </p>
+        <blockquote className="blockquote-gold" style={{ maxWidth: '620px', margin: '0 auto 3rem', textAlign: 'left' }}>
+          &laquo;Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.&raquo;
+        </blockquote>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', flexWrap: 'wrap' }}>
+          <Link href="/corsi/corsi-live" className="card-link" style={{ fontSize: '0.925rem' }}>Scopri i corsi &rarr;</Link>
+          <Link href="/marketing/chi-siamo" className="card-link" style={{ fontSize: '0.925rem' }}>Il Centro &rarr;</Link>
         </div>
       </section>
 
-      {/* ================================================
-          ACCREDITAMENTI — striscia istituzionale
-          ================================================ */}
-      <section style={{ background: '#F4F6F8', borderBottom: '1px solid #DDE3ED', padding: '18px 24px' }}>
-        <div className="container" style={{ display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.82rem', color: '#1B3A6B', fontWeight: 600 }}>
-            Accreditato MIM (Ministero dell&apos;Istruzione e del Merito)
-          </span>
-          <span style={{ color: '#DDE3ED' }}>|</span>
-          <span style={{ fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.82rem', color: '#1B3A6B', fontWeight: 600 }}>
-            Membro Associato ALTE (Association of Language Testers in Europe)
-          </span>
-          <span style={{ color: '#DDE3ED' }}>|</span>
-          <span style={{ fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.82rem', color: '#5A6A7A' }}>
-            Bonus Docenti (Carta del Docente) applicabile
-          </span>
-        </div>
-      </section>
+      <hr className="section-divider" />
 
-      {/* ================================================
-          ORIENTAMENTO — 4 percorsi
-          Layout: 2 colonne superiori (acquisto diretto) + 2 inferiori
-          Ref: COUNCIL.md decisione UX — struttura riflette mental model utente
-          ================================================ */}
-      <section className="section">
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '52px' }}>
-            <h2 className="section-title reveal">
-              <span className="section-title__underline">Scegli il tuo percorso</span>
-            </h2>
-            <p className="section-subtitle reveal" style={{ margin: '12px auto 0', maxWidth: '560px' }}>
-              Quattro modalità di accesso alla formazione classica del Centro.
+      {/* PERCORSI 2x2 */}
+      <section id="percorsi" aria-labelledby="percorsi-titolo" style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+          <h2 id="percorsi-titolo" style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 400, color: '#002147', marginBottom: '0.6rem' }}>
+            Offerta Formativa
+          </h2>
+          <p style={{ fontSize: '0.95rem', color: '#666', maxWidth: '520px', margin: '0 auto' }}>
+            Quattro modalità di accesso alla conoscenza classica, per ogni esigenza e ritmo di studio.
+          </p>
+        </div>
+        <div className="hp-percorsi-grid">
+          <article className="card">
+            <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Corsi in Diretta</h3>
+            <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1.25rem', lineHeight: 1.7 }}>
+              Classi live con insegnanti specializzati, massimo 15 studenti per gruppo.
+              Livelli A1&ndash;C2. 72 ore equivalenti al biennio liceale.
             </p>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
-            {[
-              {
-                label: 'Corsi in Diretta',
-                sublabel: 'Acquisto singolo',
-                desc: 'Lezioni live con docenti specializzati in classi di massimo 15 studenti. Feedback diretto, calendario strutturato, registrazione della lezione inclusa.',
-                detail: 'Latino · Greco Antico · Egiziano · Ebraico · Sanscrito',
-                href: '/corsi/corsi-live',
-                cta: 'Vedi i corsi disponibili',
-                accent: false,
-              },
-              {
-                label: 'Corsi Asincroni',
-                sublabel: 'Acquisto singolo',
-                desc: 'Video-lezioni registrate da seguire ai propri tempi, con accesso a vita al materiale. 56 corsi su tutte le lingue, con attestato digitale incluso.',
-                detail: '56 corsi · Accesso a vita',
-                href: '/corsi/corsi-asincroni',
-                cta: 'Sfoglia il catalogo',
-                accent: false,
-              },
-              {
-                label: 'Portale in Abbonamento',
-                sublabel: 'Abbonamento mensile o annuale',
-                desc: 'Accesso illimitato a tutto il catalogo registrato con un abbonamento. Tre piani da €5,90/mese. Il portale è gestito su portale.grecolatinovivo.it.',
-                detail: 'Cultura · Linguae · Accademia',
-                href: '/commercio/abbonamento',
-                cta: 'Scopri i piani',
-                accent: true,
-              },
-              {
-                label: 'Eventi e Convegni',
-                sublabel: 'Biglietteria singola',
-                desc: 'Seminari, Bidua Latinitatis, convegni accademici e giornate di studio. Partecipa alla vita scientifica del Centro Nazionale di Studi Classici.',
-                detail: 'Calendario eventi 2025–2026',
-                href: '/eventi',
-                cta: 'Vedi il calendario',
-                accent: false,
-              },
-            ].map((item) => (
-              <div
-                key={item.href}
-                className="card reveal"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderLeft: item.accent ? '4px solid #1B3A6B' : '4px solid transparent',
-                  background: item.accent ? '#F4F6F8' : '#fff',
-                }}
-              >
-                <p style={{
-                  fontFamily: 'var(--font-body, Inter, sans-serif)',
-                  fontSize: '0.68rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.12em',
-                  color: '#1B3A6B',
-                  marginBottom: '8px',
-                }}>
-                  {item.sublabel}
-                </p>
-                <h3 style={{
-                  fontFamily: 'var(--font-heading, Playfair Display, serif)',
-                  fontSize: '1.25rem',
-                  fontWeight: 700,
-                  color: '#1A2A3A',
-                  marginBottom: '12px',
-                }}>
-                  {item.label}
-                </h3>
-                <p style={{
-                  fontSize: '0.88rem',
-                  color: '#5A6A7A',
-                  lineHeight: 1.7,
-                  flex: 1,
-                  marginBottom: '16px',
-                }}>
-                  {item.desc}
-                </p>
-                <p style={{
-                  fontSize: '0.78rem',
-                  color: '#1B3A6B',
-                  fontWeight: 600,
-                  fontFamily: 'var(--font-body, Inter, sans-serif)',
-                  marginBottom: '20px',
-                }}>
-                  {item.detail}
-                </p>
-                <Link href={item.href} className="btn btn-secondary btn-sm" style={{ alignSelf: 'flex-start' }}>
-                  {item.cta}
-                </Link>
-              </div>
-            ))}
-          </div>
+            <Link href="/corsi/corsi-live" className="card-link">Scopri i corsi in diretta &rarr;</Link>
+          </article>
+          <article className="card">
+            <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Corsi Asincroni</h3>
+            <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1.25rem', lineHeight: 1.7 }}>
+              Percorsi registrati con materiali didattici esclusivi, fruibili in autonomia
+              e a qualsiasi ora. Ideali per ritmi personalizzati.
+            </p>
+            <Link href="/corsi/corsi-asincroni" className="card-link">Scopri i corsi asincroni &rarr;</Link>
+          </article>
+          <article className="card">
+            <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Portale in Abbonamento</h3>
+            <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1.25rem', lineHeight: 1.7 }}>
+              Accesso a risorse, testi commentati, esercizi e archivi didattici.
+              Cultura &euro;5,90/mese &middot; Linguae &euro;12,90/mese &middot; Accademia &euro;19,90/mese.
+            </p>
+            <Link href="/commercio/abbonamento" className="card-link">Scopri i piani &rarr;</Link>
+          </article>
+          <article className="card">
+            <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Eventi e Convegni</h3>
+            <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1.25rem', lineHeight: 1.7 }}>
+              Conferenze, seminari e convegni dedicati alle lingue e alle culture del mondo
+              antico. Aperti a studenti, docenti e pubblico.
+            </p>
+            <Link href="/eventi" className="card-link">Scopri gli eventi &rarr;</Link>
+          </article>
         </div>
       </section>
 
-      {/* ================================================
-          METODOLOGIA — sezione istituzionale
-          Ref: DIDACTIC_SPEC §1 — comunicazione Metodo Natura
-          ================================================ */}
-      <section className="section section--alt">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '72px', alignItems: 'center' }}>
-            <div className="reveal">
-              <p style={{ color: '#1B3A6B', fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', marginBottom: '16px' }}>
-                La nostra metodologia
-              </p>
-              <h2 style={{ fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: 'clamp(1.7rem, 2.8vw, 2.2rem)', fontWeight: 700, color: '#1A2A3A', marginBottom: '20px', lineHeight: 1.25 }}>
-                Il Metodo Natura
-              </h2>
-              <p style={{ color: '#5A6A7A', lineHeight: 1.8, marginBottom: '16px', fontSize: '0.95rem' }}>
-                Ispirato all&apos;approccio di Hans Henning Ørberg, il Metodo Natura consente
-                di acquisire le lingue classiche attraverso un percorso contestuale e induttivo:
-                leggendo, ascoltando e producendo nella lingua, piuttosto che memorizzando
-                paradigmi astratti.
-              </p>
-              <p style={{ color: '#5A6A7A', lineHeight: 1.8, marginBottom: '28px', fontSize: '0.95rem' }}>
-                Il corso base (72 ore) equivale al biennio liceale. Con il nostro approccio,
-                studenti adulti raggiungono la lettura autonoma dei testi classici in tempi
-                significativamente più brevi rispetto ai metodi tradizionali.
-              </p>
-              <Link href="/marketing/metodologia" className="btn btn-secondary">
-                Approfondisci il metodo
-              </Link>
+      <hr className="section-divider" />
+
+      {/* NUMERI */}
+      <div style={{ borderTop: '1px solid #e8e8e8', borderBottom: '1px solid #e8e8e8' }}>
+        <div className="numeri-grid">
+          {[
+            { valore: '5.000+', etichetta: 'Studenti formati' },
+            { valore: '56', etichetta: 'Corsi disponibili' },
+            { valore: '15', etichetta: 'Studenti per classe' },
+            { valore: '5', etichetta: 'Sedi in Italia' },
+          ].map((item) => (
+            <div key={item.etichetta} className="numero-item">
+              <span className="stat-value">{item.valore}</span>
+              <span className="stat-label">{item.etichetta}</span>
             </div>
-
-            <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              {[
-                { n: '72h', label: 'corso base, equivalente al biennio liceale' },
-                { n: '15', label: 'studenti per classe, massimo' },
-                { n: 'A1–C2', label: 'livelli QCER coperti' },
-                { n: '5', label: 'sedi fisiche in Italia' },
-              ].map((s) => (
-                <div key={s.n} style={{
-                  background: '#fff',
-                  border: '1px solid #DDE3ED',
-                  borderRadius: '8px',
-                  padding: '24px 20px',
-                  textAlign: 'center',
-                }}>
-                  <div style={{
-                    fontFamily: 'var(--font-heading, Playfair Display, serif)',
-                    fontSize: '1.9rem',
-                    fontWeight: 700,
-                    color: '#1B3A6B',
-                    marginBottom: '8px',
-                    lineHeight: 1,
-                  }}>
-                    {s.n}
-                  </div>
-                  <div style={{
-                    fontFamily: 'var(--font-body, Inter, sans-serif)',
-                    fontSize: '0.78rem',
-                    color: '#5A6A7A',
-                    lineHeight: 1.5,
-                  }}>
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================
-          LE NOSTRE LINGUE
-          Latino e Greco: card grandi (lingue fondanti)
-          Egiziano, Ebraico, Sanscrito: card compatte (specializzazioni)
-          Ref: COUNCIL.md decisione UX/CLA
-          ================================================ */}
-      <section className="section">
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <h2 className="section-title reveal">
-              <span className="section-title__underline">Le lingue del Centro</span>
-            </h2>
-            <p className="section-subtitle reveal" style={{ margin: '12px auto 0', maxWidth: '540px' }}>
-              Cinque tradizioni testuali dell&apos;antichità, insegnate con rigore filologico
-              e approccio contestuale-induttivo.
-            </p>
-          </div>
-
-          {/* Lingue fondanti — card grandi */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
-            <LanguageCard
-              lang="Latino"
-              desc="La lingua della civiltà giuridica, letteraria e filosofica occidentale."
-              courses="7 corsi &middot; A1.1–B1.3"
-              quote="Alea iacta est"
-              quoteAuthor="Gaio Giulio Cesare"
-              href="/corsi/corsi-asincroni?lang=latino"
-              featured
-            />
-            <LanguageCard
-              lang="Greco Antico"
-              desc="La lingua della filosofia, della scienza e del primo pensiero critico europeo."
-              courses="7 corsi &middot; A1.1–B1.3"
-              quote="&#947;&#957;&#8182;&#952;&#953; &#963;&#949;&#945;&#965;&#964;&#972;&#957;"
-              quoteAuthor="Oracolo di Delfi"
-              href="/corsi/corsi-asincroni?lang=greco"
-              featured
-            />
-          </div>
-
-          {/* Specializzazioni avanzate — card compatte */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-            <LanguageCard lang="Egiziano Antico" desc="Scrittura geroglifica e lingua parlata dell&apos;antico Egitto." courses="3 corsi" href="/corsi/corsi-asincroni?lang=egiziano" />
-            <LanguageCard lang="Ebraico Biblico" desc="La lingua dei testi della tradizione ebraica e cristiana antica." courses="3 corsi" href="/corsi/corsi-asincroni?lang=ebraico" />
-            <LanguageCard lang="Sanscrito" desc="La lingua classica dell&apos;India e radice dell&apos;indoeuropeo." courses="[DA INSERIRE]" href="/corsi/corsi-asincroni?lang=sanscrito" />
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================
-          ABBONAMENTO — i tre piani
-          Ref: NEURO_SPEC §6 — presentazione istituzionale, non SaaS
-          ================================================ */}
-      <section className="section section--alt" id="abbonamento">
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h2 className="section-title reveal">
-            <span className="section-title__underline">Il Portale in abbonamento</span>
-          </h2>
-          <p className="section-subtitle reveal" style={{ margin: '12px auto 0', maxWidth: '540px' }}>
-            Accesso illimitato a tutto il catalogo registrato con un piano mensile o annuale.
-            Disdici in qualsiasi momento.
-          </p>
-          <p style={{
-            color: '#5A6A7A',
-            fontSize: '0.85rem',
-            marginTop: '8px',
-            marginBottom: '44px',
-            fontFamily: 'var(--font-body, Inter, sans-serif)',
-          }}>
-            Gestito su <a href="https://portale.grecolatinovivo.it" rel="noopener" style={{ color: '#1B3A6B' }}>portale.grecolatinovivo.it</a>
-          </p>
-
-          <PricingToggle />
-        </div>
-      </section>
-
-      {/* ================================================
-          STORIA E NUMERI — sezione istituzionale
-          ================================================ */}
-      <section className="section" style={{ background: '#1A2A4A' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <h2 style={{ fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: 'clamp(1.7rem, 2.8vw, 2.2rem)', fontWeight: 700, color: '#fff', marginBottom: '12px' }} className="reveal">
-              Un decennio di studi classici
-            </h2>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.95rem', maxWidth: '480px', margin: '0 auto' }} className="reveal">
-              Dal 2015, il Centro Nazionale di Studi Classici forma studiosi
-              con rigore filologico e metodo didattico innovativo.
-            </p>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-            {[
-              { n: '5.000+', label: 'studenti formati dal 2015' },
-              { n: '6', label: 'dipartimenti linguistici' },
-              { n: '15', label: 'studenti massimo per classe' },
-            ].map((s, i) => (
-              <div key={s.n} className="reveal" style={{
-                padding: '36px 24px',
-                textAlign: 'center',
-                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.1)' : 'none',
-                background: 'rgba(255,255,255,0.03)',
-              }}>
-                <div style={{ fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: '2.4rem', fontWeight: 700, color: '#C9A84C', marginBottom: '8px' }}>
-                  {s.n}
-                </div>
-                <div style={{ fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================
-          FAQ — accordion
-          ================================================ */}
-      <section className="section">
-        <div className="container-narrow">
-          <h2 className="section-title text-center reveal">
-            <span className="section-title__underline">Domande frequenti</span>
-          </h2>
-          <div style={{ textAlign: 'left', marginTop: '40px' }}>
-            <FaqAccordion />
-          </div>
-          <div style={{ marginTop: '28px', textAlign: 'center' }}>
-            <Link href="/marketing/faq" className="btn btn-secondary">
-              Vedi tutte le domande
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================
-          CTA FINALE — istituzionale
-          Ref: NEURO_SPEC §4 — coerenza con hero, tono sobrio
-          ================================================ */}
-      <section style={{ background: '#1B3A6B', padding: '80px 24px', textAlign: 'center' }}>
-        <div className="container-narrow">
-          <p style={{ fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'rgba(201,168,76,0.8)', marginBottom: '16px' }}>
-            Centro Nazionale di Studi Classici
-          </p>
-          <h2 style={{ fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: 'clamp(1.7rem, 3vw, 2.4rem)', fontWeight: 700, color: '#fff', marginBottom: '16px', lineHeight: 1.25 }}>
-            Inizia il tuo percorso nelle lingue classiche
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '36px', fontSize: '1rem', lineHeight: 1.7, maxWidth: '500px', margin: '0 auto 36px' }}>
-            5.000 studenti hanno scelto il Centro. Classi di massimo 15 persone,
-            docenti specializzati, accreditamento MIM.
-          </p>
-          <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/corsi/corsi-live" className="btn" style={{ background: '#C9A84C', color: '#1A2A4A', padding: '14px 32px', fontWeight: 700, fontSize: '0.95rem', borderRadius: '5px', textDecoration: 'none' }}>
-              Scopri i corsi
-            </Link>
-            <Link href="/marketing/chi-siamo" className="btn btn-ghost">
-              Chi siamo
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
-  )
-}
-
-// ================================================
-// SUB-COMPONENTS
-// ================================================
-
-function LanguageCard({
-  lang, desc, courses, quote, quoteAuthor, href, featured = false,
-}: {
-  lang: string
-  desc: string
-  courses: string
-  quote?: string
-  quoteAuthor?: string
-  href: string
-  featured?: boolean
-}) {
-  return (
-    <Link href={href} style={{ textDecoration: 'none' }}>
-      <div
-        style={{
-          background: featured ? '#F4F6F8' : '#fff',
-          border: featured ? '1px solid #DDE3ED' : '1px solid #DDE3ED',
-          borderTop: featured ? '3px solid #1B3A6B' : '1px solid #DDE3ED',
-          borderRadius: '8px',
-          padding: featured ? '28px 28px 24px' : '22px 24px 20px',
-          transition: 'box-shadow 0.2s, transform 0.2s',
-          cursor: 'pointer',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-        className="lang-card"
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px', flex: 1 }}>
-          <div>
-            <h3 style={{
-              fontFamily: 'var(--font-heading, Playfair Display, serif)',
-              fontSize: featured ? '1.35rem' : '1.05rem',
-              fontWeight: 700,
-              color: '#1A2A3A',
-              marginBottom: '6px',
-            }}>
-              {lang}
-            </h3>
-            <p style={{ color: '#5A6A7A', fontSize: '0.85rem', marginBottom: '4px', lineHeight: 1.6 }}>
-              {desc}
-            </p>
-            <p style={{ color: '#1B3A6B', fontSize: '0.78rem', fontWeight: 600, fontFamily: 'var(--font-body, Inter, sans-serif)', marginBottom: 0 }}>
-              {courses}
-            </p>
-          </div>
-          {quote && (
-            <blockquote style={{ textAlign: 'right', margin: 0, borderLeft: 'none', paddingLeft: 0, maxWidth: '180px' }}>
-              <p style={{
-                fontFamily: 'var(--font-heading, Playfair Display, serif)',
-                fontStyle: 'italic',
-                color: '#1B3A6B',
-                fontSize: '0.9rem',
-                marginBottom: '2px',
-                opacity: 0.75,
-              }}>
-                &ldquo;{quote}&rdquo;
-              </p>
-              <footer style={{ fontSize: '0.7rem', color: '#5A6A7A' }}>
-                &mdash; {quoteAuthor}
-              </footer>
-            </blockquote>
-          )}
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <span style={{ color: '#1B3A6B', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'var(--font-body, Inter, sans-serif)' }}>
-            Vedi i corsi &rarr;
-          </span>
+          ))}
         </div>
       </div>
-    </Link>
-  )
-}
 
-function FaqAccordion() {
-  const faqs = [
-    {
-      q: 'Devo avere conoscenze pregresse per iscrivermi?',
-      a: 'No. I nostri corsi partono dal livello A1.1, pensato per chi non ha mai studiato la lingua. Ogni percorso è costruito su livelli progressivi secondo il QCER.',
-    },
-    {
-      q: 'Cosa distingue i corsi in diretta dai corsi asincroni?',
-      a: 'I corsi in diretta sono lezioni in tempo reale con il docente, con feedback diretto e sessioni di conversazione nella lingua. I corsi asincroni sono video-lezioni registrate, da seguire ai propri tempi con accesso a vita al materiale.',
-    },
-    {
-      q: 'Il Bonus Docenti MIM è applicabile?',
-      a: 'Sì. I corsi di Formazione Docenti del Centro sono accreditati MIM e sono quindi acquistabili con il Bonus Docenti (Carta del Docente).',
-    },
-    {
-      q: 'Come funziona il tutoraggio individuale?',
-      a: 'Scegli il docente, la lingua e l\'orario disponibile. Il primo colloquio di orientamento (30 minuti) è gratuito. Dopo la conferma del pagamento ricevi il collegamento alla sessione.',
-    },
-    {
-      q: 'Posso disdire l\'abbonamento al portale?',
-      a: 'Sì, in qualsiasi momento, senza penali. L\'accesso rimane attivo fino alla fine del periodo già pagato.',
-    },
-    {
-      q: 'Dove si trovano le sedi fisiche?',
-      a: 'Il Centro ha sedi a Firenze (sede principale), Milano, Torino, Parma e Pordenone. I corsi online sono accessibili da qualsiasi parte del mondo.',
-    },
-  ]
+      <hr className="section-divider" />
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {faqs.map((faq, i) => (
-        <details key={i} style={{ borderBottom: '1px solid #DDE3ED', padding: '0' }}>
-          <summary style={{
-            cursor: 'pointer', padding: '18px 0',
-            fontFamily: 'var(--font-body, Inter, sans-serif)', fontWeight: 600, fontSize: '0.95rem',
-            color: '#1A2A3A', listStyle: 'none', display: 'flex', justifyContent: 'space-between',
-            userSelect: 'none',
-          }}>
-            {faq.q}
-            <span style={{ color: '#1B3A6B', fontWeight: 400, flexShrink: 0, marginLeft: '16px', fontSize: '1.1rem' }}>+</span>
-          </summary>
-          <p style={{ padding: '0 0 18px', color: '#5A6A7A', fontSize: '0.88rem', lineHeight: 1.75 }}>
-            {faq.a}
+      {/* METODOLOGIA */}
+      <section id="metodologia" aria-labelledby="metodo-titolo" style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2rem' }}>
+        <div className="hp-metodo-grid">
+          <div>
+            <h2 id="metodo-titolo" style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: 'clamp(1.4rem, 2vw, 1.85rem)', fontWeight: 400, color: '#002147', marginBottom: '1.25rem' }}>
+              Il Metodo Natura
+            </h2>
+            <p style={{ fontSize: '0.95rem', color: '#444', lineHeight: 1.8, marginBottom: '1rem' }}>
+              Il Centro adotta un approccio contestuale-induttivo ispirato ai principi di
+              Hans Henning &Oslash;rberg e alla tradizione del{' '}
+              <em>Lingua Latina per se Illustrata</em>. Lo studente incontra la lingua nel suo
+              contesto naturale d&apos;uso, attraverso testi graduati che permettono una comprensione
+              progressiva della grammatica e del lessico.
+            </p>
+            <p style={{ fontSize: '0.95rem', color: '#444', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+              Il risultato è la capacità di leggere, comprendere e — a livelli avanzati —
+              produrre testi in lingua originale.
+            </p>
+            <Link href="/marketing/metodologia" className="card-link">Approfondisci &rarr;</Link>
+          </div>
+          <div>
+            <h3 style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#777', marginBottom: '1.5rem' }}>
+              Caratteristiche del percorso
+            </h3>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
+              {[
+                { t: '72 ore corso base', d: 'Equivalenti al biennio liceale, con efficacia superiore grazie al metodo contestuale.' },
+                { t: 'Massimo 15 studenti per classe', d: 'Attenzione personalizzata e partecipazione attiva in ogni sessione.' },
+                { t: 'Livelli A1–C2 (QCER)', d: 'Percorso strutturato secondo il Quadro Comune Europeo di Riferimento.' },
+                { t: '5 sedi in Italia', d: 'Firenze · Milano · Torino · Parma · Pordenone, con didattica a distanza.' },
+              ].map((item) => (
+                <li key={item.t} style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '1rem', alignItems: 'start' }}>
+                  <span aria-hidden="true" style={{ width: '2px', minHeight: '1.3rem', background: '#C9A84C', display: 'block', marginTop: '0.3rem' }} />
+                  <span style={{ fontSize: '0.9rem', color: '#444', lineHeight: 1.6 }}>
+                    <strong style={{ color: '#002147', fontWeight: 600, display: 'block', marginBottom: '0.15rem' }}>{item.t}</strong>
+                    {item.d}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* LINGUE */}
+      <div className="lingue-strip">
+        <div className="lingue-inner">
+          <span className="lingue-label">Lingue insegnate</span>
+          <ul className="lingue-list">
+            <li>Latino</li>
+            <li>Greco Antico</li>
+            <li>Egiziano Antico</li>
+            <li>Ebraico Biblico</li>
+            <li>Sanscrito</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr className="section-divider" />
+
+      {/* PRICING */}
+      <section id="abbonamenti" aria-labelledby="abbonamenti-titolo" style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 id="abbonamenti-titolo" style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 400, color: '#002147', marginBottom: '0.6rem' }}>
+            Piani di abbonamento
+          </h2>
+          <p style={{ fontSize: '0.95rem', color: '#666' }}>
+            Accesso al portale didattico con risorse esclusive, testi commentati ed esercizi.
           </p>
-        </details>
-      ))}
-    </div>
+        </div>
+        <PricingToggle />
+      </section>
+
+      <hr className="section-divider" />
+
+      {/* FAQ */}
+      <section aria-labelledby="faq-titolo" style={{ maxWidth: '860px', margin: '0 auto', padding: '5rem 2rem' }}>
+        <h2 id="faq-titolo" style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 400, color: '#002147', marginBottom: '3rem', textAlign: 'center' }}>
+          Domande frequenti
+        </h2>
+        {FAQS.map((faq, i) => (
+          <details key={i} style={{ borderTop: i === 0 ? '1px solid #e8e8e8' : undefined, borderBottom: '1px solid #e8e8e8' }}>
+            <summary style={{ padding: '1.1rem 0', cursor: 'pointer', fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1rem', fontWeight: 400, color: '#002147', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+              <span>{faq.q}</span>
+              <span aria-hidden="true" style={{ color: '#C9A84C', flexShrink: 0, fontSize: '1.2rem', lineHeight: 1 }}>+</span>
+            </summary>
+            <p style={{ fontSize: '0.9rem', color: '#555', lineHeight: 1.75, paddingBottom: '1.1rem', marginTop: '0.25rem' }}>{faq.a}</p>
+          </details>
+        ))}
+        <p style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+          <Link href="/marketing/faq" className="card-link">Vedi tutte le domande &rarr;</Link>
+        </p>
+      </section>
+
+      <hr className="section-divider" />
+
+      {/* CTA FINALE */}
+      <div className="cta-band">
+        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <h2 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontWeight: 400 }}>
+            Pronto a iniziare?
+          </h2>
+          <p>
+            Scopri i corsi disponibili o accedi direttamente al portale.
+            Classi da massimo 15 studenti, livelli A1&ndash;C2.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link href="/corsi/corsi-live" className="btn btn-ghost">Vedi i corsi</Link>
+            <a href="https://www.portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid #C9A84C', color: '#C9A84C', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}>
+              Accedi al Portale ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        .hp-percorsi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+        .hp-metodo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+        @media (max-width: 768px) {
+          .hp-percorsi-grid { grid-template-columns: 1fr; }
+          .hp-metodo-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+        }
+      `}</style>
+    </main>
   )
 }
+
+const FAQS = [
+  { q: 'È necessario avere conoscenze pregresse per iscriversi?', a: 'No. I corsi partono dal livello A1 e sono progettati per chi non ha mai studiato la lingua. Il metodo contestuale-induttivo permette di entrare nella lingua senza conoscenze grammaticali precedenti.' },
+  { q: 'Quanto dura un corso e come sono strutturate le lezioni?', a: 'Il corso base è di 72 ore, distribuite tipicamente su due semestri. Le lezioni hanno una durata di 90 minuti ciascuna e si svolgono in piccoli gruppi (max 15 studenti).' },
+  { q: 'I corsi sono riconosciuti dal Ministero dell\'Istruzione?', a: 'Sì. Il Centro è accreditato dal MIM (Ministero dell\'Istruzione e del Merito). I corsi di Formazione Docenti danno diritto a crediti formativi riconosciuti.' },
+  { q: 'È possibile seguire i corsi online?', a: 'Sì. Tutti i corsi in diretta sono disponibili sia in presenza (nelle 5 sedi) sia a distanza via piattaforma. I corsi asincroni sono interamente online.' },
+  { q: "Cosa include l'abbonamento al Portale?", a: "Il Portale offre accesso a testi commentati, esercizi graduati, grammatiche di riferimento e archivi didattici. I piani Linguae e Accademia includono anche sessioni di approfondimento e tutoraggio." },
+  { q: 'Come funziona il metodo contestuale-induttivo?', a: 'Lo studente incontra la lingua attraverso testi graduati, mai isolati dalla comunicazione. La grammatica emerge dal contesto. Ispirato al metodo Ørberg (Lingua Latina per se Illustrata).' },
+]

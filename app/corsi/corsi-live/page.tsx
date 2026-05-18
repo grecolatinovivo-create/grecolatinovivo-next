@@ -21,12 +21,12 @@ export default function CorsiLivePage() {
 
   return (
     <>
-      <section style={{ background: '#1A1A1A', padding: '72px 24px 56px', textAlign: 'center' }}>
+      <section style={{ background: '#002147', padding: '72px 24px 56px', textAlign: 'center' }}>
         <div className="container-narrow">
-          <p style={{ color: '#C9A84C', fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>
+          <p style={{ color: '#C9A84C', fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>
             Formazione in diretta
           </p>
-          <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 900, color: '#fff', marginBottom: '16px' }}>
+          <h1 style={{ fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 400, color: '#fff', marginBottom: '16px' }}>
             Corsi in Diretta
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '540px', margin: '0 auto' }}>
@@ -37,7 +37,7 @@ export default function CorsiLivePage() {
       </section>
 
       {/* Caratteristiche chiave */}
-      <section style={{ background: '#1B3A6B', padding: '20px 24px' }}>
+      <section style={{ background: '#002147', padding: '20px 24px' }}>
         <div className="container" style={{ display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap' }}>
           {[
             '✓ Massimo 15 studenti per classe',
@@ -45,7 +45,7 @@ export default function CorsiLivePage() {
             '✓ Feedback in tempo reale',
             '✓ Accreditato MIM',
           ].map((f) => (
-            <span key={f} style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.875rem', color: 'rgba(255,255,255,0.9)', fontWeight: 500 }}>
+            <span key={f} style={{ fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.875rem', color: 'rgba(255,255,255,0.9)', fontWeight: 500 }}>
               {f}
             </span>
           ))}
@@ -110,7 +110,7 @@ function LiveCourseCard({ course }: { course: LiveCourse }) {
         {course.title}
       </h2>
 
-      <p style={{ fontSize: '0.85rem', color: '#1B3A6B', fontWeight: 600, marginBottom: '4px' }}>
+      <p style={{ fontSize: '0.85rem', color: '#002147', fontWeight: 600, marginBottom: '4px' }}>
         {course.teacher.name}
       </p>
 
@@ -125,11 +125,11 @@ function LiveCourseCard({ course }: { course: LiveCourse }) {
       )}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E8E0D0', paddingTop: '12px', marginBottom: '12px' }}>
-        <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', fontWeight: 700, color: '#1B3A6B' }}>
+        <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', fontWeight: 700, color: '#002147' }}>
           {formatEur(course.priceEur)}
         </span>
         {!isFull && spotsLeft <= 5 && (
-          <span style={{ fontSize: '0.75rem', color: '#1B3A6B', fontWeight: 600 }}>
+          <span style={{ fontSize: '0.75rem', color: '#002147', fontWeight: 600 }}>
             Solo {spotsLeft} posti
           </span>
         )}

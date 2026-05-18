@@ -15,7 +15,7 @@ export default function ChiSiamoPage() {
   return (
     <>
       {/* HERO — istituzionale navy */}
-      <section style={{ background: 'linear-gradient(160deg, #1A2A4A 0%, #1B3A6B 100%)', padding: '80px 24px 64px' }}>
+      <section style={{ background: 'linear-gradient(160deg, #002147 0%, #002147 100%)', padding: '80px 24px 64px' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
           <div>
             <p style={{ color: '#C9A84C', fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', marginBottom: '16px' }}>
@@ -60,7 +60,7 @@ export default function ChiSiamoPage() {
       </section>
 
       {/* ACCREDITAMENTI */}
-      <section style={{ background: '#1B3A6B', padding: '18px 24px' }}>
+      <section style={{ background: '#002147', padding: '18px 24px' }}>
         <div className="container" style={{ display: 'flex', gap: '28px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
           <span style={{ fontFamily: 'var(--font-body, Inter, sans-serif)', fontSize: '0.82rem', color: 'rgba(255,255,255,0.85)', fontWeight: 600 }}>
             Accreditato MIM (Ministero Istruzione e Merito)
@@ -78,12 +78,12 @@ export default function ChiSiamoPage() {
           <h2 className="section-title reveal">
             <span className="section-title__underline">La nostra missione</span>
           </h2>
-          <p style={{ fontSize: '1.05rem', color: '#1A2A3A', lineHeight: 1.85, marginTop: '24px' }} className="reveal">
+          <p style={{ fontSize: '1.05rem', color: '#1a1a1a', lineHeight: 1.85, marginTop: '24px' }} className="reveal">
             Il Centro Nazionale di Studi Classici &laquo;GrecoLatinoVivo&raquo; nasce a Firenze nel 2015
             con la convinzione che le lingue classiche non siano reliquie del passato,
             ma strumenti vivi di pensiero, cultura e comprensione del mondo contemporaneo.
           </p>
-          <p style={{ fontSize: '0.98rem', color: '#5A6A7A', lineHeight: 1.85, marginTop: '16px' }} className="reveal">
+          <p style={{ fontSize: '0.98rem', color: '#555555', lineHeight: 1.85, marginTop: '16px' }} className="reveal">
             Attraverso il Metodo Natura &mdash; ispirato all&apos;approccio di Hans Henning &Oslash;rberg &mdash;
             permettiamo a studenti di ogni et&agrave; e provenienza di incontrare Latino, Greco,
             Egiziano, Ebraico e Sanscrito come lingue vive: ascoltando, leggendo
@@ -114,7 +114,7 @@ export default function ChiSiamoPage() {
                 {/* Anno */}
                 <div style={{
                   width: '64px', height: '64px', borderRadius: '50%',
-                  background: '#1B3A6B', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: '#002147', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0, zIndex: 1, position: 'relative',
                 }}>
                   <span style={{ fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: '0.82rem', fontWeight: 700, color: '#fff' }}>
@@ -123,7 +123,7 @@ export default function ChiSiamoPage() {
                 </div>
                 {/* Evento */}
                 <div style={{ paddingTop: '14px' }}>
-                  <p style={{ fontSize: '0.92rem', color: '#1A2A3A', lineHeight: 1.65 }}>
+                  <p style={{ fontSize: '0.92rem', color: '#1a1a1a', lineHeight: 1.65 }}>
                     {item.event}
                   </p>
                 </div>
@@ -150,16 +150,16 @@ export default function ChiSiamoPage() {
                 {/* Avatar iniziali su sfondo navy */}
                 <div style={{
                   width: '68px', height: '68px', borderRadius: '50%',
-                  background: '#1B3A6B', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: '#002147', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   margin: '0 auto 16px',
                   fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: '1.3rem', fontWeight: 700, color: '#fff',
                 }} aria-hidden="true">
                   {t.name.split(' ').map((n) => n[0]).join('')}
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: '1.02rem', fontWeight: 700, color: '#1A2A3A', marginBottom: '4px' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: '1.02rem', fontWeight: 700, color: '#1a1a1a', marginBottom: '4px' }}>
                   {t.name}
                 </h3>
-                <p style={{ fontSize: '0.78rem', color: '#1B3A6B', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-body, Inter, sans-serif)' }}>
+                <p style={{ fontSize: '0.78rem', color: '#002147', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-body, Inter, sans-serif)' }}>
                   {t.role}
                 </p>
               </div>
@@ -179,12 +179,12 @@ export default function ChiSiamoPage() {
           </h2>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '32px' }}>
             {['Firenze', 'Milano', 'Torino', 'Parma', 'Pordenone'].map((s) => (
-              <div key={s} style={{ background: '#fff', border: '1px solid #DDE3ED', borderTop: '3px solid #1B3A6B', borderRadius: '6px', padding: '14px 22px', fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: '0.95rem', fontWeight: 600, color: '#1A2A3A' }}>
+              <div key={s} style={{ background: '#fff', border: '1px solid #DDE3ED', borderTop: '3px solid #002147', borderRadius: '6px', padding: '14px 22px', fontFamily: 'var(--font-heading, Playfair Display, serif)', fontSize: '0.95rem', fontWeight: 600, color: '#1a1a1a' }}>
                 {s}
               </div>
             ))}
           </div>
-          <p style={{ marginTop: '18px', color: '#5A6A7A', fontSize: '0.88rem' }}>
+          <p style={{ marginTop: '18px', color: '#555555', fontSize: '0.88rem' }}>
             Corsi online accessibili da tutto il mondo
           </p>
           <div style={{ marginTop: '24px' }}>
