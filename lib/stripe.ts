@@ -1,9 +1,26 @@
-// Istanza Stripe singleton
+// Istanza Stripe — lazy singleton, non crasha al build se STRIPE_SECRET_KEY non è configurata
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-04-10',
-  typescript: true,
+let _stripe: Stripe | null = null
+
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY
+    if (!key) throw new Error('STRIPE_SECRET_KEY non configurata')
+    _stripe = new Stripe(key, {
+      apiVersion: '2024-04-10',
+      typescript: true,
+    })
+  }
+  return _stripe
+}
+
+// Alias per retrocompatibilità — usa un Proxy così l'accesso a stripe.xxx
+// chiama getStripe() solo a runtime, non al momento dell'import
+export const stripe: Stripe = new Proxy({} as Stripe, {
+  get(_target, prop) {
+    return (getStripe() as unknown as Record<string | symbol, unknown>)[prop]
+  },
 })
 
 // Tipi di checkout gestiti dal sito principale

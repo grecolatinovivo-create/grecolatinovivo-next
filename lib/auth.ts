@@ -5,7 +5,13 @@ import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 import { NextRequest } from 'next/server'
 
-const JWT_SECRET = process.env.JWT_SECRET!
+// Lazy getter — non lancia al build time se JWT_SECRET non è configurata
+function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET
+  if (!secret) throw new Error('JWT_SECRET non configurata')
+  return secret
+}
+
 const COOKIE_NAME = 'glv_auth' // stesso nome del portale
 const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN ?? '.grecolatinovivo.it'
 
@@ -19,13 +25,13 @@ export interface JwtPayload {
 
 // Crea un JWT firmato (24h di validità)
 export function signToken(payload: Omit<JwtPayload, 'iat' | 'exp'>): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' })
+  return jwt.sign(payload, getJwtSecret(), { expiresIn: '24h' })
 }
 
 // Verifica il JWT — ritorna il payload o null se invalido/scaduto
 export function verifyToken(token: string): JwtPayload | null {
   try {
-    return jwt.verify(token, JWT_SECRET) as JwtPayload
+    return jwt.verify(token, getJwtSecret()) as JwtPayload
   } catch {
     return null
   }
