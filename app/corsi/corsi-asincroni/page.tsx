@@ -5,6 +5,7 @@
 // ZERO emoji. ZERO dati inventati. Docenti dal DB.
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 export const metadata: Metadata = {
   title: 'Corsi Asincroni — Centro Nazionale di Studi Classici «GrecoLatinoVivo»',
@@ -124,20 +125,46 @@ function getCorsiByLang(lang: string) {
 // ----------------------------------------------------------------
 function CorsoCard({ corso }: { corso: Corso }) {
   const prezzo = formatPrezzo(corso.priceEur)
+  const CardWrapper = corso.available !== false
+    ? ({ children }: { children: ReactNode }) => (
+        <Link
+          href={`/corsi/corsi-asincroni/${corso.slug}`}
+          style={{
+            display: 'flex', flexDirection: 'column',
+            background: '#FFFFFF',
+            borderTop: '3px solid #002147',
+            borderLeft: '1px solid #e8e8e8',
+            borderRight: '1px solid #e8e8e8',
+            borderBottom: '1px solid #e8e8e8',
+            padding: '1.5rem',
+            textDecoration: 'none', color: 'inherit',
+            transition: 'border-top-color 0.15s, box-shadow 0.15s',
+          }}
+          className="corso-card-link"
+        >
+          {children}
+        </Link>
+      )
+    : ({ children }: { children: ReactNode }) => (
+        <article
+          style={{
+            background: '#FFFFFF',
+            borderTop: '3px solid #aaa',
+            borderLeft: '1px solid #e8e8e8',
+            borderRight: '1px solid #e8e8e8',
+            borderBottom: '1px solid #e8e8e8',
+            padding: '1.5rem',
+            display: 'flex',
+            flexDirection: 'column',
+            opacity: 0.72,
+          }}
+        >
+          {children}
+        </article>
+      )
+
   return (
-    <article
-      style={{
-        background: '#FFFFFF',
-        borderTop: `3px solid ${corso.available === false ? '#aaa' : '#002147'}`,
-        borderLeft: '1px solid #e8e8e8',
-        borderRight: '1px solid #e8e8e8',
-        borderBottom: '1px solid #e8e8e8',
-        padding: '1.5rem',
-        display: 'flex',
-        flexDirection: 'column',
-        opacity: corso.available === false ? 0.72 : 1,
-      }}
-    >
+    <CardWrapper>
       {/* Meta riga superiore */}
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '0.75rem', alignItems: 'center' }}>
         <span style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: corso.available === false ? '#aaa' : '#002147', border: `1px solid ${corso.available === false ? '#ddd' : '#002147'}`, padding: '1px 6px' }}>
@@ -188,19 +215,14 @@ function CorsoCard({ corso }: { corso: Corso }) {
           </span>
           {corso.available !== false ? (
             <div style={{ marginTop: '6px' }}>
-              <a
-                href="https://portale.grecolatinovivo.it"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.78rem', color: '#002147', borderBottom: '1px solid #C9A84C', paddingBottom: '1px', textDecoration: 'none' }}
-              >
-                Accedi al corso &rarr;
-              </a>
+              <span style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.78rem', color: '#002147', borderBottom: '1px solid #C9A84C', paddingBottom: '1px' }}>
+                Scopri il corso &rarr;
+              </span>
             </div>
           ) : null}
         </div>
       </div>
-    </article>
+    </CardWrapper>
   )
 }
 
@@ -383,6 +405,11 @@ export default function CorsiAsincroniPage() {
         }
         @media (max-width: 1024px) { .ca-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 640px)  { .ca-grid { grid-template-columns: 1fr; } }
+        .corso-card-link:hover {
+          border-top-color: #C9A84C !important;
+          box-shadow: 0 4px 18px rgba(0,33,71,0.08);
+          text-decoration: none;
+        }
       `}</style>
     </main>
   )
