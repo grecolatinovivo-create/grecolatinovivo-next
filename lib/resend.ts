@@ -151,7 +151,7 @@ export async function sendContactFormEmail({
 }) {
   return resend.emails.send({
     from: FROM,
-    replyTo: senderEmail,
+    reply_to: senderEmail,
     to: 'info@grecolatinovivo.it',
     subject: `[Contatto sito] ${subject}`,
     html: `
