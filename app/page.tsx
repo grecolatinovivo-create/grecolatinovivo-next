@@ -37,9 +37,9 @@ export default function HomePage() {
         <blockquote className="blockquote-gold" style={{ maxWidth: '620px', margin: '0 auto 3rem', textAlign: 'left' }}>
           &laquo;Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.&raquo;
         </blockquote>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', flexWrap: 'wrap' }}>
-          <Link href="/corsi/corsi-live" className="card-link" style={{ fontSize: '0.925rem' }}>Scopri i corsi &rarr;</Link>
-          <Link href="/marketing/chi-siamo" className="card-link" style={{ fontSize: '0.925rem' }}>Il Centro &rarr;</Link>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <Link href="/corsi/corsi-live" className="btn btn-primary">Scopri i corsi</Link>
+          <Link href="/marketing/chi-siamo" className="btn btn-secondary">Il Centro</Link>
         </div>
       </section>
 
@@ -62,7 +62,7 @@ export default function HomePage() {
               Classi live con insegnanti specializzati, massimo 15 studenti per gruppo.
               Livelli A1&ndash;C2. 72 ore equivalenti al biennio liceale.
             </p>
-            <span className="card-link">Scopri i corsi in diretta &rarr;</span>
+            <span className="btn-card-cta">Scopri i corsi in diretta</span>
           </Link>
           <Link href="/corsi/corsi-asincroni" className="card card-clickable" style={{ display: 'block', textDecoration: 'none' }}>
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Corsi Asincroni</h3>
@@ -70,7 +70,7 @@ export default function HomePage() {
               Percorsi registrati con materiali didattici esclusivi, fruibili in autonomia
               e a qualsiasi ora. Ideali per ritmi personalizzati.
             </p>
-            <span className="card-link">Scopri i corsi asincroni &rarr;</span>
+            <span className="btn-card-cta">Scopri i corsi asincroni</span>
           </Link>
           <a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" className="card card-clickable" style={{ display: 'block', textDecoration: 'none' }}>
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Portale in Abbonamento</h3>
@@ -78,7 +78,7 @@ export default function HomePage() {
               Accesso a risorse, testi commentati, esercizi e archivi didattici.
               Cultura &euro;5,90/mese &middot; Linguae &euro;12,90/mese &middot; Accademia &euro;19,90/mese.
             </p>
-            <span className="card-link">Scopri il portale &rarr;</span>
+            <span className="btn-card-cta">Scopri il portale</span>
           </a>
           <Link href="/eventi" className="card card-clickable" style={{ display: 'block', textDecoration: 'none' }}>
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Eventi e Convegni</h3>
@@ -86,7 +86,7 @@ export default function HomePage() {
               Conferenze, seminari e convegni dedicati alle lingue e alle culture del mondo
               antico. Aperti a studenti, docenti e pubblico.
             </p>
-            <span className="card-link">Scopri gli eventi &rarr;</span>
+            <span className="btn-card-cta">Scopri gli eventi</span>
           </Link>
         </div>
       </section>
@@ -130,7 +130,7 @@ export default function HomePage() {
               Il risultato è la capacità di leggere, comprendere e — a livelli avanzati —
               produrre testi in lingua originale.
             </p>
-            <Link href="/marketing/metodologia" className="card-link">Approfondisci &rarr;</Link>
+            <Link href="/marketing/metodologia" className="btn btn-secondary btn-sm">Approfondisci il metodo</Link>
           </div>
           <div>
             <h3 style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#777', marginBottom: '1.5rem' }}>
@@ -202,7 +202,7 @@ export default function HomePage() {
           </details>
         ))}
         <p style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-          <Link href="/marketing/faq" className="card-link">Vedi tutte le domande &rarr;</Link>
+          <Link href="/marketing/faq" className="btn btn-secondary btn-sm">Vedi tutte le domande</Link>
         </p>
       </section>
 
@@ -220,8 +220,8 @@ export default function HomePage() {
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <Link href="/corsi/corsi-live" className="btn btn-ghost">Vedi i corsi</Link>
-            <a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid #C9A84C', color: '#C9A84C', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}>
-              Accedi al Portale ↗
+            <a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" className="btn btn-outline-gold">
+              Accedi al Portale
             </a>
           </div>
         </div>

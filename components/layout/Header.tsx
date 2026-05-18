@@ -158,7 +158,7 @@ export default function Header() {
               <li><Link href="/corsi/minicorsi" onClick={() => setMenuOpen(false)}>Corsi Brevi</Link></li>
               <li><Link href="/corsi/formazione-docenti" onClick={() => setMenuOpen(false)}>Formazione Docenti</Link></li>
               <li><Link href="/eventi" onClick={() => setMenuOpen(false)}>Eventi</Link></li>
-              <li><a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>Abbonamento ↗</a></li>
+              <li><a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>Abbonamento</a></li>
               <li><Link href="/marketing/chi-siamo" onClick={() => setMenuOpen(false)}>Chi siamo</Link></li>
               <li>
                 <a
@@ -168,7 +168,7 @@ export default function Header() {
                   onClick={() => setMenuOpen(false)}
                   style={{ fontWeight: 600, color: '#002147' }}
                 >
-                  Portale studenti ↗
+                  Portale studenti
                 </a>
               </li>
             </ul>

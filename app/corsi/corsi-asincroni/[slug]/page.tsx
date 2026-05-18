@@ -730,34 +730,22 @@ export default async function CorsoDetailPage({ params }: Props) {
               <div style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '2rem', fontWeight: 400, color: '#002147', marginBottom: '4px' }}>{prezzo}</div>
               <div style={{ fontSize: '0.75rem', color: '#777', marginBottom: '1.5rem', fontFamily: 'var(--font-body, sans-serif)' }}>Accesso permanente · Nessuna scadenza</div>
               <a
-                href={`https://portale.grecolatinovivo.it`}
+                href="https://portale.grecolatinovivo.it"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  textAlign: 'center',
-                  padding: '12px 0',
-                  background: '#002147',
-                  color: '#fff',
-                  fontFamily: 'var(--font-body, sans-serif)',
-                  fontSize: '0.875rem',
-                  letterSpacing: '0.06em',
-                  textDecoration: 'none',
-                  textTransform: 'uppercase',
-                  fontWeight: 500,
-                  marginBottom: '0.75rem',
-                }}
+                className="btn btn-primary"
+                style={{ display: 'block', width: '100%', textAlign: 'center', marginBottom: '0.75rem', boxSizing: 'border-box' }}
               >
-                Inizia il corso →
+                Inizia il corso
               </a>
               <a
                 href="https://portale.grecolatinovivo.it"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'block', textAlign: 'center', fontSize: '0.8rem', color: '#777', fontFamily: 'var(--font-body, sans-serif)', textDecoration: 'none' }}
+                className="btn btn-secondary btn-sm"
+                style={{ display: 'block', width: '100%', textAlign: 'center', boxSizing: 'border-box' }}
               >
-                Sfoglia il catalogo ↗
+                Sfoglia il catalogo
               </a>
               {corso.bonusDocenti && (
                 <div style={{ marginTop: '1rem', padding: '10px 12px', background: '#f8f7f4', borderLeft: '2px solid #C9A84C', fontSize: '0.75rem', color: '#555', fontFamily: 'var(--font-body, sans-serif)', lineHeight: 1.5 }}>
@@ -897,10 +885,10 @@ export default async function CorsoDetailPage({ params }: Props) {
                       href="https://www.latin-cert.org/sillabo_corsiLatino.php"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="card-link"
-                      style={{ fontSize: '0.8rem' }}
+                      className="btn btn-secondary btn-sm"
+                      style={{ marginTop: '0.75rem' }}
                     >
-                      Consulta il sillabo completo Latin Cert ↗
+                      Consulta il sillabo Latin Cert
                     </a>
                   )}
                 </div>
@@ -979,23 +967,10 @@ export default async function CorsoDetailPage({ params }: Props) {
               href="https://portale.grecolatinovivo.it"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: 'block',
-                width: '100%',
-                textAlign: 'center',
-                padding: '13px 0',
-                background: '#002147',
-                color: '#fff',
-                fontFamily: 'var(--font-body, sans-serif)',
-                fontSize: '0.875rem',
-                letterSpacing: '0.06em',
-                textDecoration: 'none',
-                textTransform: 'uppercase',
-                fontWeight: 500,
-                marginBottom: '0.75rem',
-              }}
+              className="btn btn-primary"
+              style={{ display: 'block', width: '100%', textAlign: 'center', marginBottom: '0.75rem', boxSizing: 'border-box' }}
             >
-              Inizia il corso →
+              Inizia il corso
             </a>
 
             {/* Rassicurazione */}
@@ -1023,8 +998,8 @@ export default async function CorsoDetailPage({ params }: Props) {
 
             {/* Link catalogo */}
             <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-              <Link href="/corsi/corsi-asincroni" className="card-link" style={{ fontSize: '0.8rem' }}>
-                ← Tutti i corsi asincroni
+              <Link href="/corsi/corsi-asincroni" className="btn btn-secondary btn-sm" style={{ width: '100%', textAlign: 'center', boxSizing: 'border-box' }}>
+                Tutti i corsi asincroni
               </Link>
             </div>
           </div>
@@ -1048,7 +1023,7 @@ export default async function CorsoDetailPage({ params }: Props) {
               rel="noopener noreferrer"
               className="btn btn-ghost"
             >
-              Inizia il corso →
+              Inizia il corso
             </a>
             <Link href="/corsi/corsi-asincroni" className="btn btn-ghost" style={{ opacity: 0.7 }}>
               Tutti i corsi

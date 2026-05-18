@@ -214,10 +214,8 @@ function CorsoCard({ corso }: { corso: Corso }) {
             {prezzo}
           </span>
           {corso.available !== false ? (
-            <div style={{ marginTop: '6px' }}>
-              <span style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.78rem', color: '#002147', borderBottom: '1px solid #C9A84C', paddingBottom: '1px' }}>
-                Scopri il corso &rarr;
-              </span>
+            <div style={{ marginTop: '8px' }}>
+              <span className="btn-card-cta">Scopri il corso</span>
             </div>
           ) : null}
         </div>
@@ -280,9 +278,9 @@ export default function CorsiAsincroniPage() {
           href="https://portale.grecolatinovivo.it"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.9rem', color: '#002147', borderBottom: '1px solid #C9A84C', paddingBottom: '2px', textDecoration: 'none' }}
+          className="btn btn-primary"
         >
-          Accedi al portale per iscriverti &rarr;
+          Accedi al portale per iscriverti
         </a>
       </section>
 
@@ -381,17 +379,18 @@ export default function CorsiAsincroniPage() {
               href="https://portale.grecolatinovivo.it"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid rgba(255,255,255,0.8)', color: '#fff', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}
+              className="btn btn-ghost"
             >
-              Accedi al Portale ↗
+              Accedi al Portale
             </a>
             <a
               href="https://portale.grecolatinovivo.it"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid #C9A84C', color: '#C9A84C', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}
+              className="btn btn-outline-gold"
+              style={{ borderColor: '#C9A84C', color: '#C9A84C' }}
             >
-              Vedi gli abbonamenti ↗
+              Vedi gli abbonamenti
             </a>
           </div>
         </div>

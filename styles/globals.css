@@ -256,6 +256,43 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   text-decoration: none;
 }
 
+/* Outline gold — CTA portale su sfondo chiaro */
+.btn-outline-gold {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--primary);
+  padding: 11px 26px;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+}
+.btn-outline-gold:hover:not(:disabled) {
+  background: var(--gold);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* CTA visiva dentro card già cliccabile (pointer-events: none) */
+.btn-card-cta {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-btn);
+  pointer-events: none;
+  transition: var(--transition);
+}
+.card-clickable:hover .btn-card-cta,
+.corso-card-link:hover .btn-card-cta {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
 /* Small variant */
 .btn-sm { padding: 8px 18px; font-size: 0.85rem; }
 
