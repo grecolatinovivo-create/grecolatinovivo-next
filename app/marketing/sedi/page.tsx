@@ -393,7 +393,7 @@ export default function SediPage() {
                 seguono i corsi online con risultati equivalenti a quelli in presenza.
                 La piattaforma dedicata &egrave; accessibile all&apos;indirizzo{' '}
                 <a
-                  href="https://www.portale.grecolatinovivo.it"
+                  href="https://portale.grecolatinovivo.it"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: '#002147', borderBottom: '1px solid #C9A84C', paddingBottom: '1px' }}

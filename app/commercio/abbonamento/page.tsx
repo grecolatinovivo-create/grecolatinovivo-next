@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://grecolatinovivo.it/commercio/abbonamento' },
 }
 
-const portalUrl = 'https://www.portale.grecolatinovivo.it'
+const portalUrl = 'https://portale.grecolatinovivo.it'
 
 const faq = [
   {

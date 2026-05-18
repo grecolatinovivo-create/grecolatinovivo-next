@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Suspense as ReactSuspense } from 'react'
 
-const PORTALE_URL = 'https://www.portale.grecolatinovivo.it'
+const PORTALE_URL = 'https://portale.grecolatinovivo.it'
 
 const MESSAGES: Record<string, { title: string; body: string; cta: string; ctaHref: string; ctaExternal: boolean }> = {
   abbonamento: {

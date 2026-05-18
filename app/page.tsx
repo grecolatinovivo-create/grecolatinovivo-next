@@ -78,7 +78,7 @@ export default function HomePage() {
               Accesso a risorse, testi commentati, esercizi e archivi didattici.
               Cultura &euro;5,90/mese &middot; Linguae &euro;12,90/mese &middot; Accademia &euro;19,90/mese.
             </p>
-            <a href="https://www.portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" className="card-link">Scopri i piani &rarr;</a>
+            <a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" className="card-link">Scopri i piani &rarr;</a>
           </article>
           <article className="card">
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Eventi e Convegni</h3>
@@ -220,7 +220,7 @@ export default function HomePage() {
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <Link href="/corsi/corsi-live" className="btn btn-ghost">Vedi i corsi</Link>
-            <a href="https://www.portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid #C9A84C', color: '#C9A84C', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}>
+            <a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid #C9A84C', color: '#C9A84C', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}>
               Accedi al Portale ↗
             </a>
           </div>

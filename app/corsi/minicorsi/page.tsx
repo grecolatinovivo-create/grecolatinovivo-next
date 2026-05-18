@@ -250,7 +250,7 @@ export default function MinicorsiPage() {
                 </p>
 
                 <a
-                  href="https://www.portale.grecolatinovivo.it"
+                  href="https://portale.grecolatinovivo.it"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="card-link"
@@ -329,7 +329,7 @@ export default function MinicorsiPage() {
               Scopri tutti i minicorsi
             </Link>
             <a
-              href="https://www.portale.grecolatinovivo.it"
+              href="https://portale.grecolatinovivo.it"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"

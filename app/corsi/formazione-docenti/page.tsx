@@ -418,7 +418,7 @@ export default function FormazioneDocentiPage() {
               Richiedi informazioni
             </Link>
             <a
-              href="https://www.portale.grecolatinovivo.it"
+              href="https://portale.grecolatinovivo.it"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-ghost"

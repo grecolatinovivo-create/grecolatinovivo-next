@@ -189,7 +189,7 @@ function CorsoCard({ corso }: { corso: Corso }) {
           {corso.available !== false ? (
             <div style={{ marginTop: '6px' }}>
               <a
-                href="https://www.portale.grecolatinovivo.it"
+                href="https://portale.grecolatinovivo.it"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.78rem', color: '#002147', borderBottom: '1px solid #C9A84C', paddingBottom: '1px', textDecoration: 'none' }}
@@ -255,7 +255,7 @@ export default function CorsiAsincroniPage() {
           Dal livello A1 al B1, per tutte le lingue classiche insegnate dal Centro.
         </p>
         <a
-          href="https://www.portale.grecolatinovivo.it"
+          href="https://portale.grecolatinovivo.it"
           target="_blank"
           rel="noopener noreferrer"
           style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.9rem', color: '#002147', borderBottom: '1px solid #C9A84C', paddingBottom: '2px', textDecoration: 'none' }}
@@ -356,7 +356,7 @@ export default function CorsiAsincroniPage() {
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <a
-              href="https://www.portale.grecolatinovivo.it"
+              href="https://portale.grecolatinovivo.it"
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid rgba(255,255,255,0.8)', color: '#fff', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}
@@ -364,7 +364,7 @@ export default function CorsiAsincroniPage() {
               Accedi al Portale ↗
             </a>
             <a
-              href="https://www.portale.grecolatinovivo.it"
+              href="https://portale.grecolatinovivo.it"
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid #C9A84C', color: '#C9A84C', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}

@@ -2,7 +2,7 @@
 // Header istituzionale — design Oxford/Cambridge
 // COUNCIL sessione 2 (18/05/2026): #002147, linea oro 2px, Georgia serif
 // Logo: /public/logo.* — fallback testo "ΓΛ" se non presente
-// Portale studenti → https://www.portale.grecolatinovivo.it (target="_blank")
+// Portale studenti → https://portale.grecolatinovivo.it (target="_blank")
 
 import { useState } from 'react'
 import Link from 'next/link'
@@ -96,7 +96,7 @@ export default function Header() {
 
               <li className="nav-item">
                 <a
-                  href="https://www.portale.grecolatinovivo.it"
+                  href="https://portale.grecolatinovivo.it"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nav-link"
@@ -114,7 +114,7 @@ export default function Header() {
               {/* CTA Portale → esterno */}
               <li className="nav-item nav-item--cta">
                 <a
-                  href="https://www.portale.grecolatinovivo.it"
+                  href="https://portale.grecolatinovivo.it"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nav-cta"
@@ -158,11 +158,11 @@ export default function Header() {
               <li><Link href="/corsi/minicorsi" onClick={() => setMenuOpen(false)}>Corsi Brevi</Link></li>
               <li><Link href="/corsi/formazione-docenti" onClick={() => setMenuOpen(false)}>Formazione Docenti</Link></li>
               <li><Link href="/eventi" onClick={() => setMenuOpen(false)}>Eventi</Link></li>
-              <li><a href="https://www.portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>Abbonamento ↗</a></li>
+              <li><a href="https://portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>Abbonamento ↗</a></li>
               <li><Link href="/marketing/chi-siamo" onClick={() => setMenuOpen(false)}>Chi siamo</Link></li>
               <li>
                 <a
-                  href="https://www.portale.grecolatinovivo.it"
+                  href="https://portale.grecolatinovivo.it"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}

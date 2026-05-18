@@ -87,12 +87,12 @@ export default function TerminiCondizioniPage() {
               <li>
                 <strong style={{ color: '#1a1a1a' }}>«Portale»</strong>: il sito web{' '}
                 <a
-                  href="https://www.portale.grecolatinovivo.it"
+                  href="https://portale.grecolatinovivo.it"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="card-link"
                 >
-                  www.portale.grecolatinovivo.it
+                  portale.grecolatinovivo.it
                 </a>{' '}
                 e tutti i sottodomini e le applicazioni web a esso collegati.
               </li>
@@ -448,7 +448,7 @@ export default function TerminiCondizioniPage() {
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="https://www.portale.grecolatinovivo.it"
+              href="https://portale.grecolatinovivo.it"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
