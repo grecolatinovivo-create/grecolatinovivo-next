@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centro Nazionale di Studi Classici «GrecoLatinoVivo»</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      background: #FFFFFF;
+      color: #555555;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    a {
+      color: #1A3A6B;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      opacity: 0.75;
+    }
+
+    /* ---- NAVBAR ---- */
+
+    .navbar {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E0E0E0;
+      padding: 0 2rem;
+    }
+
+    .navbar-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 2rem;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: #111111;
+      flex-shrink: 0;
+    }
+
+    .navbar-logo-glyph {
+      font-family: Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #1A3A6B;
+    }
+
+    .navbar-logo-name {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.82rem;
+      color: #555555;
+      font-weight: normal;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .navbar-nav a {
+      font-size: 0.88rem;
+      color: #555555;
+      text-decoration: none;
+    }
+
+    .navbar-nav a:hover {
+      color: #111111;
+    }
+
+    /* ---- HERO ---- */
+
+    .hero {
+      padding: 120px 2rem;
+      text-align: center;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    .hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: normal;
+      color: #111111;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: #777777;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-links {
+      font-size: 0.95rem;
+    }
+
+    .hero-links a {
+      color: #1A3A6B;
+    }
+
+    .hero-links span {
+      color: #BBBBBB;
+      margin: 0 0.5rem;
+    }
+
+    /* ---- DATI ISTITUZIONALI ---- */
+
+    .dati {
+      padding: 48px 2rem;
+      text-align: center;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    .dati-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .dati p {
+      font-size: 0.9rem;
+      color: #888888;
+      letter-spacing: 0.03em;
+    }
+
+    .dati p span {
+      color: #CCCCCC;
+      margin: 0 0.5rem;
+    }
+
+    /* ---- SEZIONE COMUNE ---- */
+
+    .section {
+      padding: 80px 2rem;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: normal;
+      color: #111111;
+      margin-bottom: 2.5rem;
+      line-height: 1.35;
+    }
+
+    /* ---- PERCORSI ---- */
+
+    .percorso-list {
+      list-style: none;
+    }
+
+    .percorso-item {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    .percorso-item:first-child {
+      border-top: 1px solid #E0E0E0;
+    }
+
+    .percorso-titolo {
+      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #111111;
+      min-width: 220px;
+      flex-shrink: 0;
+    }
+
+    .percorso-desc {
+      font-size: 0.93rem;
+      color: #666666;
+      line-height: 1.7;
+    }
+
+    /* ---- METODOLOGIA ---- */
+
+    .metodo p {
+      max-width: 640px;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .citazione {
+      margin: 3.5rem auto;
+      max-width: 620px;
+      text-align: center;
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 1.12rem;
+      color: #444444;
+      line-height: 1.75;
+    }
+
+    /* ---- PIANI ---- */
+
+    .piani-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .piano-item {
+      flex: 1;
+      min-width: 200px;
+      padding: 2rem 0;
+      border-bottom: 1px solid #E0E0E0;
+      border-right: 1px solid #E0E0E0;
+      padding-right: 2.5rem;
+      padding-left: 0;
+    }
+
+    .piano-item:last-child {
+      border-right: none;
+      padding-right: 0;
+      padding-left: 2.5rem;
+    }
+
+    .piano-item:not(:first-child):not(:last-child) {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+
+    .piano-nome {
+      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #111111;
+      margin-bottom: 0.3rem;
+    }
+
+    .piano-prezzo {
+      font-size: 1.4rem;
+      color: #1A3A6B;
+      font-weight: normal;
+      margin-bottom: 0.75rem;
+    }
+
+    .piano-prezzo em {
+      font-size: 0.82rem;
+      color: #999999;
+      font-style: normal;
+    }
+
+    .piano-desc {
+      font-size: 0.88rem;
+      color: #777777;
+      line-height: 1.65;
+    }
+
+    .piani-note {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #AAAAAA;
+    }
+
+    /* ---- CTA ---- */
+
+    .cta-section {
+      padding: 100px 2rem;
+      text-align: center;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    .cta-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-family: Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: normal;
+      color: #111111;
+      margin-bottom: 1.25rem;
+      line-height: 1.35;
+    }
+
+    .cta-section p {
+      font-size: 0.95rem;
+      color: #777777;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #1A3A6B;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 14px 36px;
+      border-radius: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .cta-btn:hover {
+      background: #142e57;
+      opacity: 1;
+    }
+
+    /* ---- FOOTER ---- */
+
+    .footer {
+      background: #FFFFFF;
+      padding: 48px 2rem;
+    }
+
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-brand {
+      font-family: Georgia, serif;
+      font-size: 0.88rem;
+      color: #888888;
+    }
+
+    .footer-brand strong {
+      color: #555555;
+      font-weight: normal;
+    }
+
+    .footer-col {
+      font-size: 0.8rem;
+      color: #999999;
+      line-height: 1.9;
+    }
+
+    .footer-col a {
+      color: #888888;
+      text-decoration: none;
+    }
+
+    .footer-col a:hover {
+      color: #555555;
+    }
+
+    .footer-legal {
+      width: 100%;
+      border-top: 1px solid #E0E0E0;
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: #BBBBBB;
+    }
+
+    /* ---- RESPONSIVE ---- */
+
+    @media (max-width: 680px) {
+      .navbar-inner {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem 0;
+        gap: 0.75rem;
+      }
+
+      .navbar-logo-name {
+        display: none;
+      }
+
+      .navbar-nav {
+        gap: 1rem;
+      }
+
+      .hero {
+        padding: 72px 1.5rem;
+      }
+
+      .percorso-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .percorso-titolo {
+        min-width: unset;
+      }
+
+      .piani-list {
+        flex-direction: column;
+      }
+
+      .piano-item {
+        border-right: none;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .section {
+        padding: 56px 1.5rem;
+      }
+
+      .cta-section {
+        padding: 72px 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="navbar-logo">
+        <span class="navbar-logo-glyph">&#915;&#923;</span>
+        <span class="navbar-logo-name">Centro Nazionale di Studi Classici «GrecoLatinoVivo»</span>
+      </a>
+      <nav aria-label="Navigazione principale">
+        <ul class="navbar-nav">
+          <li><a href="#">Corsi</a></li>
+          <li><a href="#">Lingue</a></li>
+          <li><a href="#">Eventi</a></li>
+          <li><a href="#">Chi siamo</a></li>
+          <li><a href="#">Portale</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Le lingue classiche<br>nella loro forma viva</h1>
+      <p class="hero-subtitle">
+        Latino, Greco Antico, Egiziano Antico, Ebraico Biblico, Sanscrito.<br>
+        Metodo Natura. Classi di massimo 15 studenti. Accreditato MIM.
+      </p>
+      <p class="hero-links">
+        <a href="#">Scopri i corsi</a>
+        <span>·</span>
+        <a href="#">Accedi al portale</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- DATI ISTITUZIONALI -->
+  <div class="dati">
+    <div class="dati-inner">
+      <p>
+        5.000+ studenti formati
+        <span>·</span>
+        56 corsi
+        <span>·</span>
+        15 studenti per classe
+        <span>·</span>
+        5 sedi in Italia
+        <span>·</span>
+        Dal 2015
+      </p>
+    </div>
+  </div>
+
+  <!-- I 4 PERCORSI -->
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">I percorsi di studio</h2>
+      <ul class="percorso-list">
+
+        <li class="percorso-item">
+          <span class="percorso-titolo">Corsi di Latino</span>
+          <span class="percorso-desc">
+            Dal livello A1 al C2 del QCER. Il corso base (72 ore) equivale all'intero biennio liceale.
+            Lettura di testi originali sin dalle prime settimane, con il Metodo Natura ispirato a Ørberg.
+          </span>
+        </li>
+
+        <li class="percorso-item">
+          <span class="percorso-titolo">Corsi di Greco Antico</span>
+          <span class="percorso-desc">
+            Percorso completo dalla fonetica all'analisi dei testi letterari. Attenzione alla comprensione
+            diretta, senza traduzione intermedia. Docenti specializzati in didattica attiva.
+          </span>
+        </li>
+
+        <li class="percorso-item">
+          <span class="percorso-titolo">Lingue dell'Antichità</span>
+          <span class="percorso-desc">
+            Egiziano Antico, Ebraico Biblico, Sanscrito. Corsi annuali con approccio contestuale ai testi
+            di riferimento: geroglifici, Bibbia ebraica, testi vedici e classici.
+          </span>
+        </li>
+
+        <li class="percorso-item">
+          <span class="percorso-titolo">Formazione Docenti</span>
+          <span class="percorso-desc">
+            Corsi accreditati MIM per insegnanti di scuola secondaria. Metodologia Natura, didattica
+            per input comprensibile, progettazione di unità didattiche in lingua classica.
+          </span>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- METODOLOGIA -->
+  <section class="section metodo">
+    <div class="section-inner">
+      <h2 class="section-title">Il Metodo Natura</h2>
+      <p>
+        Il centro adotta il Metodo Natura, ispirato all'opera didattica di Hans Ørberg e alla ricerca
+        contemporanea sull'acquisizione linguistica. Anziché partire da regole grammaticali astratte,
+        gli studenti entrano in contatto con la lingua attraverso testi graduati, dialogo in classe
+        e lettura estensiva — gli stessi meccanismi che guidano l'apprendimento di qualsiasi lingua viva.
+      </p>
+      <p>
+        Ogni corso prevede un massimo di 15 partecipanti, per garantire un'interazione autentica e
+        una progressione calibrata sui bisogni individuali. I livelli seguono il quadro europeo
+        di riferimento (QCER), da A1 a C2.
+      </p>
+
+      <blockquote class="citazione">
+        «Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.»
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- I 3 PIANI -->
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">Piani di abbonamento</h2>
+      <ul class="piani-list">
+
+        <li class="piano-item">
+          <p class="piano-nome">Cultura</p>
+          <p class="piano-prezzo">€ 5,90 <em>/ mese</em></p>
+          <p class="piano-desc">
+            Accesso ai contenuti introduttivi, video delle lezioni registrate,
+            grammatiche di riferimento e biblioteca di testi annotati.
+          </p>
+        </li>
+
+        <li class="piano-item">
+          <p class="piano-nome">Linguae</p>
+          <p class="piano-prezzo">€ 12,90 <em>/ mese</em></p>
+          <p class="piano-desc">
+            Tutto il piano Cultura, più accesso ai corsi in aula virtuale,
+            esercizi interattivi e correzione automatica.
+          </p>
+        </li>
+
+        <li class="piano-item">
+          <p class="piano-nome">Accademia</p>
+          <p class="piano-prezzo">€ 19,90 <em>/ mese</em></p>
+          <p class="piano-desc">
+            Accesso completo: corsi dal vivo, tutoraggio individuale, certificazioni
+            QCER e accesso alle risorse per docenti.
+          </p>
+        </li>
+
+      </ul>
+      <p class="piani-note">Tutti i prezzi si intendono IVA inclusa. Abbonamenti mensili, disdetta in qualsiasi momento.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Inizia il tuo percorso</h2>
+      <p>
+        Scegli la lingua, il livello e la sede. Le iscrizioni sono aperte tutto l'anno.
+        Per informazioni scrivi a <a href="mailto:info@grecolatinovivo.it">info@grecolatinovivo.it</a>
+        o chiama <a href="tel:+393452456696">+39 345 245 6696</a>.
+      </p>
+      <a href="#" class="cta-btn">Iscriviti ora</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <strong>Centro Nazionale di Studi Classici<br>«GrecoLatinoVivo»</strong><br>
+        Fondato a Firenze nel 2015<br>
+        Accreditato MIM &middot; Membro Associato ALTE
+      </div>
+
+      <div class="footer-col">
+        <strong style="color: #777777; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;">Sedi</strong><br>
+        Firenze &middot; Milano &middot; Torino<br>
+        Parma &middot; Pordenone
+      </div>
+
+      <div class="footer-col">
+        <strong style="color: #777777; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;">Contatti</strong><br>
+        <a href="tel:+393452456696">+39 345 245 6696</a><br>
+        <a href="mailto:info@grecolatinovivo.it">info@grecolatinovivo.it</a>
+      </div>
+
+      <div class="footer-col">
+        <strong style="color: #777777; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;">Istituzionale</strong><br>
+        <a href="#">Corsi</a><br>
+        <a href="#">Chi siamo</a><br>
+        <a href="#">Privacy policy</a>
+      </div>
+
+    </div>
+
+    <div class="footer-inner">
+      <div class="footer-legal">
+        P.IVA: [DA INSERIRE] &nbsp;&middot;&nbsp;
+        Sede legale: [DA INSERIRE], Firenze &nbsp;&middot;&nbsp;
+        &copy; 2015&ndash;2026 Centro Nazionale di Studi Classici «GrecoLatinoVivo». Tutti i diritti riservati.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

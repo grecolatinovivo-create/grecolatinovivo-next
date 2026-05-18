@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro Nazionale di Studi Classici «GrecoLatinoVivo»</title>
+<style>
+  /* =====================================================
+     VARIABILI & RESET
+  ===================================================== */
+  :root {
+    --accent: #4A1528;
+    --accent-dark: #2e0d18;
+    --accent-light: #6b1f3a;
+    --white: #ffffff;
+    --gray-light: #F5F5F5;
+    --gray-mid: #e0e0e0;
+    --gray-text: #444444;
+    --gray-muted: #888888;
+    --footer-bg: #111111;
+    --border-left-width: 4px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #222222;
+    background: var(--white);
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: normal;
+    line-height: 1.2;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* =====================================================
+     UTILITA'
+  ===================================================== */
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+  }
+
+  /* =====================================================
+     NAVBAR
+  ===================================================== */
+  .navbar {
+    background: var(--white);
+    border-bottom: 3px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    gap: 24px;
+  }
+
+  .navbar__brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .navbar__logo-mark {
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .navbar__name {
+    font-family: system-ui, Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.3;
+    max-width: 260px;
+  }
+
+  .navbar__nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .navbar__nav li a {
+    font-size: 12px;
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #333;
+    text-transform: uppercase;
+    transition: color 0.15s;
+  }
+
+  .navbar__nav li a:hover {
+    color: var(--accent);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 22px;
+    font-family: system-ui, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .btn--primary {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+  }
+
+  .btn--primary:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+
+  .btn--primary-white {
+    background: var(--white);
+    color: var(--accent);
+    border-color: var(--white);
+  }
+
+  .btn--primary-white:hover {
+    background: var(--gray-light);
+    border-color: var(--gray-light);
+  }
+
+  .btn--outline-white {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+  }
+
+  .btn--outline-white:hover {
+    background: rgba(255,255,255,0.12);
+  }
+
+  .btn--outline-accent {
+    background: transparent;
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .btn--outline-accent:hover {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  /* =====================================================
+     HERO
+  ===================================================== */
+  .hero {
+    background: var(--accent);
+    color: var(--white);
+    padding: 88px 0 80px;
+  }
+
+  .hero__accreditation {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 5px 14px;
+    margin-bottom: 28px;
+    border-radius: 2px;
+  }
+
+  .hero__eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 16px;
+    font-family: system-ui, Arial, sans-serif;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 5vw, 62px);
+    color: var(--white);
+    margin-bottom: 20px;
+    max-width: 760px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero__subtitle {
+    font-size: 19px;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 12px;
+    max-width: 620px;
+    font-family: Georgia, serif;
+    font-style: italic;
+  }
+
+  .hero__quote {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 40px;
+    max-width: 560px;
+    font-style: normal;
+    font-family: system-ui, Arial, sans-serif;
+    padding-left: 14px;
+    border-left: 2px solid rgba(255,255,255,0.35);
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .hero__sedi {
+    margin-top: 52px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    font-weight: 600;
+  }
+
+  .hero__sedi span {
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+  }
+
+  /* =====================================================
+     STATS STRIP
+  ===================================================== */
+  .stats {
+    background: var(--gray-light);
+    border-bottom: 1px solid var(--gray-mid);
+  }
+
+  .stats__inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .stats__item {
+    padding: 40px 32px;
+    border-right: 1px solid var(--gray-mid);
+    text-align: center;
+  }
+
+  .stats__item:last-child {
+    border-right: none;
+  }
+
+  .stats__number {
+    font-family: Georgia, serif;
+    font-size: 46px;
+    color: var(--accent);
+    font-weight: normal;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stats__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-muted);
+    font-weight: 600;
+  }
+
+  /* =====================================================
+     SEZIONE PERCORSI
+  ===================================================== */
+  .section {
+    padding: 80px 0;
+  }
+
+  .section--alt {
+    background: var(--gray-light);
+  }
+
+  .section__header {
+    margin-bottom: 52px;
+  }
+
+  .section__label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .section__title {
+    font-size: clamp(26px, 3vw, 38px);
+    color: #1a1a1a;
+    margin-bottom: 14px;
+  }
+
+  .section__intro {
+    font-size: 16px;
+    color: var(--gray-text);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .card {
+    background: var(--white);
+    border-left: var(--border-left-width) solid var(--accent);
+    padding: 32px 28px 28px;
+    border-radius: 2px;
+  }
+
+  .card--alt {
+    background: var(--gray-light);
+  }
+
+  .card__tag {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .card__title {
+    font-size: 21px;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+  }
+
+  .card__desc {
+    font-size: 14px;
+    color: var(--gray-text);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  /* =====================================================
+     METODOLOGIA
+  ===================================================== */
+  .metodologia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .metodologia__numeri {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .metnum {
+    border-top: 3px solid var(--accent);
+    padding-top: 16px;
+  }
+
+  .metnum__value {
+    font-family: Georgia, serif;
+    font-size: 48px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metnum__label {
+    font-size: 13px;
+    color: var(--gray-text);
+    line-height: 1.4;
+  }
+
+  .metodologia__testo h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+  }
+
+  .metodologia__testo p {
+    font-size: 15px;
+    color: var(--gray-text);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .metodologia__testo p:last-child {
+    margin-bottom: 0;
+  }
+
+  .lingue-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .lingue-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* =====================================================
+     PIANI
+  ===================================================== */
+  .piani-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--gray-mid);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .piano {
+    padding: 40px 32px;
+    background: var(--white);
+    border-right: 1px solid var(--gray-mid);
+    position: relative;
+  }
+
+  .piano:last-child {
+    border-right: none;
+  }
+
+  .piano--featured {
+    border-top: 4px solid var(--accent);
+    margin-top: -4px;
+    padding-top: 44px;
+  }
+
+  .piano__label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--gray-muted);
+    margin-bottom: 12px;
+  }
+
+  .piano--featured .piano__label {
+    color: var(--accent);
+  }
+
+  .piano__name {
+    font-size: 24px;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+
+  .piano__price {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .piano__price-note {
+    font-size: 12px;
+    color: var(--gray-muted);
+    margin-bottom: 28px;
+  }
+
+  .piano__divider {
+    border: none;
+    border-top: 1px solid var(--gray-mid);
+    margin-bottom: 24px;
+  }
+
+  .piano__features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .piano__features li {
+    font-size: 14px;
+    color: var(--gray-text);
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .piano__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .piano__features li:last-child {
+    border-bottom: none;
+  }
+
+  /* =====================================================
+     FOOTER
+  ===================================================== */
+  .footer {
+    background: var(--footer-bg);
+    color: rgba(255,255,255,0.75);
+    padding: 72px 0 0;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer__brand-mark {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--white);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+
+  .footer__brand-name {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .footer__tagline {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    max-width: 280px;
+    margin-bottom: 20px;
+  }
+
+  .footer__badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .footer__badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.55);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .footer__col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .footer__links {
+    list-style: none;
+  }
+
+  .footer__links li {
+    margin-bottom: 10px;
+  }
+
+  .footer__links li a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    transition: color 0.15s;
+  }
+
+  .footer__links li a:hover {
+    color: var(--white);
+  }
+
+  .footer__contact-item {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .footer__contact-item strong {
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .footer__bottom {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer__legal {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.5;
+  }
+
+  /* =====================================================
+     MEDIA QUERY — MOBILE
+  ===================================================== */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 20px;
+    }
+
+    .navbar__nav {
+      display: none;
+    }
+
+    .navbar__inner {
+      height: auto;
+      padding: 14px 0;
+    }
+
+    .hero {
+      padding: 56px 0 52px;
+    }
+
+    .stats__inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats__item {
+      padding: 28px 20px;
+    }
+
+    .stats__item:nth-child(2) {
+      border-right: none;
+    }
+
+    .grid-2x2 {
+      grid-template-columns: 1fr;
+    }
+
+    .metodologia {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .piani-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .piano {
+      border-right: none;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .piano--featured {
+      border-top: 4px solid var(--accent);
+      margin-top: 0;
+    }
+
+    .piano:last-child {
+      border-bottom: none;
+    }
+
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero__actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .stats__number {
+      font-size: 34px;
+    }
+
+    .metodologia__numeri {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+<header class="navbar">
+  <div class="container">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__brand">
+        <span class="navbar__logo-mark">&#915;&#923;</span>
+        <span class="navbar__name">Centro Nazionale di Studi Classici<br>«GrecoLatinoVivo»</span>
+      </a>
+      <nav aria-label="Navigazione principale">
+        <ul class="navbar__nav">
+          <li><a href="#percorsi">Corsi</a></li>
+          <li><a href="#metodologia">Metodo</a></li>
+          <li><a href="#piani">Abbonamento</a></li>
+          <li><a href="#contatti">Il Centro</a></li>
+          <li><a href="#portale" class="btn btn--primary">Portale Studenti</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero__accreditation">Accreditato MIM &nbsp;&middot;&nbsp; Membro Associato ALTE &nbsp;&middot;&nbsp; Fondato a Firenze nel 2015</div>
+    <p class="hero__eyebrow">Centro Nazionale di Studi Classici</p>
+    <h1>Le lingue dell'antichit&agrave;<br>nella loro forma viva.</h1>
+    <p class="hero__subtitle">Latino, Greco Antico, Egiziano Antico, Ebraico Biblico, Sanscrito: studiati con il rigore accademico di un'istituzione, con il Metodo Natura di Ørberg.</p>
+    <p class="hero__quote">«Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.»</p>
+    <div class="hero__actions">
+      <a href="#percorsi" class="btn btn--primary-white">Esplora i corsi</a>
+      <a href="#piani" class="btn btn--outline-white">Abbonamento Portale</a>
+    </div>
+    <div class="hero__sedi">
+      Sedi operative: <span>Firenze &nbsp;&middot;&nbsp; Milano &nbsp;&middot;&nbsp; Torino &nbsp;&middot;&nbsp; Parma &nbsp;&middot;&nbsp; Pordenone</span>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+<section class="stats">
+  <div class="container">
+    <div class="stats__inner">
+      <div class="stats__item">
+        <div class="stats__number">5.000+</div>
+        <div class="stats__label">Studenti formati</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__number">56</div>
+        <div class="stats__label">Corsi attivi</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__number">15</div>
+        <div class="stats__label">Studenti max per classe</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__number">Dal 2015</div>
+        <div class="stats__label">Attivi a Firenze e in Italia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     PERCORSI
+===================================================== -->
+<section class="section" id="percorsi">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">Offerta Formativa</span>
+      <h2 class="section__title">Quattro percorsi di studio</h2>
+      <p class="section__intro">Dall'accesso in diretta con un docente esperto alla formazione autonoma attraverso il portale digitale: ogni percorso condivide lo stesso rigore metodologico.</p>
+    </div>
+    <div class="grid-2x2">
+      <div class="card">
+        <span class="card__tag">Formato sincrono</span>
+        <h3 class="card__title">Corsi in Diretta</h3>
+        <p class="card__desc">Lezioni sincrone con docenti qualificati in gruppi di massimo 15 studenti. Il contatto diretto con la lingua, la grammatica e il testo antico &egrave; il centro di ogni incontro. Livelli A1-C2 secondo il QCER.</p>
+        <a href="#" class="btn btn--outline-accent">Consulta il calendario</a>
+      </div>
+      <div class="card">
+        <span class="card__tag">Formato asincrono</span>
+        <h3 class="card__title">Corsi Asincroni</h3>
+        <p class="card__desc">Moduli registrati con struttura progressiva e verifiche integrate. Adatti a chi ha vincoli di orario o preferisce un ritmo autonomo. Stessa progressione dei corsi in diretta, fruibili in qualsiasi momento.</p>
+        <a href="#" class="btn btn--outline-accent">Consulta i moduli</a>
+      </div>
+      <div class="card">
+        <span class="card__tag">Piattaforma digitale</span>
+        <h3 class="card__title">Portale in Abbonamento</h3>
+        <p class="card__desc">Accesso mensile a centinaia di ore di contenuti, esercizi interattivi, letture graduate e strumenti per l'apprendimento autonomo. Tre livelli di abbonamento: Cultura, Linguae, Accademia.</p>
+        <a href="#piani" class="btn btn--outline-accent">Vedi i piani</a>
+      </div>
+      <div class="card">
+        <span class="card__tag">Alta formazione</span>
+        <h3 class="card__title">Eventi e Convegni</h3>
+        <p class="card__desc">Seminari di alto profilo, conferenze di filologi e classicisti, eventi di approfondimento per chi opera nel campo della cultura classica: docenti universitari, insegnanti, ricercatori, appassionati avanzati.</p>
+        <a href="#" class="btn btn--outline-accent">Prossimi eventi</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     METODOLOGIA
+===================================================== -->
+<section class="section section--alt" id="metodologia">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">Il Metodo</span>
+      <h2 class="section__title">Natura, non grammatica astratta</h2>
+    </div>
+    <div class="metodologia">
+      <div class="metodologia__numeri">
+        <div class="metnum">
+          <div class="metnum__value">72h</div>
+          <div class="metnum__label">Corso base equivalente al biennio liceale</div>
+        </div>
+        <div class="metnum">
+          <div class="metnum__value">15</div>
+          <div class="metnum__label">Studenti massimo per gruppo di lavoro</div>
+        </div>
+        <div class="metnum">
+          <div class="metnum__value">A1-C2</div>
+          <div class="metnum__label">Scala QCER completa, tutti i livelli coperti</div>
+        </div>
+        <div class="metnum">
+          <div class="metnum__value">5</div>
+          <div class="metnum__label">Lingue antiche nell'offerta formativa</div>
+        </div>
+      </div>
+      <div class="metodologia__testo">
+        <h3>Metodo Natura</h3>
+        <p>Il Centro adotta il Metodo Natura, ispirato al lavoro di Hans &Oslash;rberg e alla tradizione della lettura estensiva nelle lingue classiche. Il principio fondamentale &egrave; che la lingua si acquisisce attraverso l'esposizione progressiva a testi comprensibili, non attraverso la memorizzazione paradigmatica fine a se stessa.</p>
+        <p>Ogni livello introduce strutture linguistiche in contesti autentici o autenticamente costruiti. La grammatica emerge dall'uso: &egrave; osservata, indotta, consolidata nel testo. Gli studenti leggono sin dalle prime ore, senza attendere una competenza grammaticale completa e astratta.</p>
+        <p>Questo approccio, affiancato al rigore filologico che caratterizza la formazione dei nostri docenti, produce una competenza linguistica duratura e trasferibile alla lettura dei testi originali.</p>
+        <div class="lingue-list">
+          <span class="lingue-tag">Latino</span>
+          <span class="lingue-tag">Greco Antico</span>
+          <span class="lingue-tag">Egiziano Antico</span>
+          <span class="lingue-tag">Ebraico Biblico</span>
+          <span class="lingue-tag">Sanscrito</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     PIANI
+===================================================== -->
+<section class="section" id="piani">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">Portale in Abbonamento</span>
+      <h2 class="section__title">Tre livelli di accesso</h2>
+      <p class="section__intro">Abbonamento mensile al portale digitale GrecoLatinoVivo. Nessun vincolo di durata, cancellazione in qualsiasi momento.</p>
+    </div>
+    <div class="piani-grid">
+      <div class="piano">
+        <div class="piano__label">Piano Base</div>
+        <h3 class="piano__name">Cultura</h3>
+        <div class="piano__price">&euro;5,90</div>
+        <div class="piano__price-note">al mese &middot; IVA inclusa</div>
+        <hr class="piano__divider">
+        <ul class="piano__features">
+          <li>Accesso ai contenuti introduttivi</li>
+          <li>Letture graduate livello A1-A2</li>
+          <li>Esercizi di base integrati</li>
+          <li>Vocabolari e glossari digitali</li>
+        </ul>
+        <a href="#" class="btn btn--outline-accent" style="width:100%;text-align:center;">Attiva Cultura</a>
+      </div>
+      <div class="piano piano--featured">
+        <div class="piano__label">Piano Intermedio</div>
+        <h3 class="piano__name">Linguae</h3>
+        <div class="piano__price">&euro;12,90</div>
+        <div class="piano__price-note">al mese &middot; IVA inclusa</div>
+        <hr class="piano__divider">
+        <ul class="piano__features">
+          <li>Tutto il piano Cultura</li>
+          <li>Corsi asincroni livello A1-B2</li>
+          <li>Accesso a sessioni registrate</li>
+          <li>Esercizi interattivi avanzati</li>
+          <li>Forum e comunit&agrave; di studio</li>
+        </ul>
+        <a href="#" class="btn btn--primary" style="width:100%;text-align:center;">Attiva Linguae</a>
+      </div>
+      <div class="piano">
+        <div class="piano__label">Piano Completo</div>
+        <h3 class="piano__name">Accademia</h3>
+        <div class="piano__price">&euro;19,90</div>
+        <div class="piano__price-note">al mese &middot; IVA inclusa</div>
+        <hr class="piano__divider">
+        <ul class="piano__features">
+          <li>Tutto il piano Linguae</li>
+          <li>Livelli C1-C2 completi</li>
+          <li>Accesso a tutti gli eventi registrati</li>
+          <li>Materiali per docenti e ricercatori</li>
+          <li>Contenuti filologici avanzati</li>
+          <li>Priorit&agrave; di iscrizione ai corsi live</li>
+        </ul>
+        <a href="#" class="btn btn--outline-accent" style="width:100%;text-align:center;">Attiva Accademia</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+<footer class="footer" id="contatti">
+  <div class="container">
+    <div class="footer__grid">
+      <!-- BRAND -->
+      <div>
+        <div class="footer__brand-mark">&#915;&#923;</div>
+        <div class="footer__brand-name">Centro Nazionale di Studi Classici «GrecoLatinoVivo»</div>
+        <p class="footer__tagline">«Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.»</p>
+        <div class="footer__badges">
+          <span class="footer__badge">Accreditato MIM</span>
+          <span class="footer__badge">Membro ALTE</span>
+        </div>
+      </div>
+      <!-- FORMAZIONE -->
+      <div>
+        <div class="footer__col-title">Formazione</div>
+        <ul class="footer__links">
+          <li><a href="#">Corsi in Diretta</a></li>
+          <li><a href="#">Corsi Asincroni</a></li>
+          <li><a href="#">Portale in Abbonamento</a></li>
+          <li><a href="#">Eventi e Convegni</a></li>
+          <li><a href="#">Calendario</a></li>
+          <li><a href="#">Livelli A1-C2</a></li>
+        </ul>
+      </div>
+      <!-- IL CENTRO -->
+      <div>
+        <div class="footer__col-title">Il Centro</div>
+        <ul class="footer__links">
+          <li><a href="#">Storia e Missione</a></li>
+          <li><a href="#">Il Metodo Natura</a></li>
+          <li><a href="#">I Docenti</a></li>
+          <li><a href="#">Sedi</a></li>
+          <li><a href="#">Accreditamenti</a></li>
+          <li><a href="#">Rassegna Stampa</a></li>
+        </ul>
+      </div>
+      <!-- CONTATTI -->
+      <div>
+        <div class="footer__col-title">Contatti</div>
+        <div class="footer__contact-item">
+          <strong>Telefono</strong>
+          +39 345 245 6696
+        </div>
+        <div class="footer__contact-item">
+          <strong>Email</strong>
+          info@grecolatinovivo.it
+        </div>
+        <div class="footer__contact-item">
+          <strong>Sede Legale — Firenze</strong>
+          [DA INSERIRE]
+        </div>
+        <div class="footer__contact-item">
+          <strong>P.IVA</strong>
+          [DA INSERIRE]
+        </div>
+        <div class="footer__contact-item">
+          <strong>Sedi operative</strong>
+          Firenze &middot; Milano &middot; Torino &middot; Parma &middot; Pordenone
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__legal">
+        &copy; 2015&ndash;2026 Centro Nazionale di Studi Classici «GrecoLatinoVivo». Tutti i diritti riservati.<br>
+        P.IVA [DA INSERIRE] &middot; Sede legale: [DA INSERIRE] &middot; Fondato a Firenze nel 2015
+      </div>
+      <div class="footer__legal">
+        <a href="#" style="color:rgba(255,255,255,0.35);margin-right:16px;">Privacy Policy</a>
+        <a href="#" style="color:rgba(255,255,255,0.35);margin-right:16px;">Cookie Policy</a>
+        <a href="#" style="color:rgba(255,255,255,0.35);">Note legali</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

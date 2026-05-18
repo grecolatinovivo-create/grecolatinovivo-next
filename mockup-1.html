@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centro Nazionale di Studi Classici «GrecoLatinoVivo»</title>
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #FFFFFF;
+      color: #1a1a1a;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+      line-height: 1.25;
+    }
+
+    a {
+      color: #002147;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    header {
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #002147;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #002147;
+    }
+
+    .navbar-logo {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.6rem;
+      font-weight: normal;
+      color: #002147;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .navbar-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.95rem;
+      color: #002147;
+      letter-spacing: 0.03em;
+    }
+
+    .navbar-name span {
+      display: block;
+      font-size: 0.72rem;
+      font-family: system-ui, sans-serif;
+      color: #555;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      list-style: none;
+    }
+
+    .navbar-nav li a {
+      display: block;
+      padding: 0 1rem;
+      font-size: 0.875rem;
+      color: #002147;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .navbar-nav li a:hover {
+      text-decoration: underline;
+    }
+
+    .navbar-nav li.cta a {
+      border: 1px solid #002147;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-left: 0.75rem;
+    }
+
+    .navbar-nav li.cta a:hover {
+      background-color: #002147;
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+
+    /* Gold accent line below navbar */
+    .gold-line {
+      height: 2px;
+      background-color: #C9A84C;
+    }
+
+    /* ============================================================
+       ACCREDITAMENTO STRIP
+    ============================================================ */
+    .accreditamento-strip {
+      background-color: #002147;
+      text-align: center;
+      padding: 0.55rem 1rem;
+    }
+
+    .accreditamento-strip p {
+      font-size: 0.75rem;
+      color: #FFFFFF;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 7rem 2rem 6rem;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      color: #002147;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #C9A84C;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: #444;
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+
+    .hero-quote {
+      border-left: 3px solid #C9A84C;
+      margin: 0 auto 3rem;
+      padding: 1rem 1.5rem;
+      max-width: 620px;
+      text-align: left;
+    }
+
+    .hero-quote p {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .hero-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-links a {
+      font-size: 0.925rem;
+      color: #002147;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-bottom: 1px solid #C9A84C;
+      padding-bottom: 2px;
+    }
+
+    .hero-links a:hover {
+      color: #C9A84C;
+      text-decoration: none;
+    }
+
+    /* ============================================================
+       SECTION DIVIDER
+    ============================================================ */
+    .section-divider {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       PERCORSI (2x2 GRID)
+    ============================================================ */
+    .percorsi {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      color: #002147;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-header p {
+      font-size: 0.95rem;
+      color: #666;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .percorsi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+    }
+
+    .card {
+      border-top: 3px solid #002147;
+      border-left: 1px solid #e8e8e8;
+      border-right: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 1.75rem 1.75rem 1.5rem;
+      background: #FFFFFF;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      color: #002147;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1.25rem;
+      line-height: 1.7;
+    }
+
+    .card-link {
+      font-size: 0.85rem;
+      color: #002147;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      border-bottom: 1px solid #C9A84C;
+      padding-bottom: 1px;
+    }
+
+    .card-link:hover {
+      color: #C9A84C;
+      text-decoration: none;
+    }
+
+    /* ============================================================
+       NUMERI
+    ============================================================ */
+    .numeri-section {
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .numeri {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .numero-item {
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .numero-item + .numero-item {
+      border-left: 1px solid #d0d0d0;
+    }
+
+    .numero-valore {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      color: #002147;
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .numero-etichetta {
+      font-size: 0.8rem;
+      color: #666;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       METODOLOGIA
+    ============================================================ */
+    .metodologia {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .metodologia-testo h2 {
+      font-size: clamp(1.4rem, 2vw, 1.85rem);
+      color: #002147;
+      margin-bottom: 1.25rem;
+    }
+
+    .metodologia-testo p {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    .metodologia-bullet {
+      padding-top: 0.5rem;
+    }
+
+    .metodologia-bullet h3 {
+      font-family: system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 1.5rem;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .bullet-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .bullet-marker {
+      width: 1px;
+      height: 100%;
+      min-height: 1.3rem;
+      background-color: #C9A84C;
+      display: block;
+      margin-top: 0.3rem;
+      flex-shrink: 0;
+      width: 2px;
+    }
+
+    .bullet-list li .bullet-text {
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .bullet-list li .bullet-text strong {
+      color: #002147;
+      font-weight: 600;
+      display: block;
+      font-size: 0.925rem;
+      margin-bottom: 0.15rem;
+    }
+
+    /* ============================================================
+       LINGUE (OPTIONAL STRIP)
+    ============================================================ */
+    .lingue-strip {
+      background-color: #f8f7f4;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .lingue-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .lingue-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #777;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .lingue-list {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .lingue-list li {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1rem;
+      color: #002147;
+      border-bottom: 1px solid #C9A84C;
+      padding-bottom: 1px;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background-color: #002147;
+      padding: 4rem 2rem 2.5rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand .footer-logo {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      color: #FFFFFF;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-brand .footer-tagline {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: 0.875rem;
+      color: #a8b8cc;
+      line-height: 1.65;
+      margin-top: 1rem;
+      max-width: 320px;
+    }
+
+    .footer-sedi {
+      font-size: 0.8rem;
+      color: #7a8fa0;
+      margin-top: 1.25rem;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-nav h4,
+    .footer-contact h4 {
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-nav ul li a {
+      font-size: 0.875rem;
+      color: #a8b8cc;
+      text-decoration: none;
+    }
+
+    .footer-nav ul li a:hover {
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+
+    .footer-contact address {
+      font-style: normal;
+    }
+
+    .footer-contact p,
+    .footer-contact address p {
+      font-size: 0.875rem;
+      color: #a8b8cc;
+      margin-bottom: 0.4rem;
+      line-height: 1.6;
+    }
+
+    .footer-contact a {
+      color: #a8b8cc;
+      text-decoration: none;
+    }
+
+    .footer-contact a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 3rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: #5a6e80;
+      letter-spacing: 0.03em;
+    }
+
+    /* ============================================================
+       RESPONSIVE — < 768px
+    ============================================================ */
+    @media (max-width: 767px) {
+      .navbar-name {
+        display: none;
+      }
+
+      .navbar-nav {
+        gap: 0;
+      }
+
+      .navbar-nav li a {
+        padding: 0 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      .navbar-nav li.cta {
+        display: none;
+      }
+
+      .hero {
+        padding: 4rem 1.5rem 3.5rem;
+      }
+
+      .percorsi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .numeri {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 2.5rem;
+      }
+
+      .numero-item + .numero-item {
+        border-left: none;
+      }
+
+      .numeri .numero-item:nth-child(odd) {
+        border-right: 1px solid #d0d0d0;
+      }
+
+      .metodologia {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .lingue-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER / NAVBAR
+  ============================================================ -->
+  <header>
+    <nav class="navbar" aria-label="Navigazione principale">
+      <a href="#" class="navbar-brand">
+        <span class="navbar-logo">&#915;&#923;</span>
+        <span class="navbar-name">
+          Centro Nazionale di Studi Classici
+          <span>«GrecoLatinoVivo»</span>
+        </span>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="#percorsi">Offerta Formativa</a></li>
+        <li><a href="#lingue">Lingue</a></li>
+        <li><a href="#eventi">Eventi</a></li>
+        <li><a href="#chi-siamo">Chi siamo</a></li>
+        <li class="cta"><a href="#">Portale studenti</a></li>
+      </ul>
+    </nav>
+    <div class="gold-line"></div>
+  </header>
+
+  <!-- ============================================================
+       ACCREDITAMENTO STRIP
+  ============================================================ -->
+  <div class="accreditamento-strip" role="banner">
+    <p>Accreditato MIM &middot; Membro Associato ALTE &middot; Dal 2015</p>
+  </div>
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-titolo">
+      <p class="hero-eyebrow">Firenze &middot; Milano &middot; Torino &middot; Parma &middot; Pordenone</p>
+      <h1 id="hero-titolo">Le lingue classiche<br>nella loro <em>forma viva</em></h1>
+      <p class="hero-sub">
+        Il primo centro nazionale dedicato allo studio attivo del Latino, del Greco Antico
+        e delle lingue del mondo antico, con metodo contestuale-induttivo.
+      </p>
+      <blockquote class="hero-quote">
+        <p>
+          «Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.»
+        </p>
+      </blockquote>
+      <div class="hero-links">
+        <a href="#percorsi">Scopri i corsi &#8594;</a>
+        <a href="#chi-siamo">Il Centro &#8594;</a>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- PERCORSI 2x2 -->
+    <section class="percorsi" id="percorsi" aria-labelledby="percorsi-titolo">
+      <div class="section-header">
+        <h2 id="percorsi-titolo">Offerta Formativa</h2>
+        <p>Quattro modalità di accesso alla conoscenza classica, per ogni esigenza e ritmo di studio.</p>
+      </div>
+      <div class="percorsi-grid">
+        <article class="card">
+          <h3>Corsi in Diretta</h3>
+          <p>
+            Classi live con insegnanti specializzati, massimo 15 studenti per gruppo.
+            Livelli A1&ndash;C2 secondo il quadro comune europeo di riferimento.
+            72 ore equivalenti al biennio liceale.
+          </p>
+          <a href="#" class="card-link">Scopri i corsi in diretta &#8594;</a>
+        </article>
+        <article class="card">
+          <h3>Corsi Asincroni</h3>
+          <p>
+            Percorsi registrati con materiali didattici esclusivi, fruibili in autonomia
+            e a qualsiasi ora. Ideali per chi ha orari irregolari o preferisce
+            un ritmo personalizzato.
+          </p>
+          <a href="#" class="card-link">Scopri i corsi asincroni &#8594;</a>
+        </article>
+        <article class="card">
+          <h3>Portale in Abbonamento</h3>
+          <p>
+            Accesso continuo a risorse, testi commentati, esercizi e archivi didattici.
+            Tre piani: Cultura &euro;5,90/mese &middot; Linguae &euro;12,90/mese
+            &middot; Accademia &euro;19,90/mese.
+          </p>
+          <a href="#" class="card-link">Scopri i piani &#8594;</a>
+        </article>
+        <article class="card" id="eventi">
+          <h3>Eventi e Convegni</h3>
+          <p>
+            Conferenze, seminari e convegni scientifici dedicati alle lingue
+            e alle culture del mondo antico. Aperti a studenti, docenti e pubblico.
+          </p>
+          <a href="#" class="card-link">Scopri gli eventi &#8594;</a>
+        </article>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- NUMERI -->
+    <div class="numeri-section">
+      <div class="numeri" aria-label="Dati del Centro">
+        <div class="numero-item">
+          <span class="numero-valore">5.000+</span>
+          <span class="numero-etichetta">Studenti formati</span>
+        </div>
+        <div class="numero-item">
+          <span class="numero-valore">56</span>
+          <span class="numero-etichetta">Corsi disponibili</span>
+        </div>
+        <div class="numero-item">
+          <span class="numero-valore">15</span>
+          <span class="numero-etichetta">Studenti per classe</span>
+        </div>
+        <div class="numero-item">
+          <span class="numero-valore">5</span>
+          <span class="numero-etichetta">Sedi in Italia</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- METODOLOGIA -->
+    <section class="metodologia" id="chi-siamo" aria-labelledby="metodo-titolo">
+      <div class="metodologia-testo">
+        <h2 id="metodo-titolo">Il Metodo Natura</h2>
+        <p>
+          Il Centro adotta un approccio contestuale-induttivo ispirato ai principi di Hans Henning
+          Ørberg e alla tradizione del <em>Lingua Latina per se Illustrata</em>. Lo studente
+          incontra la lingua classica nel suo contesto naturale d'uso, attraverso testi graduati
+          che permettono una comprensione progressiva e organica della grammatica e del lessico.
+        </p>
+        <p style="margin-top: 1rem;">
+          Il risultato non è la conoscenza di regole isolate, ma la capacità di leggere,
+          comprendere e — a livelli avanzati — produrre testi in lingua originale.
+          Un metodo che ridona alla lingua classica la sua dimensione viva e comunicativa.
+        </p>
+      </div>
+      <div class="metodologia-bullet">
+        <h3>Caratteristiche del percorso</h3>
+        <ul class="bullet-list">
+          <li>
+            <span class="bullet-marker" aria-hidden="true"></span>
+            <span class="bullet-text">
+              <strong>72 ore corso base</strong>
+              Equivalenti al biennio liceale tradizionale, con efficacia superiore grazie
+              al metodo contestuale.
+            </span>
+          </li>
+          <li>
+            <span class="bullet-marker" aria-hidden="true"></span>
+            <span class="bullet-text">
+              <strong>Massimo 15 studenti per classe</strong>
+              Ogni studente riceve attenzione personalizzata e partecipa attivamente
+              alle sessioni.
+            </span>
+          </li>
+          <li>
+            <span class="bullet-marker" aria-hidden="true"></span>
+            <span class="bullet-text">
+              <strong>Livelli A1&ndash;C2 (QCER)</strong>
+              Percorso strutturato secondo il Quadro Comune Europeo di Riferimento
+              per le lingue.
+            </span>
+          </li>
+          <li>
+            <span class="bullet-marker" aria-hidden="true"></span>
+            <span class="bullet-text">
+              <strong>5 sedi in Italia</strong>
+              Firenze &middot; Milano &middot; Torino &middot; Parma &middot; Pordenone,
+              con didattica anche a distanza.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LINGUE -->
+    <div class="lingue-strip" id="lingue">
+      <div class="lingue-inner">
+        <span class="lingue-label">Lingue insegnate</span>
+        <ul class="lingue-list">
+          <li>Latino</li>
+          <li>Greco Antico</li>
+          <li>Egiziano Antico</li>
+          <li>Ebraico Biblico</li>
+          <li>Sanscrito</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+
+      <!-- Colonna 1: Brand -->
+      <div class="footer-brand">
+        <span class="footer-logo">Centro Nazionale di Studi Classici «GrecoLatinoVivo»</span>
+        <p class="footer-tagline">
+          «Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.»
+        </p>
+        <p class="footer-sedi">
+          Firenze &middot; Milano &middot; Torino &middot; Parma &middot; Pordenone
+        </p>
+        <p class="footer-sedi" style="margin-top:0.5rem;">
+          Accreditato MIM &middot; Membro Associato ALTE &middot; Fondato 2015
+        </p>
+      </div>
+
+      <!-- Colonna 2: Navigazione -->
+      <nav class="footer-nav" aria-label="Link rapidi footer">
+        <h4>Navigazione</h4>
+        <ul>
+          <li><a href="#percorsi">Offerta Formativa</a></li>
+          <li><a href="#lingue">Lingue</a></li>
+          <li><a href="#eventi">Eventi e Convegni</a></li>
+          <li><a href="#chi-siamo">Chi siamo</a></li>
+          <li><a href="#">Portale studenti</a></li>
+          <li><a href="#">Abbonamenti</a></li>
+        </ul>
+      </nav>
+
+      <!-- Colonna 3: Contatti -->
+      <div class="footer-contact">
+        <h4>Contatti</h4>
+        <address>
+          <p>
+            <a href="tel:+393452456696">+39 345 245 6696</a>
+          </p>
+          <p>
+            <a href="mailto:info@grecolatinovivo.it">info@grecolatinovivo.it</a>
+          </p>
+          <p>
+            <a href="https://grecolatinovivo.it" target="_blank" rel="noopener">grecolatinovivo.it</a>
+          </p>
+          <p style="margin-top:0.75rem;">
+            Sede Firenze: [DA INSERIRE]
+          </p>
+          <p>
+            P.IVA: [DA INSERIRE]
+          </p>
+        </address>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Centro Nazionale di Studi Classici «GrecoLatinoVivo». Tutti i diritti riservati.</p>
+      <p>Privacy Policy &middot; Termini di utilizzo</p>
+    </div>
+  </footer>
+
+</body>
+</html>
