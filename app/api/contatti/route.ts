@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // POST /api/contatti
 // Form di contatto → invio email via Resend a info@grecolatinovivo.it
 // Sostituisce contatti.php del vecchio sito (PHP non supportato su Vercel)

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // GET /api/config/abbonamento
 // Restituisce i Price ID Stripe per i 3 piani abbonamento
 // Usato dal frontend per avviare il checkout con il priceId corretto

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // POST /api/stripe/webhook
 // Gestisce gli eventi Stripe dopo il pagamento
 // maxDuration: 30s (configurato in vercel.json)

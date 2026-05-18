@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // GET /api/eventi/[id]/biglietto
 // Scarica il PDF del biglietto per l'utente autenticato
 // maxDuration: 30s (configurato in vercel.json)

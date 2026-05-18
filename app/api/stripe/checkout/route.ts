@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // POST /api/stripe/checkout
 // Crea una sessione Stripe Checkout per:
 //   - corso_live: pagamento singolo iscrizione

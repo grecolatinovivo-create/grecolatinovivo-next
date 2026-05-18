@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // POST /api/auth/login
 // Autentica l'utente con email + password
 // Condivide il JWT cookie con il portale via domain=.grecolatinovivo.it

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // POST /api/auth/logout
 // Cancella il cookie di autenticazione
 import { NextResponse } from 'next/server'

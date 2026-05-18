@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // GET /api/corsi-asincroni
 // Ritorna la lista dei corsi asincroni dal DB condiviso con il portale
 // Query params: lang, level, page, limit

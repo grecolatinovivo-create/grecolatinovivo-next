@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // GET /api/corsi-live
 // Lista corsi live attivi con docenti e sessioni future
 import { NextRequest, NextResponse } from 'next/server'

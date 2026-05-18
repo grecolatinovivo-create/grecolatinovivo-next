@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // GET /api/eventi
 // Lista eventi pubblicati, ordinati per data
 import { NextRequest, NextResponse } from 'next/server'

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // POST /api/auth/register
 // Registra un nuovo utente — crea il record nel DB condiviso con il portale
 import { NextRequest, NextResponse } from 'next/server'
