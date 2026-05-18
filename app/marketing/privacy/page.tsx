@@ -484,7 +484,7 @@ export default function PrivacyPage() {
             >
               info@grecolatinovivo.it
             </a>
-            . Ti risponderemo entro 24 ore.
+            . Ti risponderemo entro 30 giorni dalla ricezione, come previsto dall&apos;art.&nbsp;12 GDPR.
           </p>
           <Link href="/marketing/contatti" className="btn btn-ghost">
             Vai alla pagina Contatti

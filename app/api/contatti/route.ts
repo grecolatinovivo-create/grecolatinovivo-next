@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       message: message.trim(),
     })
 
-    return NextResponse.json({ ok: true, message: 'Messaggio inviato. Ti risponderemo entro 24 ore.' })
+    return NextResponse.json({ ok: true, message: 'Messaggio inviato con successo. Ti risponderemo il prima possibile.' })
   } catch (err) {
     console.error('[/api/contatti]', err)
     return NextResponse.json({ error: 'Errore invio messaggio. Riprova o scrivi direttamente a info@grecolatinovivo.it.' }, { status: 500 })
