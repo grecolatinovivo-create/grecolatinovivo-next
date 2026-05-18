@@ -25,7 +25,8 @@
   --bg:             #FFFFFF;  /* bianco puro — sfondo pagine */
   --dark:           #002147;  /* footer, strip — stesso valore di primary */
   --light-section:  #f8f7f4;  /* avorio tenue — sezioni alternate, corpo */
-  --border:         #e8e8e8;  /* grigio neutro — bordi card */
+  --border:         #e8e8e8;  /* grigio neutro — bordi card, divisori */
+  --border-input:   #999999;  /* bordi campi form — contrasto ≥ 3:1 su bianco (WCAG 1.4.11) */
   --text:           #1a1a1a;  /* quasi-nero — corpo testo */
   --text-light:     #555555;  /* testo secondario, caption */
   --text-muted:     #777777;  /* eyebrow, label, etichette */
@@ -308,7 +309,7 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
    ============================ */
 .input {
   width: 100%;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-input);  /* #999 — contrasto ≥ 3:1 su bianco (WCAG 1.4.11) */
   border-radius: var(--radius-input);
   padding: 10px 14px;
   font-family: var(--font-body);

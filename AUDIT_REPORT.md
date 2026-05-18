@@ -1,9 +1,9 @@
 # AUDIT_REPORT — GrecoLatinoVivo Site
-*Aggiornato da: agent-auditor — sessione 2 — 18 maggio 2026*
+*Aggiornato da: agent-auditor — sessione 3 — 18 maggio 2026 (tutte le raccomandazioni tecniche risolte)*
 
 ---
 
-## Livello di rischio residuo: BASSO
+## Livello di rischio residuo: MINIMO
 
 ### Riepilogo rapido
 
@@ -508,5 +508,32 @@ condizionato al completamento delle azioni indicate nelle raccomandazioni aperte
 
 ---
 
-*AUDIT_REPORT.md prodotto il 17/05/2026*
-*4 correzioni applicate — Rischio residuo: BASSO*
+---
+
+## Aggiornamento sessione 3 — 18 maggio 2026
+
+### Correzioni aggiuntive applicate
+
+| N. | File | Problema | Correzione |
+|----|------|----------|------------|
+| S3-1 | styles/globals.css | Variabile --border (#e8e8e8) usata anche per input — contrasto 1.37:1 su bianco, sotto soglia WCAG 1.4.11 | Aggiunta variabile --border-input: #999 (contrasto ≥ 3:1); .input aggiornato |
+| S3-2 | app/marketing/contatti/layout.tsx | Pagina contatti senza metadata SEO (page.tsx è Client Component) | Creato layout.tsx Server Component con title, description, canonical, OpenGraph |
+| S3-3 | app/marketing/privacy/page.tsx | CTA privacy diceva "Ti risponderemo entro 24 ore" in contesto diritti GDPR | Corretto: "entro 30 giorni dalla ricezione, come previsto dall'art. 12 GDPR" |
+| S3-4 | app/api/contatti/route.ts | Response JSON diceva "entro 24 ore" | Corretto in testo generico senza impegni temporali specifici |
+
+### Stato finale raccomandazioni sessione 2
+
+| N. | Raccomandazione | Stato |
+|----|-----------------|-------|
+| 1 | Completare [DA INSERIRE]: P.IVA, indirizzi, data privacy | APERTA — richiede dati reali |
+| 2 | /api/contatti | GIA' RISOLTA dalla sessione precedente |
+| 3 | Security headers next.config.js | GIA' RISOLTO dalla sessione precedente |
+| 4 | Metadata SEO contatti | RISOLTA in S3-2 |
+| 5 | "24 ore" → "30 giorni" (GDPR) | RISOLTA in S3-3/S3-4 |
+
+*Rischio residuo post-sessione 3: MINIMO — un solo punto aperto richiede dati reali da Giampiero*
+
+---
+
+*AUDIT_REPORT.md prodotto il 17/05/2026 — Aggiornato il 18/05/2026*
+*7 correzioni totali applicate al codice — Rischio residuo: MINIMO*
