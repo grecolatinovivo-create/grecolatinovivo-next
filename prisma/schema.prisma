@@ -1,0 +1,272 @@
+// ===================================================
+// Schema Prisma — grecolatinovivo-site
+// ESTENDE il portale-glv/prisma/schema.prisma
+// NON modifica le tabelle esistenti del portale.
+// Tabelle portale: User, Course, Lesson, Subscription,
+//   Purchase, LessonProgress, Certificate, AdminLog
+// ===================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===================================================
+// TABELLE ESISTENTI DEL PORTALE (riprodotte per
+// permettere le relation — NON creare di nuovo via
+// db push se già esistono)
+// ===================================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
+  role          String    @default("student")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relazioni portale esistenti
+  subscriptions  Subscription[]
+  purchases      Purchase[]
+  lessonProgress LessonProgress[]
+  certificates   Certificate[]
+
+  // Relazioni NUOVE (questo schema)
+  liveBookings     LiveBooking[]
+  tutoringBookings TutoringBooking[]
+  eventTickets     EventTicket[]
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String   @db.Text
+  lang        String
+  level       String
+  teacherName String
+  priceEur    Int
+  durationMin Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  lessons        Lesson[]
+  purchases      Purchase[]
+  lessonProgress LessonProgress[]
+  certificates   Certificate[]
+}
+
+model Lesson {
+  id          String   @id @default(cuid())
+  courseId    String
+  title       String
+  videoUrl    String?
+  content     String?  @db.Text
+  sortOrder   Int
+  isFree      Boolean  @default(false)
+  durationMin Int      @default(0)
+
+  course         Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessonProgress LessonProgress[]
+}
+
+model Subscription {
+  id                 String    @id @default(cuid())
+  userId             String
+  plan               String
+  status             String    @default("active")
+  stripeSubId        String?   @unique
+  currentPeriodStart DateTime?
+  currentPeriodEnd   DateTime?
+  createdAt          DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Purchase {
+  id              String   @id @default(cuid())
+  userId          String
+  courseId        String
+  stripePaymentId String   @unique
+  amountEur       Int
+  createdAt       DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+}
+
+model LessonProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  courseId    String
+  lessonId    String
+  completed   Boolean  @default(false)
+  progressPct Int      @default(0)
+  updatedAt   DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+}
+
+model Certificate {
+  id         String   @id @default(cuid())
+  userId     String
+  courseId   String
+  issuedAt   DateTime @default(now())
+  pdfUrl     String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+}
+
+model AdminLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  details   String?  @db.Text
+  createdAt DateTime @default(now())
+}
+
+// ===================================================
+// TABELLE NUOVE — Solo per grecolatinovivo-site
+// ===================================================
+
+// DOCENTI — tabella centralizzata per tutto il sito
+model Teacher {
+  id        String  @id @default(cuid())
+  slug      String  @unique
+  // [DA INSERIRE — nomi reali da confermare con Giampiero]
+  name      String
+  title     String  // "Prof." | "Dott." | "Dott.ssa"
+  role      String  // es. "Responsabile Dipartimento Latino"
+  dept      String  // "Latino" | "Greco Antico" | "Sanscrito" | ecc.
+  deptCode  String  // "LA" | "GR" | "SA" | "EG" | "BD" | "AF"
+  bio       String  @db.Text
+  photoUrl  String? // null → fallback con iniziali su sfondo bordeaux
+  isActive  Boolean @default(true)
+
+  liveCourses   LiveCourse[]
+  tutoringSlots TutoringSlot[]
+}
+
+// CORSI IN DIRETTA
+model LiveCourse {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  title       String
+  description String  @db.Text
+  lang        String  // "Latino" | "Greco Antico" | ecc.
+  level       String  // "A1.1" | "B1" | ecc.
+  teacherId   String
+  // [DA INSERIRE — prezzi da confermare con Giampiero]
+  priceEur    Int     // centesimi
+  maxStudents Int     @default(15) // max 15 studenti/classe (da chi-siamo.html numeri-grid)
+  isActive    Boolean @default(true)
+  createdAt   DateTime @default(now())
+
+  teacher   Teacher       @relation(fields: [teacherId], references: [id])
+  sessions  LiveSession[]
+  bookings  LiveBooking[]
+}
+
+// SESSIONI DI UN CORSO LIVE (lezioni programmate)
+model LiveSession {
+  id            String   @id @default(cuid())
+  liveCourseId  String
+  title         String
+  scheduledAt   DateTime // data e ora della lezione
+  durationMin   Int      // durata in minuti
+  zoomUrl       String?  // link Zoom — inserito prima della lezione
+  sortOrder     Int      @default(0)
+
+  course LiveCourse @relation(fields: [liveCourseId], references: [id], onDelete: Cascade)
+}
+
+// ISCRIZIONI AI CORSI LIVE
+model LiveBooking {
+  id              String   @id @default(cuid())
+  userId          String
+  liveCourseId    String
+  stripePaymentId String   @unique
+  status          String   @default("confirmed") // "confirmed" | "cancelled" | "refunded"
+  createdAt       DateTime @default(now())
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  liveCourse LiveCourse @relation(fields: [liveCourseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, liveCourseId])
+}
+
+// SLOT TUTORAGGIO 1:1
+model TutoringSlot {
+  id          String   @id @default(cuid())
+  teacherId   String
+  startAt     DateTime
+  durationMin Int      @default(60)
+  // [DA INSERIRE — prezzi tutoraggio da confermare con Giampiero]
+  priceEur    Int      // centesimi
+  isBooked    Boolean  @default(false)
+
+  teacher Teacher          @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  booking TutoringBooking?
+}
+
+// PRENOTAZIONI TUTORAGGIO
+model TutoringBooking {
+  id              String   @id @default(cuid())
+  userId          String
+  slotId          String   @unique
+  stripePaymentId String   @unique
+  notes           String?  // note opzionali dello studente
+  zoomUrl         String?  // link Zoom inviato dopo conferma
+  status          String   @default("confirmed") // "confirmed" | "cancelled" | "refunded"
+  createdAt       DateTime @default(now())
+
+  user User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slot TutoringSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
+}
+
+// EVENTI E CONVEGNI
+model Event {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String   @db.Text
+  // [DA INSERIRE — calendario eventi 2025/2026 da Giampiero]
+  eventType   String   // "convegno" | "seminario" | "biduum" | "giornata-studio" | "workshop"
+  location    String   // es. "Firenze, Sala Brunelleschi" o "Online"
+  startsAt    DateTime
+  endsAt      DateTime
+  priceEur    Int      // centesimi (0 = gratuito)
+  maxTickets  Int
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  tickets EventTicket[]
+}
+
+// BIGLIETTI EVENTI
+model EventTicket {
+  id              String    @id @default(cuid())
+  ticketCode      String    @unique // es. "GLV-EVT-2025-X7K2M"
+  userId          String
+  eventId         String
+  stripePaymentId String    @unique
+  issuedAt        DateTime  @default(now())
+  revokedAt       DateTime?
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId]) // un biglietto per utente per evento
+}

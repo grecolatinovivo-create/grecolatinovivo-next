@@ -1,0 +1,481 @@
+/* ======================================================
+   CSS Globale — Centro Nazionale di Studi Classici GLV
+   Design system tramite CSS custom properties.
+   Valori da UX_SPEC.md e README_NUOVO.md §8.
+   ====================================================== */
+
+/*
+ * ⚠️  GDPR AUDIT — DA CORREGGERE PRIMA DEL GO-LIVE  ⚠️
+ *
+ * Google Fonts caricato da CDN esterno trasferisce l'IP dell'utente
+ * a server Google (USA). Sentenza LG München 20 O 13928/20 (2022):
+ * uso di Google Fonts senza consenso = violazione GDPR Art. 5/6.
+ *
+ * SOLUZIONE: scaricare i font e servirli localmente.
+ *
+ * 1. Scaricare i file da https://fonts.google.com/specimen/Playfair+Display
+ *    e https://fonts.google.com/specimen/Inter (pesi: 400,500,600,700)
+ * 2. Copiare i .woff2 in /public/fonts/
+ * 3. Sostituire questa @import con i blocchi @font-face qui sotto
+ *    (decommentare e adattare i percorsi):
+ *
+ * @font-face {
+ *   font-family: 'Playfair Display';
+ *   font-style: normal;
+ *   font-weight: 400 900;
+ *   font-display: swap;
+ *   src: url('/fonts/playfair-display.woff2') format('woff2');
+ * }
+ * @font-face {
+ *   font-family: 'Inter';
+ *   font-style: normal;
+ *   font-weight: 400 700;
+ *   font-display: swap;
+ *   src: url('/fonts/inter.woff2') format('woff2');
+ * }
+ *
+ * Fino al completamento del self-hosting, mantenere questa @import
+ * solo in staging/sviluppo, NON in produzione.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================
+   1. CUSTOM PROPERTIES
+   ============================ */
+:root {
+  /* Colori */
+  --primary:        #8B1A1A;  /* bordeaux — CTA, accenti, active */
+  --primary-dark:   #6B1313;  /* hover button, link active */
+  --primary-light:  rgba(139, 26, 26, 0.07); /* badge background */
+  --gold:           #C9A84C;  /* SOLO decorativo — mai come testo su sfondo chiaro (WCAG fail) */
+  --bg:             #FAFAF7;  /* parchment — sfondo pagine */
+  --dark:           #1A1A1A;  /* quasi-nero — hero, footer, navbar */
+  --light-section:  #F5F0E8;  /* beige chiaro — sezioni alternate */
+  --border:         #E8E0D0;  /* grigio caldo — bordi card */
+  --text:           #3A3A3A;  /* corpo testo */
+  --text-light:     #6B6B6B;  /* testo secondario, caption */
+  --white:          #FFFFFF;
+  --success:        #1e7e34;  /* check features, conferme */
+  --error:          #dc3545;  /* messaggi errore */
+
+  /* Tipografia */
+  --font-heading:   'Playfair Display', Georgia, serif;
+  --font-body:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spaziature (8px grid) */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Layout */
+  --container:        1200px;
+  --container-narrow:  860px;
+  --padding-section:   80px 0;
+  --padding-mobile:    32px 0;
+  --padding-x:         24px;
+  --padding-x-mobile:  16px;
+  --gap-grid:          28px;
+  --gap-grid-mobile:   16px;
+
+  /* Border radius */
+  --radius-card:   12px;
+  --radius-btn:    6px;
+  --radius-badge:  20px;
+  --radius-modal:  16px;
+  --radius-input:  6px;
+
+  /* Ombre */
+  --shadow-card:  0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.20);
+
+  /* Transizioni */
+  --transition: all 0.2s ease;
+  --transition-slow: all 0.35s ease;
+
+  /* Z-index */
+  --z-topbar:  900;
+  --z-navbar: 1000;
+  --z-modal:  2000;
+  --z-toast:  3000;
+}
+
+/* ============================
+   2. RESET E BASE
+   ============================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Rispetta prefers-reduced-motion (NEURO_SPEC: accessibilità emotiva) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================
+   3. TIPOGRAFIA
+   ============================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--dark);
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 700; }
+h3 { font-size: 1.5rem; font-weight: 700; }
+h4 { font-size: 1.1rem; font-weight: 700; }
+h5 { font-size: 1rem; font-weight: 600; }
+
+p { margin-bottom: var(--space-4); }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+a:hover { color: var(--primary-dark); text-decoration: underline; }
+
+/* ============================
+   4. LAYOUT CONTAINER
+   ============================ */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--padding-x);
+}
+
+.container-narrow {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 var(--padding-x);
+}
+
+@media (max-width: 768px) {
+  .container,
+  .container-narrow {
+    padding: 0 var(--padding-x-mobile);
+  }
+}
+
+/* ============================
+   5. BOTTONI
+   ============================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primario */
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  padding: 14px 30px;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* Secondario outline */
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: 12px 28px;
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--primary-light);
+  text-decoration: none;
+}
+
+/* Ghost (su sfondo scuro) */
+.btn-ghost {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.5);
+  color: var(--white);
+  padding: 12px 28px;
+}
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.10);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* Small variant */
+.btn-sm { padding: 8px 18px; font-size: 0.85rem; }
+
+/* ============================
+   6. CARDS
+   ============================ */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ============================
+   7. BADGE / TAG
+   ============================ */
+.badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 9px;
+  border-radius: var(--radius-badge);
+}
+
+.badge-gold {
+  /* Solo su sfondo scuro — gold NON usato come testo su sfondo chiaro (WCAG) */
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+}
+
+.badge-success {
+  background: rgba(30, 126, 52, 0.10);
+  color: var(--success);
+}
+
+/* ============================
+   8. FORM INPUTS
+   ============================ */
+.input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.15s ease;
+}
+.input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.10);
+}
+.input::placeholder { color: #aaa; }
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.form-error {
+  color: var(--error);
+  font-size: 0.825rem;
+  margin-top: var(--space-1);
+}
+
+/* ============================
+   9. PROGRESS BAR (Zeigarnik — NEURO_SPEC §8.4)
+   ============================ */
+.progress-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-bar__fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* ============================
+   10. SEZIONI PAGINA
+   ============================ */
+.section {
+  padding: var(--padding-section);
+}
+.section--alt {
+  background: var(--light-section);
+}
+.section--dark {
+  background: var(--dark);
+  color: var(--white);
+}
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--white);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.section-title__underline {
+  display: inline-block;
+  border-bottom: 3px solid var(--primary);
+  padding-bottom: 4px;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin-bottom: var(--space-10);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--padding-mobile);
+  }
+}
+
+/* ============================
+   11. GRIDS
+   ============================ */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-grid);
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-grid);
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-grid);
+}
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .grid-4,
+  .grid-3,
+  .grid-2 { grid-template-columns: 1fr; gap: var(--gap-grid-mobile); }
+}
+
+/* ============================
+   12. SCROLL REVEAL (NEURO_SPEC §8)
+   ============================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================
+   13. UTILITY
+   ============================ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+/* Skip-link: visibile solo quando focalizzato da tastiera (WCAG 2.1 AA §2.4.1) */
+.visually-hidden:focus {
+  width: auto;
+  height: auto;
+  padding: 8px 16px;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  z-index: 9999;
+  top: 8px;
+  left: 8px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.text-center { text-align: center; }
+.text-gold { color: var(--gold); } /* Solo su sfondo scuro */
+.text-primary { color: var(--primary); }
+.text-muted { color: var(--text-light); }
+.mt-auto { margin-top: auto; }
+.hidden { display: none; }
