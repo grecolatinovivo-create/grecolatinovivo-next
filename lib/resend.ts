@@ -24,7 +24,7 @@ export async function sendLiveBookingConfirmation({
 }) {
   return resend.emails.send({
     from: FROM,
-    replyTo: REPLY_TO,
+    reply_to: REPLY_TO,
     to,
     subject: `${courseTitle} — Iscrizione confermata`,
     html: `
@@ -52,7 +52,7 @@ export async function sendCourseAccessEmail({
 }) {
   return resend.emails.send({
     from: FROM,
-    replyTo: REPLY_TO,
+    reply_to: REPLY_TO,
     to,
     subject: `${courseTitle} — Accesso confermato`,
     html: `
@@ -84,7 +84,7 @@ export async function sendEventTicketEmail({
 }) {
   return resend.emails.send({
     from: FROM,
-    replyTo: REPLY_TO,
+    reply_to: REPLY_TO,
     to,
     subject: `${eventTitle} — Il tuo biglietto è allegato`,
     html: `
@@ -121,7 +121,7 @@ export async function sendTutoringConfirmation({
 }) {
   return resend.emails.send({
     from: FROM,
-    replyTo: REPLY_TO,
+    reply_to: REPLY_TO,
     to,
     subject: `Tutoraggio con ${teacherName} — Appuntamento confermato`,
     html: `
