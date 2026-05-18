@@ -78,7 +78,7 @@ export default function HomePage() {
               Accesso a risorse, testi commentati, esercizi e archivi didattici.
               Cultura &euro;5,90/mese &middot; Linguae &euro;12,90/mese &middot; Accademia &euro;19,90/mese.
             </p>
-            <Link href="/commercio/abbonamento" className="card-link">Scopri i piani &rarr;</Link>
+            <a href="https://www.portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" className="card-link">Scopri i piani &rarr;</a>
           </article>
           <article className="card">
             <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.1rem', fontWeight: 400, color: '#002147', marginBottom: '0.75rem' }}>Eventi e Convegni</h3>

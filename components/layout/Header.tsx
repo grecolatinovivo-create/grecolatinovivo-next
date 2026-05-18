@@ -95,9 +95,14 @@ export default function Header() {
               </li>
 
               <li className="nav-item">
-                <Link href="/commercio/abbonamento" className={`nav-link${isActive('/commercio/abbonamento') ? ' nav-link--active' : ''}`}>
+                <a
+                  href="https://www.portale.grecolatinovivo.it"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-link"
+                >
                   Abbonamento
-                </Link>
+                </a>
               </li>
 
               <li className="nav-item">
@@ -153,7 +158,7 @@ export default function Header() {
               <li><Link href="/corsi/minicorsi" onClick={() => setMenuOpen(false)}>Corsi Brevi</Link></li>
               <li><Link href="/corsi/formazione-docenti" onClick={() => setMenuOpen(false)}>Formazione Docenti</Link></li>
               <li><Link href="/eventi" onClick={() => setMenuOpen(false)}>Eventi</Link></li>
-              <li><Link href="/commercio/abbonamento" onClick={() => setMenuOpen(false)}>Abbonamento</Link></li>
+              <li><a href="https://www.portale.grecolatinovivo.it" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>Abbonamento ↗</a></li>
               <li><Link href="/marketing/chi-siamo" onClick={() => setMenuOpen(false)}>Chi siamo</Link></li>
               <li>
                 <a

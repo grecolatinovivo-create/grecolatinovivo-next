@@ -363,12 +363,14 @@ export default function CorsiAsincroniPage() {
             >
               Accedi al Portale ↗
             </a>
-            <Link
-              href="/commercio/abbonamento"
+            <a
+              href="https://www.portale.grecolatinovivo.it"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ display: 'inline-block', padding: '11px 26px', border: '1px solid #C9A84C', color: '#C9A84C', fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.875rem', letterSpacing: '0.04em', textDecoration: 'none' }}
             >
-              Vedi gli abbonamenti
-            </Link>
+              Vedi gli abbonamenti ↗
+            </a>
           </div>
         </div>
       </div>
