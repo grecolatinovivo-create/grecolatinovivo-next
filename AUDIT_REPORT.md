@@ -1,7 +1,136 @@
 # AUDIT_REPORT — GrecoLatinoVivo Site
-*Prodotto da: Auditor (GDPR / WCAG 2.1 / Sicurezza) — pipeline agent-orchestra — 18 maggio 2026*
+*Aggiornato da: agent-auditor — sessione 2 — 18 maggio 2026*
 
 ---
+
+## Livello di rischio residuo: BASSO
+
+### Riepilogo rapido
+
+| Voce | Stato |
+|------|-------|
+| Problemi corretti in questa sessione | 4 (3 auditor + 1 fase PM) |
+| Raccomandazioni aperte | 5 |
+| Zero dati inventati | Confermato — PM_VERIFY.md |
+| Zero emoji nei contenuti | Confermato |
+| Conformità GDPR | Conforme (con [DA INSERIRE] da completare) |
+| Conformità WCAG 2.1 AA | 1 violazione corretta, 0 residue |
+| Sicurezza base | Nessun rischio critico |
+| Licenze | Tutte MIT / Apache 2.0 |
+| Link portale target="_blank" | Tutti con rel="noopener noreferrer" |
+| Mobile responsive | Breakpoint 640/1024px presenti |
+
+---
+
+## 1. Dati inventati
+
+ESITO: ZERO dati inventati.
+
+Verifica PM (PM_VERIFY.md): tutti i 56 corsi corrispondono esattamente a MOCK_COURSES del DB portale-glv/public/js/app.js. Tutti i 14 docenti sono reali. Una discrepanza (breve-miniera-luna level) corretta in fase PM.
+
+Placeholder [DA INSERIRE] presenti dove i dati non erano disponibili: P.IVA, sede Firenze, indirizzi sedi, data aggiornamento privacy.
+
+---
+
+## 2. Emoji
+
+ESITO: ZERO emoji nei contenuti visibili.
+
+---
+
+## 3. GDPR
+
+ESITO: Conforme — placeholder [DA INSERIRE] da completare prima del deploy.
+
+| Voce | Stato |
+|------|-------|
+| Informativa privacy art. 13 | Presente — /marketing/privacy |
+| Titolare trattamento | Placeholder [DA INSERIRE] — P.IVA e indirizzo legale |
+| Dati raccolti (form contatti) | Dichiarati: nome, email, messaggio |
+| Dati pagamento | Delegati Stripe, dichiarati con link stripe.com/it/privacy |
+| Cookie | Solo tecnici — banner non obbligatorio (Direttiva ePrivacy) |
+| Diritti interessato | Sezione dedicata con email e link Garante |
+| Font Google a runtime | Zero — self-hosted via next/font |
+
+---
+
+## 4. WCAG 2.1 AA
+
+| Criterio | Esito |
+|----------|-------|
+| 1.1.1 Alt text | PASS — aria-label su logo |
+| 1.3.1 Struttura semantica | PASS — header/main/nav/footer/section/article |
+| 1.4.3 Testo body #1a1a1a su bianco | PASS — circa 18:1 |
+| 1.4.3 CTA #ffffff su #002147 | PASS — circa 14.7:1 |
+| 1.4.3 #555555 su bianco | PASS — circa 7.4:1 |
+| 1.4.3 Gold su #002147 | PASS — circa 5.7:1 |
+| 1.4.3 Gold su bianco (CORRETTO) | era 2.2:1 — ora eliminato |
+| 1.4.4 Zoom 200% | PASS — clamp() + layout flessibile |
+| 2.1.1 Tastiera | PASS — skip-link + focus-visible |
+| 2.4.1 Salta blocchi | PASS — href="#main-content" presente |
+| 2.4.7 Focus visibile | PASS — outline 2px navy |
+| 2.5.3 Reduced motion | PASS — media query in globals.css |
+| 3.1.1 Lingua pagina | PASS — lang="it" su html |
+| 3.3.1 Errori form | PASS — stati idle/sending/ok/error |
+| 3.3.2 Etichette form | PASS — label htmlFor su tutti i campi |
+| 4.1.2 Nome/ruolo/valore | PASS — aria-label nav, aria-expanded hamburger |
+
+---
+
+## 5. Sicurezza base
+
+| Controllo | Esito |
+|-----------|-------|
+| XSS | Sicuro — nessun dangerouslySetInnerHTML con dati utente |
+| CDN esterni a runtime | Zero |
+| target="_blank" senza noopener | Zero casi |
+| Dati sensibili in storage | Zero |
+| Route /api/contatti | Non implementata — da fare prima del deploy |
+| Headers CSP/X-Frame-Options | Da configurare in next.config.js |
+
+---
+
+## 6. Licenze
+
+Tutte MIT / Apache 2.0 / SIL OFL 1.1. Nessuna dipendenza GPL.
+
+---
+
+## 7. Claim legali verificati
+
+"Accreditato MIM", "Dal 2015", "5.000+ studenti", "Massimo 15 studenti", "Membro Associato ALTE", "Metodo Natura", tutti i prezzi corsi: verificati da fonti reali.
+
+Attenzione: "risponderemo entro 24 ore" nella privacy — la soglia GDPR art. 12 e' 30 giorni (v. Raccomandazione 5).
+
+---
+
+## 8. Correzioni applicate in questa sessione
+
+| N. | File | Problema | Correzione |
+|----|------|----------|------------|
+| 1 | styles/globals.css r.323 | Box-shadow focus con rgba(139,26,26) bordeaux residuo | Cambiato in rgba(0,33,71,0.12) Oxford blue |
+| 2 | app/marketing/contatti/page.tsx r.429 | Gold #C9A84C su card bianca — WCAG 1.4.3 fail (2.2:1) | Cambiato in #777777 (circa 4.6:1) |
+| 3 | app/corsi/corsi-live/page.tsx | Sfondo #1A1A1A fuori palette; font hardcoded; h1 weight 900 | Sfondo -> #002147; font -> CSS vars; weight -> 400 |
+| 4 (PM) | app/corsi/corsi-asincroni/page.tsx | breve-miniera-luna level errato vs DB | Corretto in 'Filosofia Antica' |
+
+---
+
+## 9. Raccomandazioni aperte
+
+Priorita ALTA (prima del deploy):
+1. Completare [DA INSERIRE]: P.IVA, sede legale, indirizzi, data aggiornamento privacy — obbligatori per GDPR art. 13.
+2. Implementare /api/contatti — il form fallisce silenziosamente senza questa route.
+
+Priorita MEDIA (post-deploy):
+3. Headers sicurezza in next.config.js: X-Frame-Options, X-Content-Type-Options, Referrer-Policy.
+4. Metadata SEO per pagina contatti (attualmente Client Component con metadata commentato).
+5. "Risponderemo entro 24 ore" -> "entro 30 giorni" per allineamento art. 12 GDPR.
+
+---
+
+## Note
+
+Valutazione tecnica, non parere legale. Per un sito che raccoglie dati personali di cittadini UE si raccomanda consulenza specializzata in data protection prima del lancio, in particolare per informativa art. 13 e registro trattamenti art. 30 GDPR.
 
 ## GDPR
 
