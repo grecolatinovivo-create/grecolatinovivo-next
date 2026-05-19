@@ -976,7 +976,6 @@ export default async function CorsoDetailPage({ params }: Props) {
           <div
             style={{
               background: '#fff',
-              borderTop: '3px solid #C9A84C',
               border: '1px solid #e8e8e8',
               borderTop: '3px solid #C9A84C',
               padding: '1.75rem',
