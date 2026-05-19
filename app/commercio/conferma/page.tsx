@@ -23,11 +23,18 @@ const MESSAGES: Record<string, { title: string; body: string; cta: string; ctaHr
     ctaExternal: true,
   },
   corso_asincrono: {
-    title: 'Accesso al corso attivato',
-    body: 'Il corso è ora accessibile nella tua dashboard. Puoi iniziare subito.',
-    cta: 'Inizia il corso',
-    ctaHref: `${PORTALE_URL}/dashboard`,
-    ctaExternal: true,
+    title: 'Acquisto completato',
+    body: 'Riceverai una email con le istruzioni per accedere al corso. Controlla anche la cartella spam.',
+    cta: 'Torna ai corsi',
+    ctaHref: '/corsi/corsi-asincroni',
+    ctaExternal: false,
+  },
+  corso_asincrono_guest: {
+    title: 'Acquisto completato',
+    body: 'Riceverai a breve una email con le istruzioni per accedere al corso. Controlla anche la cartella spam se non arriva entro pochi minuti.',
+    cta: 'Torna ai corsi',
+    ctaHref: '/corsi/corsi-asincroni',
+    ctaExternal: false,
   },
   biglietto_evento: {
     title: 'Biglietto confermato',

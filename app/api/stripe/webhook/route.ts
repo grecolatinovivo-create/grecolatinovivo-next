@@ -179,6 +179,35 @@ export async function POST(req: NextRequest) {
         break
       }
 
+      // ── GUEST CHECKOUT (pagine pubbliche, senza login) ──────────
+      case 'corso_asincrono_guest': {
+        const { slug, idc, lang, level } = meta
+        const email = session.customer_details?.email
+        const name  = session.customer_details?.name ?? 'Studente'
+        const amountEur = session.amount_total ?? 0
+
+        console.log(
+          `[webhook] corso_asincrono_guest | slug=${slug} | idc=${idc}` +
+          ` | email=${email} | importo=€${(amountEur / 100).toFixed(2)}`
+        )
+
+        // Invia email di conferma con link al portale per accedere al corso
+        // TODO: creare account automatico se l'email non è registrata
+        if (email) {
+          try {
+            await sendCourseAccessEmail({
+              to: email,
+              name,
+              courseTitle: `${lang} · Livello ${level}`,
+              portalUrl: `${process.env.NEXT_PUBLIC_PORTALE_URL ?? 'https://portale.grecolatinovivo.it'}/corsi/${slug}`,
+            })
+          } catch (emailErr) {
+            console.error('[webhook] Errore invio email corso_asincrono_guest:', emailErr)
+          }
+        }
+        break
+      }
+
       default:
         // Abbonamenti — gestiti dal portale (stesso DB, stesso webhook Stripe)
         // Non duplicare la logica qui: il portale ha già il suo webhook handler

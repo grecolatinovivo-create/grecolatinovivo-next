@@ -7,6 +7,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import dynamic from 'next/dynamic'
+
+// CheckoutButton è un Client Component — importato dinamicamente per evitare SSR
+const CheckoutButton = dynamic(() => import('@/components/corsi/CheckoutButton'), {
+  ssr: false,
+  loading: () => (
+    <button className="btn btn-primary" style={{ width: '100%', opacity: 0.6 }} disabled>
+      Caricamento…
+    </button>
+  ),
+})
 
 // ─────────────────────────────────────────────────────
 // TIPI
@@ -594,6 +605,22 @@ const CORSI: CorsoDetail[] = [
 ]
 
 // ─────────────────────────────────────────────────────
+// RECENSIONI — struttura predisposta
+// Populate aggiungendo oggetti a questo array.
+// In futuro: fetch da DB o CMS.
+// ─────────────────────────────────────────────────────
+interface Recensione {
+  nome: string
+  stelle: 1 | 2 | 3 | 4 | 5
+  testo: string
+  data?: string
+}
+
+// Array vuoto = mostra placeholder "In arrivo".
+// Per aggiungere recensioni: { nome:'…', stelle:5, testo:'…', data:'maggio 2026' }
+const RECENSIONI_CORSO: Recensione[] = []
+
+// ─────────────────────────────────────────────────────
 // LOOKUP
 // ─────────────────────────────────────────────────────
 function getCorso(slug: string): CorsoDetail | undefined {
@@ -729,24 +756,18 @@ export default async function CorsoDetailPage({ params }: Props) {
               <div style={{ fontSize: '0.7rem', color: '#777', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '4px', fontFamily: 'var(--font-body, sans-serif)' }}>Prezzo</div>
               <div style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '2rem', fontWeight: 400, color: '#002147', marginBottom: '4px' }}>{prezzo}</div>
               <div style={{ fontSize: '0.75rem', color: '#777', marginBottom: '1.5rem', fontFamily: 'var(--font-body, sans-serif)' }}>Accesso permanente · Nessuna scadenza</div>
-              <a
-                href="https://portale.grecolatinovivo.it"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-                style={{ display: 'block', width: '100%', textAlign: 'center', marginBottom: '0.75rem', boxSizing: 'border-box' }}
-              >
-                Inizia il corso
-              </a>
-              <a
-                href="https://portale.grecolatinovivo.it"
-                target="_blank"
-                rel="noopener noreferrer"
+              <CheckoutButton
+                slug={corso.slug}
+                label="Acquista ora"
+                style={{ marginBottom: '0.75rem' }}
+              />
+              <Link
+                href="/corsi/corsi-asincroni"
                 className="btn btn-secondary btn-sm"
                 style={{ display: 'block', width: '100%', textAlign: 'center', boxSizing: 'border-box' }}
               >
-                Sfoglia il catalogo
-              </a>
+                Tutti i corsi asincroni
+              </Link>
               {corso.bonusDocenti && (
                 <div style={{ marginTop: '1rem', padding: '10px 12px', background: '#f8f7f4', borderLeft: '2px solid #C9A84C', fontSize: '0.75rem', color: '#555', fontFamily: 'var(--font-body, sans-serif)', lineHeight: 1.5 }}>
                   Carta del Docente (Bonus Docenti) applicabile
@@ -963,15 +984,11 @@ export default async function CorsoDetailPage({ params }: Props) {
             </div>
 
             {/* CTA principale */}
-            <a
-              href="https://portale.grecolatinovivo.it"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-              style={{ display: 'block', width: '100%', textAlign: 'center', marginBottom: '0.75rem', boxSizing: 'border-box' }}
-            >
-              Inizia il corso
-            </a>
+            <CheckoutButton
+              slug={corso.slug}
+              label="Acquista ora"
+              style={{ marginBottom: '0.75rem' }}
+            />
 
             {/* Rassicurazione */}
             <p style={{ fontSize: '0.75rem', color: '#888', textAlign: 'center', marginBottom: '1.5rem', fontFamily: 'var(--font-body, sans-serif)' }}>
@@ -1007,6 +1024,114 @@ export default async function CorsoDetailPage({ params }: Props) {
 
       </div>
 
+      {/* ── RECENSIONI ───────────────────────────────── */}
+      <section
+        aria-labelledby="recensioni-titolo"
+        style={{ maxWidth: '860px', margin: '0 auto', padding: '4rem 2rem' }}
+      >
+        <div style={{ borderTop: '1px solid #e8e8e8', paddingTop: '3.5rem' }}>
+          {/* Intestazione sezione */}
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '1.5rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
+            <h2
+              id="recensioni-titolo"
+              style={{
+                fontFamily: 'var(--font-heading, Georgia, serif)',
+                fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
+                fontWeight: 400,
+                color: '#002147',
+                margin: 0,
+              }}
+            >
+              Cosa dicono gli studenti
+            </h2>
+            <span style={{
+              fontFamily: 'var(--font-body, sans-serif)',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#999',
+              border: '1px solid #e8e8e8',
+              padding: '2px 10px',
+            }}>
+              In arrivo
+            </span>
+          </div>
+
+          {/* Placeholder — popolato quando arrivano le prime recensioni */}
+          {RECENSIONI_CORSO.length === 0 ? (
+            <div style={{
+              border: '1px solid #e8e8e8',
+              borderTop: '3px solid #e8e8e8',
+              padding: '2.5rem',
+              textAlign: 'center',
+              background: '#fafafa',
+            }}>
+              <p style={{
+                fontFamily: 'var(--font-heading, Georgia, serif)',
+                fontSize: '0.95rem',
+                color: '#777',
+                fontStyle: 'italic',
+                marginBottom: '0.5rem',
+              }}>
+                Le prime recensioni saranno pubblicate dopo i prossimi acquisti.
+              </p>
+              <p style={{
+                fontFamily: 'var(--font-body, sans-serif)',
+                fontSize: '0.8rem',
+                color: '#aaa',
+              }}>
+                Hai già frequentato questo corso?{' '}
+                <a
+                  href="mailto:info@grecolatinovivo.it?subject=Recensione corso"
+                  style={{ color: '#002147', borderBottom: '1px solid #C9A84C', textDecoration: 'none', paddingBottom: '1px' }}
+                >
+                  Scrivi la tua opinione
+                </a>
+              </p>
+            </div>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+              {RECENSIONI_CORSO.map((r, i) => (
+                <blockquote
+                  key={i}
+                  style={{
+                    margin: 0,
+                    border: '1px solid #e8e8e8',
+                    borderTop: '3px solid #C9A84C',
+                    padding: '1.5rem',
+                    background: '#fff',
+                  }}
+                >
+                  {/* Stelle */}
+                  <div style={{ color: '#C9A84C', fontSize: '0.85rem', marginBottom: '0.75rem', letterSpacing: '0.05em' }} aria-label={`Valutazione: ${r.stelle} su 5`}>
+                    {'★'.repeat(r.stelle)}{'☆'.repeat(5 - r.stelle)}
+                  </div>
+                  <p style={{
+                    fontFamily: 'var(--font-heading, Georgia, serif)',
+                    fontSize: '0.9rem',
+                    color: '#333',
+                    fontStyle: 'italic',
+                    lineHeight: 1.65,
+                    marginBottom: '1rem',
+                  }}>
+                    &ldquo;{r.testo}&rdquo;
+                  </p>
+                  <footer style={{
+                    fontFamily: 'var(--font-body, sans-serif)',
+                    fontSize: '0.78rem',
+                    color: '#777',
+                  }}>
+                    <strong style={{ color: '#002147', fontWeight: 600 }}>{r.nome}</strong>
+                    {r.data && <span> &middot; {r.data}</span>}
+                  </footer>
+                </blockquote>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* ── CTA BAND FINALE ──────────────────────────── */}
       <div className="cta-band">
         <div style={{ maxWidth: '640px', margin: '0 auto' }}>
@@ -1016,15 +1141,13 @@ export default async function CorsoDetailPage({ params }: Props) {
           <p style={{ marginBottom: '2rem' }}>
             {prezzo} · Accesso permanente · Studia al tuo ritmo dal portale GrecoLatinoVivo.
           </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <a
-              href="https://portale.grecolatinovivo.it"
-              target="_blank"
-              rel="noopener noreferrer"
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', maxWidth: '420px', margin: '0 auto' }}>
+            <CheckoutButton
+              slug={corso.slug}
+              label="Acquista ora"
               className="btn btn-ghost"
-            >
-              Inizia il corso
-            </a>
+              style={{ flex: 1 }}
+            />
             <Link href="/corsi/corsi-asincroni" className="btn btn-ghost" style={{ opacity: 0.7 }}>
               Tutti i corsi
             </Link>
