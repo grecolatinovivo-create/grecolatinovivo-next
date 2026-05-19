@@ -8,7 +8,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
 
 // CancelledBanner — Client Component che legge searchParams senza rompere SSG
 const CancelledBanner = dynamic(() => import('@/components/corsi/CancelledBanner'), { ssr: false })

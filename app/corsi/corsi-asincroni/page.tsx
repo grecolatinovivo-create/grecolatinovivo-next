@@ -5,7 +5,6 @@
 // ZERO emoji. ZERO dati inventati. Docenti dal DB.
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import type { ReactNode } from 'react'
 
 export const metadata: Metadata = {
   title: 'Corsi Asincroni — Centro Nazionale di Studi Classici «GrecoLatinoVivo»',
@@ -122,52 +121,15 @@ function getCorsiByLang(lang: string) {
 
 // ----------------------------------------------------------------
 // CARD CORSO — design Oxford
+// Usa Link diretto (no componente inline) per garantire href nel build
 // ----------------------------------------------------------------
-function CorsoCard({ corso }: { corso: Corso }) {
-  const prezzo = formatPrezzo(corso.priceEur)
-  const CardWrapper = corso.available !== false
-    ? ({ children }: { children: ReactNode }) => (
-        <Link
-          href={`/corsi/corsi-asincroni/${corso.slug}`}
-          style={{
-            display: 'flex', flexDirection: 'column',
-            background: '#FFFFFF',
-            borderTop: '3px solid #002147',
-            borderLeft: '1px solid #e8e8e8',
-            borderRight: '1px solid #e8e8e8',
-            borderBottom: '1px solid #e8e8e8',
-            padding: '1.5rem',
-            textDecoration: 'none', color: 'inherit',
-            transition: 'border-top-color 0.15s, box-shadow 0.15s',
-          }}
-          className="corso-card-link"
-        >
-          {children}
-        </Link>
-      )
-    : ({ children }: { children: ReactNode }) => (
-        <article
-          style={{
-            background: '#FFFFFF',
-            borderTop: '3px solid #aaa',
-            borderLeft: '1px solid #e8e8e8',
-            borderRight: '1px solid #e8e8e8',
-            borderBottom: '1px solid #e8e8e8',
-            padding: '1.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            opacity: 0.72,
-          }}
-        >
-          {children}
-        </article>
-      )
-
+function CardContent({ corso, prezzo }: { corso: Corso; prezzo: string }) {
+  const available = corso.available !== false
   return (
-    <CardWrapper>
-      {/* Meta riga superiore */}
+    <>
+      {/* Badge riga superiore */}
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '0.75rem', alignItems: 'center' }}>
-        <span style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: corso.available === false ? '#aaa' : '#002147', border: `1px solid ${corso.available === false ? '#ddd' : '#002147'}`, padding: '1px 6px' }}>
+        <span style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: available ? '#002147' : '#aaa', border: `1px solid ${available ? '#002147' : '#ddd'}`, padding: '1px 6px' }}>
           {corso.level}
         </span>
         {corso.isNew && (
@@ -180,7 +142,7 @@ function CorsoCard({ corso }: { corso: Corso }) {
             Bonus Docenti
           </span>
         )}
-        {corso.available === false && (
+        {!available && (
           <span style={{ fontFamily: 'var(--font-body, sans-serif)', fontSize: '0.65rem', fontWeight: 600, color: '#999', padding: '1px 6px', border: '1px solid #eee' }}>
             In lavorazione
           </span>
@@ -188,7 +150,7 @@ function CorsoCard({ corso }: { corso: Corso }) {
       </div>
 
       {/* Titolo */}
-      <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '0.95rem', fontWeight: 400, color: corso.available === false ? '#777' : '#002147', lineHeight: 1.4, marginBottom: '0.6rem' }}>
+      <h3 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '0.95rem', fontWeight: 400, color: available ? '#002147' : '#777', lineHeight: 1.4, marginBottom: '0.6rem' }}>
         {corso.title}
       </h3>
 
@@ -197,7 +159,7 @@ function CorsoCard({ corso }: { corso: Corso }) {
         {corso.description}
       </p>
 
-      {/* Meta inferiore */}
+      {/* Meta inferiore: docente + prezzo + CTA */}
       <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '8px' }}>
         <div>
           {corso.teacher && (
@@ -210,17 +172,66 @@ function CorsoCard({ corso }: { corso: Corso }) {
           </p>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <span style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.05rem', color: corso.available === false ? '#aaa' : '#002147' }}>
+          <span style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: '1.05rem', color: available ? '#002147' : '#aaa' }}>
             {prezzo}
           </span>
-          {corso.available !== false ? (
+          {available && (
             <div style={{ marginTop: '8px' }}>
               <span className="btn-card-cta">Scopri il corso</span>
             </div>
-          ) : null}
+          )}
         </div>
       </div>
-    </CardWrapper>
+    </>
+  )
+}
+
+function CorsoCard({ corso }: { corso: Corso }) {
+  const prezzo = formatPrezzo(corso.priceEur)
+  const available = corso.available !== false
+
+  // Corsi disponibili → Link interno alla pagina del corso
+  // Corsi in lavorazione → article statico (no link)
+  if (available) {
+    return (
+      <Link
+        href={`/corsi/corsi-asincroni/${corso.slug}`}
+        className="corso-card-link"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          background: '#FFFFFF',
+          borderTop: '3px solid #002147',
+          borderLeft: '1px solid #e8e8e8',
+          borderRight: '1px solid #e8e8e8',
+          borderBottom: '1px solid #e8e8e8',
+          padding: '1.5rem',
+          textDecoration: 'none',
+          color: 'inherit',
+          transition: 'border-top-color 0.15s, box-shadow 0.15s',
+        }}
+      >
+        <CardContent corso={corso} prezzo={prezzo} />
+      </Link>
+    )
+  }
+
+  return (
+    <article
+      style={{
+        background: '#FFFFFF',
+        borderTop: '3px solid #aaa',
+        borderLeft: '1px solid #e8e8e8',
+        borderRight: '1px solid #e8e8e8',
+        borderBottom: '1px solid #e8e8e8',
+        padding: '1.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        opacity: 0.72,
+      }}
+    >
+      <CardContent corso={corso} prezzo={prezzo} />
+    </article>
   )
 }
 
