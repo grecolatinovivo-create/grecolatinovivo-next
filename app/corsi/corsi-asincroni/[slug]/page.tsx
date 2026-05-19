@@ -8,6 +8,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+
+// CancelledBanner — Client Component che legge searchParams senza rompere SSG
+const CancelledBanner = dynamic(() => import('@/components/corsi/CancelledBanner'), { ssr: false })
 
 // CheckoutButton è un Client Component — importato dinamicamente per evitare SSR
 const CheckoutButton = dynamic(() => import('@/components/corsi/CheckoutButton'), {
@@ -665,6 +669,9 @@ export default async function CorsoDetailPage({ params }: Props) {
 
   return (
     <>
+      {/* ── BANNER ANNULLATO (client component — legge URL senza rompere SSG) ── */}
+      <CancelledBanner />
+
       {/* ── HERO ─────────────────────────────────────── */}
       <section
         aria-labelledby="corso-titolo"

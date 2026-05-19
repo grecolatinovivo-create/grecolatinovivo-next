@@ -274,14 +274,14 @@ export default function CorsiAsincroniPage() {
           Percorsi registrati con materiali didattici esclusivi, fruibili in autonomia a qualsiasi ora.
           Dal livello A1 al B1, per tutte le lingue classiche insegnate dal Centro.
         </p>
-        <a
-          href="https://portale.grecolatinovivo.it"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary"
-        >
-          Accedi al portale per iscriverti
-        </a>
+        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href="#latino" className="btn btn-primary">
+            Sfoglia i corsi
+          </a>
+          <a href="/abbonamenti" className="btn btn-secondary">
+            Vedi gli abbonamenti
+          </a>
+        </div>
       </section>
 
       {/* NAVIGAZIONE SEZIONI */}
@@ -368,20 +368,18 @@ export default function CorsiAsincroniPage() {
       <div className="cta-band">
         <div style={{ maxWidth: '640px', margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontWeight: 400 }}>
-            Pronto a iniziare?
+            Preferisci accedere a tutto il catalogo?
           </h2>
           <p>
-            Accedi al Portale per iscriverti ai corsi, seguire le lezioni e ottenere gli attestati.
-            Posti senza limiti per i corsi asincroni.
+            Con il Portale Abbonamento hai accesso illimitato a tutti i corsi registrati e alle sessioni live,
+            a prezzo fisso mensile o annuale. Un'alternativa all'acquisto del singolo corso.
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <a
-              href="https://portale.grecolatinovivo.it"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/abbonamenti"
               className="btn btn-ghost"
             >
-              Accedi al Portale
+              Confronta i piani
             </a>
             <a
               href="https://portale.grecolatinovivo.it"
@@ -390,7 +388,7 @@ export default function CorsiAsincroniPage() {
               className="btn btn-outline-gold"
               style={{ borderColor: '#C9A84C', color: '#C9A84C' }}
             >
-              Vedi gli abbonamenti
+              Accedi al Portale
             </a>
           </div>
         </div>

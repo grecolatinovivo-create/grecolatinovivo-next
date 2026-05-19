@@ -1,5 +1,70 @@
 # QA_REPORT — GrecoLatinoVivo Site
-*Prodotto da: QA Engineer — pipeline agent-orchestra — 18 maggio 2026*
+*Aggiornato: 19 maggio 2026 — QA Engineer · Sessione corsi asincroni*
+
+---
+
+## Sessione 19/05/2026 — Audit flusso corsi asincroni
+
+### Riepilogo sessione
+
+| Metrica | Valore |
+|---------|--------|
+| File analizzati | 7 |
+| Bug critici trovati e corretti | 1 |
+| Bug medi trovati e corretti | 1 |
+| Miglioramenti aggiunti | 2 |
+| Problemi aperti | 2 |
+
+### Causa principale del problema segnalato
+
+**Segnalazione utente: "le card rimandano al portale".**
+
+Le card erano tecnicamente corrette (`href="/corsi/corsi-asincroni/${corso.slug}"`). Il problema era nei CTA della pagina: un pulsante primario (Oxford blue) nella hero con testo "Accedi al portale per iscriverti" portava l'utente al portale abbonamento, facendogli credere che quel fosse il flusso per comprare un corso asincrono.
+
+### Bug #1 — CRITICO: Hero CTA mandava al portale con testo "per iscriverti"
+
+- **File**: `app/corsi/corsi-asincroni/page.tsx` righe 277–284
+- **Problema**: `btn-primary` con `href="https://portale.grecolatinovivo.it"` e testo "Accedi al portale **per iscriverti**" nella hero di una pagina di acquisto diretto.
+- **Correzione**: Sostituito con `href="#latino"` ("Sfoglia i corsi") + CTA secondario `/abbonamenti` ("Vedi gli abbonamenti").
+
+### Bug #2 — MEDIO: Bottom CTA band con testo "per iscriverti ai corsi"
+
+- **File**: `app/corsi/corsi-asincroni/page.tsx` righe 367–397
+- **Problema**: Testo "Accedi al Portale per iscriverti ai corsi" contraddice il modello di acquisto diretto Stripe.
+- **Correzione**: Titolo "Preferisci accedere a tutto il catalogo?", testo spiega il portale come alternativa. CTA → `/abbonamenti` + portale come secondario.
+
+### Miglioramento #1 — Banner "pagamento annullato" per ritorno da Stripe
+
+- **File nuovi**: `components/corsi/CancelledBanner.tsx`
+- **File modificati**: `app/corsi/corsi-asincroni/[slug]/page.tsx`
+- **Motivazione**: `cancel_url` Stripe invia `?cancelled=true` ma non c'era nessun feedback visivo.
+- **Soluzione**: Client Component con `useSearchParams()`, `dynamic(..., { ssr: false })` per compatibilità SSG.
+
+### Test funzionali
+
+| Test | Esito |
+|------|-------|
+| Card catalogo → pagina dettaglio | ✅ OK |
+| 56/56 slug coperti in catalog e detail page | ✅ OK |
+| `lib/corsi-asincroni-catalog.ts` — 56 corsi | ✅ OK |
+| API checkout — verifica prezzo server-side | ✅ OK |
+| Webhook `corso_asincrono_guest` | ✅ OK |
+| `CheckoutButton` — loading/error state | ✅ OK |
+| Pagina conferma — tipi guest gestiti | ✅ OK |
+| `next.config.js` — nessun redirect errato | ✅ OK |
+| `.btn-card-cta` pointer-events | ✅ OK |
+| Pagamento annullato `?cancelled=true` | ✅ RISOLTO |
+
+### Problemi aperti
+
+1. **Email post-acquisto linka al portale senza account** — webhook.ts riga 202. Se l'acquirente non ha un account portale, il link nell'email non funziona. TODO già presente nel codice.
+2. **Testo "dal portale" nella sidebar** — `[slug]/page.tsx` riga ~1142. Testo descrittivo leggermente ambiguo, non un link.
+
+### Raccomandazioni
+
+1. Rideploy immediato per applicare le fix.
+2. Implementare creazione account automatica prima del go-live completo.
+3. Aggiungere le prime recensioni reali in `RECENSIONI_CORSO[]` quando disponibili.
 
 ---
 
