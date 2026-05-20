@@ -21,8 +21,8 @@ export default function Header() {
         <nav
           aria-label="Navigazione principale"
           style={{
-            background: '#002147',
-            borderBottom: 'none',
+            background: '#FFFFFF',
+            borderBottom: '1px solid #002147',
             height: '68px',
             display: 'flex',
             alignItems: 'center',
@@ -166,7 +166,7 @@ export default function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}
-                  style={{ fontWeight: 600, color: '#002147' /* su sfondo bianco mobile menu */ }}
+                  style={{ fontWeight: 600, color: '#002147' }}
                 >
                   Portale studenti
                 </a>
@@ -180,7 +180,7 @@ export default function Header() {
         /* ---- BRAND ---- */
         .nav-brand {
           display: flex; align-items: center; gap: 12px;
-          text-decoration: none; flex-shrink: 0; color: #fff;
+          text-decoration: none; flex-shrink: 0; color: #002147;
         }
         .nav-brand:hover { text-decoration: none; }
         .nav-logo-img {
@@ -191,11 +191,11 @@ export default function Header() {
         }
         .nav-brand-name {
           font-family: var(--font-heading, Georgia, serif);
-          font-size: 0.92rem; font-weight: 400; color: #fff;
+          font-size: 0.92rem; font-weight: 400; color: #002147;
           letter-spacing: 0.02em;
         }
         .nav-brand-sub {
-          font-size: 0.68rem; color: rgba(255,255,255,0.65);
+          font-size: 0.68rem; color: #555;
           letter-spacing: 0.04em; font-family: var(--font-body, sans-serif);
         }
 
@@ -208,15 +208,15 @@ export default function Header() {
           display: flex; align-items: center;
           padding: 0 1rem; height: 68px;
           font-family: var(--font-body, sans-serif);
-          font-size: 0.875rem; color: rgba(255,255,255,0.88);
+          font-size: 0.875rem; color: #002147;
           text-decoration: none; letter-spacing: 0.02em;
           background: none; border: none; cursor: pointer;
           white-space: nowrap;
           border-bottom: 2px solid transparent;
-          transition: border-color 0.15s, color 0.15s;
+          transition: border-color 0.15s;
         }
-        .nav-link:hover { border-bottom-color: #C9A84C; color: #fff; text-decoration: none; }
-        .nav-link--active { border-bottom-color: #C9A84C; font-weight: 600; color: #fff; }
+        .nav-link:hover { border-bottom-color: #C9A84C; text-decoration: none; }
+        .nav-link--active { border-bottom-color: #002147; font-weight: 600; }
         .nav-dropdown-btn { gap: 0; }
 
         /* ---- DROPDOWN ---- */
@@ -252,14 +252,14 @@ export default function Header() {
         .nav-cta {
           display: inline-block;
           padding: 0.45rem 1.1rem;
-          border: 1px solid rgba(255,255,255,0.55);
+          border: 1px solid #002147;
           font-family: var(--font-body, sans-serif);
           font-size: 0.8rem; letter-spacing: 0.05em;
-          text-transform: uppercase; color: #fff;
+          text-transform: uppercase; color: #002147;
           text-decoration: none; white-space: nowrap;
-          transition: background 0.15s, border-color 0.15s;
+          transition: background 0.15s, color 0.15s;
         }
-        .nav-cta:hover { background: rgba(255,255,255,0.12); border-color: #fff; text-decoration: none; }
+        .nav-cta:hover { background: #002147; color: #fff; text-decoration: none; }
 
         /* ---- HAMBURGER ---- */
         .nav-hamburger {
@@ -268,7 +268,7 @@ export default function Header() {
         }
         .hline {
           display: block; width: 22px; height: 2px;
-          background: #fff; transition: all 0.2s;
+          background: #002147; transition: all 0.2s;
         }
 
         /* ---- MOBILE MENU ---- */

@@ -22,28 +22,30 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main>
-      {/* HERO */}
-      <section aria-labelledby="hero-titolo" style={{ maxWidth: '860px', margin: '0 auto', padding: '7rem 2rem 6rem', textAlign: 'center' }}>
-        <p className="eyebrow" style={{ marginBottom: '1.5rem' }}>
-          Firenze &middot; Milano &middot; Torino &middot; Parma &middot; Pordenone
-        </p>
-        <h1 id="hero-titolo" style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 400, color: '#002147', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-          Le lingue classiche<br />nella loro <em style={{ fontStyle: 'normal', color: '#C9A84C' }}>forma viva</em>
-        </h1>
-        <p style={{ fontSize: '1.1rem', color: '#444', maxWidth: '620px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
-          Il primo centro nazionale dedicato allo studio attivo del Latino, del Greco Antico
-          e delle lingue del mondo antico, con metodo contestuale-induttivo.
-        </p>
-        <blockquote className="blockquote-gold" style={{ maxWidth: '620px', margin: '0 auto 3rem', textAlign: 'left' }}>
-          &laquo;Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.&raquo;
-        </blockquote>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <Link href="/corsi/corsi-live" className="btn btn-primary">Scopri i corsi</Link>
-          <Link href="/marketing/chi-siamo" className="btn btn-secondary">Il Centro</Link>
-        </div>
-      </section>
-
-      <hr className="section-divider" />
+      {/* HERO — sfondo Oxford blue */}
+      <div style={{ background: '#002147' }}>
+        <section aria-labelledby="hero-titolo" style={{ maxWidth: '860px', margin: '0 auto', padding: '7rem 2rem 6rem', textAlign: 'center' }}>
+          <p className="eyebrow" style={{ marginBottom: '1.5rem', color: 'rgba(255,255,255,0.6)' }}>
+            Firenze &middot; Milano &middot; Torino &middot; Parma &middot; Pordenone
+          </p>
+          <h1 id="hero-titolo" style={{ fontFamily: 'var(--font-heading, Georgia, serif)', fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 400, color: '#fff', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+            Le lingue classiche<br />nella loro <em style={{ fontStyle: 'normal', color: '#C9A84C' }}>forma viva</em>
+          </h1>
+          <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', maxWidth: '620px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
+            Il primo centro nazionale dedicato allo studio attivo del Latino, del Greco Antico
+            e delle lingue del mondo antico, con metodo contestuale-induttivo.
+          </p>
+          <blockquote className="blockquote-gold" style={{ maxWidth: '620px', margin: '0 auto 3rem', textAlign: 'left', color: 'rgba(255,255,255,0.85)', borderLeftColor: '#C9A84C' }}>
+            &laquo;Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.&raquo;
+          </blockquote>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link href="/corsi/corsi-live" className="btn btn-secondary">Scopri i corsi</Link>
+            <Link href="/marketing/chi-siamo" className="btn btn-outline-gold">Il Centro</Link>
+          </div>
+        </section>
+        {/* Linea oro in fondo all'hero */}
+        <div style={{ height: '2px', background: '#C9A84C' }} aria-hidden="true" />
+      </div>
 
       {/* PERCORSI 2x2 */}
       <section id="percorsi" aria-labelledby="percorsi-titolo" style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2rem' }}>
