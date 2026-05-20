@@ -123,8 +123,8 @@ export default function HomePage() {
             </h2>
             <p style={{ fontSize: '0.95rem', color: '#444', lineHeight: 1.8, marginBottom: '1rem' }}>
               Il Centro adotta un approccio contestuale-induttivo ispirato ai principi di
-              Hans Henning &Oslash;rberg e alla tradizione del{' '}
-              <em>Lingua Latina per se Illustrata</em>. Lo studente incontra la lingua nel suo
+              Hans Henning &Oslash;rberg e ampliato attraverso le acquisizioni della
+              glottodidattica contemporanea. Lo studente incontra la lingua nel suo
               contesto naturale d&apos;uso, attraverso testi graduati che permettono una comprensione
               progressiva della grammatica e del lessico.
             </p>
@@ -247,5 +247,5 @@ const FAQS = [
   { q: 'I corsi sono riconosciuti dal Ministero dell\'Istruzione?', a: 'Sì. Il Centro è accreditato dal MIM (Ministero dell\'Istruzione e del Merito). I corsi di Formazione Docenti danno diritto a crediti formativi riconosciuti.' },
   { q: 'È possibile seguire i corsi online?', a: 'Sì. Tutti i corsi in diretta sono disponibili sia in presenza (nelle 5 sedi) sia a distanza via piattaforma. I corsi asincroni sono interamente online.' },
   { q: "Cosa include l'abbonamento al Portale?", a: "Il Portale offre accesso a testi commentati, esercizi graduati, grammatiche di riferimento e archivi didattici. I piani Linguae e Accademia includono anche sessioni di approfondimento e tutoraggio." },
-  { q: 'Come funziona il metodo contestuale-induttivo?', a: 'Lo studente incontra la lingua attraverso testi graduati, mai isolati dalla comunicazione. La grammatica emerge dal contesto. Ispirato al metodo Ørberg (Lingua Latina per se Illustrata).' },
+  { q: 'Come funziona il metodo contestuale-induttivo?', a: 'Lo studente incontra la lingua attraverso testi graduati, mai isolati dalla comunicazione. La grammatica emerge dal contesto, non da regole astratte. L\'approccio si fonda sul lavoro di Hans Henning Ørberg, integrato con le più recenti ricerche in glottodidattica e acquisizione delle lingue.' },
 ]

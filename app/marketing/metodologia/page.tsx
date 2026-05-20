@@ -175,12 +175,11 @@ export default function MetodologiaPage() {
                   lineHeight: 1.85,
                 }}
               >
-                L&apos;approccio si ispira direttamente al lavoro di Hans Henning
-                Ørberg e alla tradizione della{' '}
-                <em>Lingua Latina per se Illustrata</em>: un corpus graduato in
-                cui ogni parola nuova è comprensibile dal contesto, ogni struttura
-                grammaticale emerge dall&apos;uso ripetuto, ogni testo è
-                autentico o quasi-autentico.
+                L&apos;approccio si fonda sul lavoro pionieristico di Hans Henning
+                Ørberg e lo amplia attraverso le acquisizioni della glottodidattica
+                contemporanea: ogni parola nuova è comprensibile dal contesto,
+                ogni struttura grammaticale emerge dall&apos;uso ripetuto, ogni
+                testo è autentico o quasi-autentico.
               </p>
             </div>
 

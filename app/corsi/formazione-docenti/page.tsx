@@ -13,7 +13,7 @@ const MODULI = [
     titolo: 'Didattica del Latino con metodo Natura',
     durata: '20h',
     descrizione:
-      'Il modulo introduce il metodo comunicativo applicato all\'insegnamento del Latino: input comprensibile, approccio indiretto e lettura estensiva. Basato sui principi di Krashen e sull\'esperienza di LLPSI e Ørberg.',
+      'Il modulo introduce il metodo comunicativo applicato all\'insegnamento del Latino: input comprensibile, approccio indiretto e lettura estensiva. Fondato sui principi di Krashen e sulla tradizione di Ørberg (Lingua Latina per se Illustrata), integrati con le ricerche più recenti in glottodidattica delle lingue classiche.',
     argomenti: [
       'Fondamenti teorici del metodo Natura',
       'Progettazione di unita didattiche',
