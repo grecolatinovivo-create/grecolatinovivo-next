@@ -39,7 +39,7 @@ export default function HomePage() {
             &laquo;Le lingue classiche non sono morte: aspettano solo di essere incontrate nella loro forma viva.&raquo;
           </blockquote>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="/corsi/corsi-live" className="btn btn-secondary">Scopri i corsi</Link>
+            <Link href="/corsi/corsi-live" className="btn btn-gold">Scopri i corsi</Link>
             <Link href="/marketing/chi-siamo" className="btn btn-outline-gold">Il Centro</Link>
           </div>
         </section>

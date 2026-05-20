@@ -148,6 +148,9 @@ export default function Header() {
           <p>Accreditato MIM &middot; Membro Associato ALTE &middot; Dal 2015</p>
         </div>
 
+        {/* Linea oro decorativa sotto la strip */}
+        <div className="gold-line" aria-hidden="true" />
+
         {/* MENU MOBILE */}
         {menuOpen && (
           <div id="mobile-menu" className="nav-mobile-menu" aria-label="Menu mobile">

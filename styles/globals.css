@@ -256,18 +256,35 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   text-decoration: none;
 }
 
-/* Outline gold — CTA portale su sfondo chiaro */
+/* Gold pieno — CTA primaria su sfondo scuro (hero, cta-band) */
+.btn-gold {
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: #002147;
+  padding: 12px 28px;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.btn-gold:hover:not(:disabled) {
+  background: #b8943f;
+  border-color: #b8943f;
+  color: #002147;
+  text-decoration: none;
+}
+
+/* Outline gold — CTA secondaria su sfondo scuro (hero, cta-band, footer) */
 .btn-outline-gold {
   background: transparent;
   border: 1px solid var(--gold);
-  color: var(--primary);
+  color: var(--gold);
   padding: 11px 26px;
   font-size: 0.875rem;
   letter-spacing: 0.04em;
 }
 .btn-outline-gold:hover:not(:disabled) {
   background: var(--gold);
-  color: var(--white);
+  color: #002147;
   text-decoration: none;
 }
 
